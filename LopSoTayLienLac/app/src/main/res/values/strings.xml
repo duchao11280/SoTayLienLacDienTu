@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">LopSoTayLienLac</string>
+    <string name="title_home">Trang chủ</string>
+    <string name="title_tuongtac">Tương tác</string>
+    <string name="title_thongbao">Thông báo</string>
+    <string name="title_taikhoan">Tài khoản</string>
+</resources>
