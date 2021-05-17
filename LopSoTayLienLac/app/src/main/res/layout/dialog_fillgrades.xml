@@ -14,6 +14,7 @@
         android:layout_marginStart="19dp"
         android:layout_marginTop="86dp"
         android:text="@string/diem_giua_ki"
+        android:textColor="#333333"
         android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,6 +40,7 @@
         android:layout_marginStart="19dp"
         android:layout_marginTop="21dp"
         android:text="@string/diem_cuoi_ki"
+        android:textColor="#333333"
         android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDiemGiuaKi" />
@@ -58,15 +60,18 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="125dp"
+        android:layout_height="45dp"
         android:layout_marginStart="98dp"
         android:layout_marginTop="52dp"
         android:layout_marginEnd="99dp"
         android:layout_marginBottom="92dp"
-        android:text="Button"
+        android:background="@drawable/round_corner_button"
+        android:text="@string/ok"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.55"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
