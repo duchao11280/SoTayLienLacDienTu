@@ -4,4 +4,10 @@
     <string name="title_tuongtac">Tương tác</string>
     <string name="title_thongbao">Thông báo</string>
     <string name="title_taikhoan">Tài khoản</string>
+    <string name="title_malop">Mã lớp</string>
+    <string name="title_tenlop">Tên lớp</string>
+    <string name="title_mssv">MSSV</string>
+    <string name="hovaten">Họ và Tên</string>
+    <string name="diem_cuoi_ki">Điểm cuối kì:</string>
+    <string name="diem_giua_ki">Điểm giữa kì:</string>
 </resources>
