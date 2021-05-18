@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="darker_gray">#bfbfbf</color>
     <color name="lightgreen">#00ff00</color>
->>>>>>> Stashed changes
+    <color name="maincolor">#333333</color>
+
 </resources>
