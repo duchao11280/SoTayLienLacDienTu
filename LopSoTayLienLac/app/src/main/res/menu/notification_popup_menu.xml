@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_more"
+        android:icon="@drawable/ic_baseline_dehaze_24"
+        android:title=""
+        app:showAsAction="always">
+        <item
+            android:id="@+id/mark_as_read"
+            android:title="@string/mark_as_read"
+            android:icon="@drawable/ic_baseline_check_24"/>
+
+        <item
+            android:id="@+id/delete"
+            android:title="@string/delete"
+            android:icon="@drawable/ic_trash_alt_solid"
+            />
+    </item>
+
+
+</menu>

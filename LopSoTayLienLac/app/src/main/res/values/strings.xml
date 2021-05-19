@@ -17,5 +17,7 @@
     <string name="ok">OK</string>
     <string name="yes">Có</string>
     <string name="no">Không</string>
->>>>>>> Stashed changes
+    <string name="mark_as_read">Đánh dấu đã đọc</string>
+    <string name="delete">Xóa</string>
+    >>>>>>> Stashed changes
 </resources>
