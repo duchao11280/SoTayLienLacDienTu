@@ -23,6 +23,7 @@ import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lopsotaylienlac.R;
 
@@ -31,6 +32,8 @@ public class NotificationsFragment extends Fragment {
     private NotificationsViewModel notificationsViewModel;
 
     private ImageView imageView;
+    private RecyclerView recyclerView;
+    private TextView textView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -38,8 +41,17 @@ public class NotificationsFragment extends Fragment {
                 new ViewModelProvider(this).get(NotificationsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_student_notification, container, false);
 
-
+        textView = (TextView)root.findViewById(R.id.txtNoneLoad);
         imageView = (ImageView)root.findViewById(R.id.imgPopUp);
+        recyclerView = (RecyclerView)root.findViewById(R.id.rcvNoti);
+
+
+        //enter NumofItem
+//        setText(1);
+
+
+
+
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +62,13 @@ public class NotificationsFragment extends Fragment {
         return root;
     }
 
+
+    private void setText(int numItem){
+        if (numItem == 0) {
+            textView.setVisibility(View.INVISIBLE);
+        }
+        else return;
+    }
 
 
 

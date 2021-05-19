@@ -19,5 +19,14 @@
     <string name="no">Không</string>
     <string name="mark_as_read">Đánh dấu đã đọc</string>
     <string name="delete">Xóa</string>
+    <string name="nonoti">Bạn không có thông báo nào</string>
+    <string name="qlthongbao">Quản lý thông báo</string>
+    <string name="ng_nhan">Người nhận</string>
+    <string name="tieude">Tiêu đề</string>
+    <string name="lop">Lớp</string>
+    <string name="themthongbao">Thêm thông báo</string>
+    <string name="noidung">Nội dung</string>
+    <string name="hocphi">Học phí</string>
+    <string name="dtc">đ/tc</string>
     >>>>>>> Stashed changes
 </resources>
