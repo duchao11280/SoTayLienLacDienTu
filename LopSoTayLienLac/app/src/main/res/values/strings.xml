@@ -40,5 +40,10 @@
     <string name="diem_tong_ket">Điểm tổng kết:</string>
     <string name="diem10">10</string>
 
-    >>>>>>> Stashed changes
+    <string name="title_quanlylophoc">Quản lý các lớp học</string>
+    <string name="txt_tenhocphan">Tên học phần:</string>
+    <string name="txt_mahocphan">Mã học phần:</string>
+    <string name="txt_sotinchi">Số tín chỉ:</string>
+    <string name="txt_soluongsinhvien">Số lượng sinh viên:</string>
+    <string name="txt_danhsachlop">Danh sách lớp:</string>
 </resources>
