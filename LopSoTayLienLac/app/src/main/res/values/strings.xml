@@ -28,5 +28,17 @@
     <string name="noidung">Nội dung</string>
     <string name="hocphi">Học phí</string>
     <string name="dtc">đ/tc</string>
+
+    <string name="title_monhoc">Thương mại điện tử</string>
+    <string name="title_price">2.400.000 VNĐ</string>
+    <string name="txtStudentFee_nofee">Bạn không có học phí cần đóng!!!</string>
+
+    <string name="txtDiem">ĐIỂM</string>
+    <string name="title_diemscore">Điểm: 10.0</string>
+    <string name="title_dialog_monhoc">Thương mại điện tử</string>
+
+    <string name="diem_tong_ket">Điểm tổng kết:</string>
+    <string name="diem10">10</string>
+
     >>>>>>> Stashed changes
 </resources>
