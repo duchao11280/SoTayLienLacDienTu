@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/round_corner_large">
+    android:background="@drawable/card_round_corner_large">
 
     <ImageView
         android:id="@+id/img_conf"
@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/txtConf"
+        android:text="@string/label_Conf"
         android:textColor="#333333"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:text="@string/txt_conf_del_noti"
+        android:text="@string/label_conf_del_noti"
         android:textColor="#333333"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,8 +52,8 @@
         android:layout_height="45dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="32dp"
-        android:background="@drawable/round_corner_button"
-        android:text="@string/yes"
+        android:background="@drawable/btn_round_corner"
+        android:text="@string/btn_yes"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,8 +67,8 @@
         android:layout_height="45dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="28dp"
-        android:background="@drawable/round_corner_button"
-        android:text="@string/no"
+        android:background="@drawable/btn_round_corner"
+        android:text="@string/btn_no"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

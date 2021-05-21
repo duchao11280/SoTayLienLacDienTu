@@ -12,9 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtTitle"
-        android:background="@drawable/round_corner"
+        android:background="@drawable/card_round_corner"
         android:textSize="30dp"
-        android:text="@string/qlthongbao"
+        android:text="@string/title_qlthongbao"
         android:gravity="center"
         android:textStyle="bold"
         android:textAllCaps="true"
@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_add_24"
-        android:background="@drawable/round_corner"
+        android:background="@drawable/card_round_corner"
         android:layout_gravity="end"/>
 
 

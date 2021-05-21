@@ -29,7 +29,7 @@
 
         android:fontFamily="@font/roboto"
         android:paddingBottom="8dp"
-        android:text="@string/hovaten"
+        android:text="@string/label_hovaten"
 
         android:textColor="#333333"
         app:layout_constraintStart_toStartOf="parent"

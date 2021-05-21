@@ -8,10 +8,11 @@
     <string name="title_malop">Mã lớp</string>
     <string name="title_tenlop">Tên lớp</string>
     <string name="title_mssv">MSSV</string>
-    <string name="hovaten">Họ và Tên</string>
-    <string name="diem_cuoi_ki">Điểm cuối kì:</string>
-    <string name="diem_giua_ki">Điểm giữa kì:</string>
+    <string name="label_hovaten">Họ và Tên</string>
+    <string name="label_diem_cuoi_ki">Điểm cuối kì:</string>
+    <string name="label_diem_giua_ki">Điểm giữa kì:</string>
 
+<<<<<<< Updated upstream
     <string name="txtConf">Bạn chắc chắn?</string>
     <string name="txt_conf_del_noti">Xóa tất cả thông báo?</string>
     <string name="ok">OK</string>
@@ -46,4 +47,25 @@
     <string name="txt_sotinchi">Số tín chỉ:</string>
     <string name="txt_soluongsinhvien">Số lượng sinh viên:</string>
     <string name="txt_danhsachlop">Danh sách lớp:</string>
+=======
+    <string name="label_Conf">Bạn chắc chắn?</string>
+    <string name="label_conf_del_noti">Xóa tất cả thông báo?</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_yes">Có</string>
+    <string name="btn_no">Không</string>
+    <string name="label_mark_as_read">Đánh dấu đã đọc</string>
+    <string name="btn_delete">Xóa</string>
+    <string name="label_nonoti">Bạn không có thông báo nào</string>
+    <string name="title_qlthongbao">Quản lý thông báo</string>
+    <string name="label_ng_nhan">Người nhận</string>
+    <string name="label_tieude">Tiêu đề</string>
+    <string name="title_lop">Lớp</string>
+    <string name="title_themthongbao">Thêm thông báo</string>
+    <string name="label_noidung">Nội dung</string>
+    <string name="title_hocphi">Học phí</string>
+    <string name="label_dtc">đ/tc</string>
+    <string name="label_khongtimthay">Không tìm thấy</string>
+    <string name="btn_gui">Gửi</string>
+    >>>>>>> Stashed changes
+>>>>>>> Stashed changes
 </resources>

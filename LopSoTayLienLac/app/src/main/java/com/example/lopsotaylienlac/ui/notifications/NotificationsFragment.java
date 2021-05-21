@@ -11,17 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -75,7 +71,7 @@ public class NotificationsFragment extends Fragment {
     @SuppressLint("RestrictedApi")
     private void showPopUpMenu() {
         PopupMenu popup = new PopupMenu(getContext(), this.imageView);
-        popup.inflate(R.menu.notification_popup_menu);
+        popup.inflate(R.menu.menu_notification_popup);
 
         Menu menu = popup.getMenu();
 
@@ -105,7 +101,7 @@ public class NotificationsFragment extends Fragment {
 
     private void openConfirmDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        View view = getLayoutInflater().inflate(R.layout.confirm_dialog,null);
+        View view = getLayoutInflater().inflate(R.layout.dialog_confirm,null);
         Button btnYes = view.findViewById(R.id.btnYes);
         Button btnNo = view.findViewById(R.id.btnNo);
 

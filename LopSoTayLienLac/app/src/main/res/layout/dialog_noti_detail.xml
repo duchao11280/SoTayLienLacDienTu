@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/round_corner_large">
+    android:background="@drawable/card_round_corner_large">
 
 
     <ImageView
@@ -92,8 +92,8 @@
         android:layout_height="45dp"
         android:layout_marginStart="212dp"
         android:layout_marginBottom="92dp"
-        android:background="@drawable/round_corner_button"
-        android:text="@string/ok"
+        android:background="@drawable/btn_round_corner"
+        android:text="@string/btn_ok"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
