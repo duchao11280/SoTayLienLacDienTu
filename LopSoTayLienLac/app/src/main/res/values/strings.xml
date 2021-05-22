@@ -12,7 +12,7 @@
     <string name="label_diem_cuoi_ki">Điểm cuối kì:</string>
     <string name="label_diem_giua_ki">Điểm giữa kì:</string>
 
-<<<<<<< Updated upstream
+
     <string name="txtConf">Bạn chắc chắn?</string>
     <string name="txt_conf_del_noti">Xóa tất cả thông báo?</string>
     <string name="ok">OK</string>
@@ -47,7 +47,7 @@
     <string name="txt_sotinchi">Số tín chỉ:</string>
     <string name="txt_soluongsinhvien">Số lượng sinh viên:</string>
     <string name="txt_danhsachlop">Danh sách lớp:</string>
-=======
+
     <string name="label_Conf">Bạn chắc chắn?</string>
     <string name="label_conf_del_noti">Xóa tất cả thông báo?</string>
     <string name="btn_ok">OK</string>
@@ -66,6 +66,5 @@
     <string name="label_dtc">đ/tc</string>
     <string name="label_khongtimthay">Không tìm thấy</string>
     <string name="btn_gui">Gửi</string>
-    >>>>>>> Stashed changes
->>>>>>> Stashed changes
+
 </resources>

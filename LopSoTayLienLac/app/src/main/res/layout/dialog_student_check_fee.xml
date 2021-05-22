@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/round_corner_large"
+    android:background="@drawable/card_round_corner_large"
     android:orientation="vertical">
 
     <ImageView

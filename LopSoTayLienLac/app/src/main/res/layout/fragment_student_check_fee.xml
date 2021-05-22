@@ -11,9 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtTitle"
-        android:background="@drawable/round_corner"
+        android:background="@drawable/card_round_corner"
         android:textSize="30dp"
-        android:text="@string/txtDiem"
+        android:text="@string/hocphi"
         android:gravity="left"
         android:textStyle="bold"
         android:textAllCaps="true"
@@ -23,7 +23,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="88dp"
-        android:id="@+id/rcvStudentCheckScore"
+        android:id="@+id/rcvStudentCheckFee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
