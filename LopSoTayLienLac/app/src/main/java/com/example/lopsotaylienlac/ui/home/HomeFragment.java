@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +15,23 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.lopsotaylienlac.R;
+import com.example.lopsotaylienlac.apis.UserApi;
+import com.example.lopsotaylienlac.beans.Announcement;
+import com.example.lopsotaylienlac.beans.Fee;
+import com.example.lopsotaylienlac.beans.Parent;
+import com.example.lopsotaylienlac.beans.Student;
+import com.example.lopsotaylienlac.beans.Subjectclass;
+import com.example.lopsotaylienlac.beans.Subjectofstudent;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
 
@@ -30,6 +49,27 @@ public class HomeFragment extends Fragment {
                 textView.setText(s);
             }
         });
+        Button btnTestApi = root.findViewById(R.id.btnTestAPI);
+        btnTestApi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makeRead();
+            }
+        });
         return root;
+    }
+
+    private void makeRead() {
+        UserApi.apiService.getListUserBySubjectID("MP_01CLC").enqueue(new Callback<ArrayList<Student>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Student>> call, Response<ArrayList<Student>> response) {
+                System.out.println(response.body().get(1).getStudentName());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Student>> call, Throwable t) {
+
+            }
+        });
     }
 }
