@@ -43,7 +43,7 @@
         android:layout_marginStart="140dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="40dp"
-        android:background="@drawable/round_corner_button"
+        android:background="@drawable/btn_round_corner"
         android:text="@string/yes"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
