@@ -190,4 +190,15 @@ public class UserModel {
         }
     }
 
+    public static void updateInfor(String studentID, String phonenumber, String address){
+        final String sql = "update student set phonenumber=:phonenumber,address=:address where studentID=:studentID";
+        try(Connection con = DBUtils.getConnection()){
+            con.createQuery(sql)
+                    .addParameter("phonenumber",phonenumber)
+                    .addParameter("address",address)
+                    .addParameter("studentID",studentID)
+                    .executeUpdate();
+        }
+    }
+
 }

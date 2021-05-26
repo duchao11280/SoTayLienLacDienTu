@@ -318,9 +318,22 @@ public class UserServlet extends HttpServlet {
             case "/UpdateIsPaid":
                 doUpdateIsPaid(request,response);
                 break;
+            case "/UpdateInfoStudent":
+                doUpdateInfoStudent(request,response);
+                break;
             default:
                 break;
         }
+    }
+
+    private void doUpdateInfoStudent(HttpServletRequest request, HttpServletResponse response){
+        String studentID = request.getParameter("studentID");
+        String phonenumber = request.getParameter("phonenumber");
+        String address = request.getParameter("address");
+        System.out.println(studentID);
+        System.out.println(phonenumber);
+        System.out.println(address);
+        UserModel.updateInfor(studentID,phonenumber,address);
     }
 
     private void doUpdateIsPaid(HttpServletRequest request,HttpServletResponse response){

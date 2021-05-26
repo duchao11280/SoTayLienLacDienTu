@@ -36,15 +36,15 @@ public interface UserApi {
     //region Get
     //Lấy 1 sinh viên
     @GET("User/GetStudent")
-    Call<Student> getStudentByID(@Query("id") int id);
+    Call<Student> getStudentByID(@Query("id") String id);
 
     //Lấy 1 học sinh
     @GET("User/GetParent")
-    Call<Parent> getParentByParentID(@Query("id") int id);
+    Call<Parent> getParentByParentID(@Query("id") String id);
 
     //Lấy 1 admin
     @GET("User/GetAdmin")
-    Call<Admin> getAdminByAdminID(@Query("id") int id);
+    Call<Admin> getAdminByAdminID(@Query("id") String id);
 
     //Lấy danh sách thông báo của 1 phụ huynh
     @GET("User/GetAnnouncementParent")
@@ -122,6 +122,15 @@ public interface UserApi {
     @PUT("User/UpdateIsPaid")
     Call<Void> updateIsPaid(@Query("studentID") int studentID,
                             @Query("subjectID") String subjectID);
+
+    //Cập nhật thông tin cho học sinh
+    @PUT("User/UpdateInfoStudent")
+    Call<Void> updateInfo(
+            @Query("studentID") String studentID,
+            @Query("phonenumber") String phonenumber,
+            @Query("address") String address
+    );
+
     //endregion
 
     //region Delete

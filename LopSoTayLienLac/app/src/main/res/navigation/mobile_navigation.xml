@@ -27,5 +27,15 @@
         android:name="com.example.lopsotaylienlac.ui.account.AccountFragment"
         android:label="@string/title_taikhoan"
         tools:layout="@layout/fragment_account" />
+    <fragment
+        android:id="@+id/fragment_account_info"
+        android:name="com.example.lopsotaylienlac.ui.account.InfoFragment"
+        android:label="fragment_account_info"
+        tools:layout="@layout/fragment_account_info" />
+    <fragment
+        android:id="@+id/fragment_account_edit_info"
+        android:name="com.example.lopsotaylienlac.ui.account.EditInforFragment"
+        android:label="fragment_account_edit_infor"
+        tools:layout="@layout/fragment_account_edit_infor" />
 
 </navigation>

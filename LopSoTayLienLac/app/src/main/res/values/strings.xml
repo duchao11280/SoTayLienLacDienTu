@@ -67,4 +67,19 @@
     <string name="label_khongtimthay">Không tìm thấy</string>
     <string name="btn_gui">Gửi</string>
 
+    <string name="app_fullname">Sổ tay liên lạc điện tử</string>
+    <string name="username">Tên Đăng nhập</string>
+    <string name="password">Mật khẩu</string>
+    <string name="signin">Đăng nhập</string>
+
+    <string-array name="role_spinner">
+        <item>Học sinh</item>
+        <item>Phụ huynh</item>
+        <item>Admin</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_failed">Đăng nhập thất bại</string>
+    <string name="check_info_login">Kiểm tra thông tin đăng nhập</string>
+
 </resources>
