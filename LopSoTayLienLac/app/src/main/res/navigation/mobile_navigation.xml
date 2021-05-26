@@ -15,7 +15,7 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.example.lopsotaylienlac.ui.dashboard.DashboardFragment"
         android:label="@string/title_tuongtac"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_admin_dashboard" />
 
     <fragment
         android:id="@+id/navigation_nofitication"
@@ -37,5 +37,9 @@
         android:name="com.example.lopsotaylienlac.ui.account.EditInforFragment"
         android:label="fragment_account_edit_infor"
         tools:layout="@layout/fragment_account_edit_infor" />
-
+    <fragment
+        android:id="@+id/fragment_admin_management_allclass"
+        android:name="com.example.lopsotaylienlac.ui.sbclass.ManagementClassFragment"
+        android:label="fragment_admin_management_allclass"
+        tools:layout="@layout/fragment_admin_management_allclass" />
 </navigation>

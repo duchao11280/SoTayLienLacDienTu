@@ -12,4 +12,7 @@
     <color name="maincolor">#333333</color>
     <color name="green_check">#00FF00</color>
     <color name="main50per">#808080</color>
+    <color name="pink">#ff8080</color>
+    <color name="yellow">#ffff40</color>
+    <color name="electric_blue">#97FFFF</color>
 </resources>

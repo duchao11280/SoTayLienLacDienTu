@@ -54,4 +54,15 @@ public class Subjectclass {
     public void setTeacherID(int teacherID) {
         this.teacherID = teacherID;
     }
+
+    @Override
+    public String toString() {
+        return "Subjectclass{" +
+                "subjectID='" + subjectID + '\'' +
+                ", subjectName='" + subjectName + '\'' +
+                ", room='" + room + '\'' +
+                ", credit=" + credit +
+                ", teacherID=" + teacherID +
+                '}';
+    }
 }
