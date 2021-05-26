@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com</groupId>
-    <artifactId>CheDoDinhDuong</artifactId>
+    <artifactId>ApiContactApp</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>CheDoDinhDuong</name>
+    <name>ApiContactApp</name>
     <packaging>war</packaging>
 
     <properties>

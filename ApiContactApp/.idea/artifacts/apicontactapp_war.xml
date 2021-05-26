@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="CheDoDinhDuong-1.0-SNAPSHOT.war">
+    <root id="archive" name="ApiContactApp-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="apicontactapp:war exploded" />
     </root>
   </artifact>
