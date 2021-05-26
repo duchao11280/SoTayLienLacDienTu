@@ -72,6 +72,7 @@ public class InfoFragment extends Fragment {
                 break;
             case 2:
                 txtRole.setText("Phụ huynh");
+                btnEditInfo.setVisibility(View.INVISIBLE);
                 break;
             default:
                 break;
