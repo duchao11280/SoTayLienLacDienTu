@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/apicontactapp.iml" filepath="$PROJECT_DIR$/apicontactapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ApiContactApp.iml" filepath="$PROJECT_DIR$/ApiContactApp.iml" />
     </modules>
   </component>
 </project>
