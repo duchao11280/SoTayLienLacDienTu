@@ -26,7 +26,7 @@ public class DashboardFragment extends Fragment {
     private DashboardViewModel dashboardViewModel;
     private SharedPreferences sharedPreferences;
     private TextView itdbClass;
-    private TextView itdbFee;
+    private TextView itdbFee,itdbSchedule;
     private TextView itdbViewGrades;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -44,6 +44,7 @@ public class DashboardFragment extends Fragment {
                 itdbClass.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        // chuyen toi fragment Admin management class
                         NavHostFragment.findNavController(DashboardFragment.this).navigate(R.id.fragment_admin_management_allclass);
                         System.out.println("Click success");
 
@@ -51,13 +52,27 @@ public class DashboardFragment extends Fragment {
                 });
                 break;
             case 1:
+
                 root = inflater.inflate(R.layout.fragment_student_dashboard, container, false);
+                /**
+                 * chuyen toi trang xem hoc phi cua hoc sinh
+                 */
+                itdbSchedule = root.findViewById(R.id.itdbSchedule);
+                itdbSchedule.setOnClickListener(v -> {
+                    NavHostFragment.findNavController(DashboardFragment.this).navigate(R.id.fragment_student_schedule);
+                    System.out.println("Click success");
+                });
+                /**
+                 * chuyen toi trang xem hoc phi cua hoc sinh
+                 */
                 itdbFee = root.findViewById(R.id.itdbFee);
                 itdbFee.setOnClickListener(v->{
                     NavHostFragment.findNavController(DashboardFragment.this).navigate(R.id.fragment_student_fee);
                     System.out.println("Click success");
                 });
-
+                /**
+                 * chuyen toi trang xem diem cua hoc sinh
+                 */
                 itdbViewGrades = root.findViewById(R.id.itdbViewGrades);
                 itdbViewGrades.setOnClickListener(v->{
                     NavHostFragment.findNavController(DashboardFragment.this).navigate(R.id.fragment_student_check_score);

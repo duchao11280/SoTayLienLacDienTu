@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet(name = "UserServlet", urlPatterns = "/User/*")
@@ -119,11 +121,33 @@ public class UserServlet extends HttpServlet {
                 break;
             case "/GetListStudent":
                 doGetListStudentBySubjectID(request,response);
+            case "/GetScheduleByStudentIdandDate":
+                doGetScheduleByStudentIdandDate(request,response);
                 break;
             default:
                 break;
         }
     }
+
+    private void doGetScheduleByStudentIdandDate(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        String apiRespont="";
+        int id = Integer.parseInt(request.getParameter("studentID"));
+        System.out.println(id);
+        PrintWriter out2view = response.getWriter();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
+        String dt = request.getParameter("dtpk");
+        System.out.println(dt);
+        List<Schedule> lstSche = UserModel.getScheduleByStudentIdandDate(id,dt);
+        if(lstSche.size()>0) {
+            apiRespont = new Gson().toJson(lstSche);
+        }
+        System.out.println(apiRespont);
+        out2view.println(apiRespont);
+        out2view.flush();
+
+    }
+
     private void doGetAllSubclassByParentIDofStudentID(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String apiRespont="";
         String id = request.getParameter("parentID");

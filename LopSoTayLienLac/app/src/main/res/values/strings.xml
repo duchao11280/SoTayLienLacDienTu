@@ -4,7 +4,7 @@
     <string name="title_tuongtac">Tương tác</string>
     <string name="title_thongbao">Thông báo</string>
     <string name="title_taikhoan">Tài khoản</string>
-
+    <string name="title_schedule">Thời khóa biểu</string>
     <string name="title_malop">Mã lớp</string>
     <string name="title_tenlop">Tên lớp</string>
     <string name="title_mssv">MSSV</string>
@@ -74,6 +74,7 @@
 
     <string name="txt_view_grade">Xem điểm</string>
     <string name="txt_schedule">Thời khóa biểu</string>
+    <string name="txt_xemlich">Xem lịch</string>
     <string-array name="role_spinner">
         <item>Học sinh</item>
         <item>Phụ huynh</item>

@@ -4,6 +4,7 @@ import Beans.*;
 import Utilties.DBUtils;
 import org.sql2o.Connection;
 
+import java.util.Date;
 import java.util.List;
 
 public class UserModel {
@@ -253,6 +254,15 @@ public class UserModel {
                     .addParameter("parentID",parentID)
                     .addParameter("announID",announID)
                     .executeUpdate();
+        }
+    }
+    public static List<Schedule> getScheduleByStudentIdandDate(int id, String dt) {
+        final String sql = "call sp_getScheduleByStudentAndDate(:idd,:dt)";
+        try (Connection con = DBUtils.getConnection()) {
+            return con.createQuery(sql)
+                    .addParameter("idd", id)
+                    .addParameter("dt", dt)
+                    .executeAndFetch(Schedule.class);
         }
     }
 }

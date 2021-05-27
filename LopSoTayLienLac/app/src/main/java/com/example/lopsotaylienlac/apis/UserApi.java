@@ -4,6 +4,7 @@ import com.example.lopsotaylienlac.beans.Admin;
 import com.example.lopsotaylienlac.beans.Announcement;
 import com.example.lopsotaylienlac.beans.Fee;
 import com.example.lopsotaylienlac.beans.Parent;
+import com.example.lopsotaylienlac.beans.Schedule;
 import com.example.lopsotaylienlac.beans.Student;
 import com.example.lopsotaylienlac.beans.Subjectclass;
 import com.example.lopsotaylienlac.beans.Subjectofstudent;
@@ -96,6 +97,9 @@ public interface UserApi {
     @GET("User/GetAllFee")
     Call<ArrayList<Fee>> getAllFee();
 
+    @GET("User/GetScheduleByStudentIdandDate")
+    Call<ArrayList<Schedule>> getScheduleByStudentIdandDate(@Query("studentID")int id,
+                                                            @Query("dtpk")String dtpk);
     //endregion
 
     //region Post
