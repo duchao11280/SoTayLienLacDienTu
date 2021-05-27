@@ -7,12 +7,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ApiContactApp" />
-        <module name="apicontactapp" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="ApiContactApp" target="1.8" />
-      <module name="apicontactapp" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
