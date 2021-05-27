@@ -26,6 +26,7 @@ public class DashboardFragment extends Fragment {
     private DashboardViewModel dashboardViewModel;
     private SharedPreferences sharedPreferences;
     private TextView itdbClass;
+    private TextView itdbFee;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -50,6 +51,11 @@ public class DashboardFragment extends Fragment {
                 break;
             case 1:
                 root = inflater.inflate(R.layout.fragment_student_dashboard, container, false);
+                itdbFee = root.findViewById(R.id.itdbFee);
+                itdbFee.setOnClickListener(v->{
+                    NavHostFragment.findNavController(DashboardFragment.this).navigate(R.id.studentFeeFragment);
+                    System.out.println("Click success");
+                });
                 break;
             case 2:
                 root = inflater.inflate(R.layout.fragment_parent_dashboard, container, false);

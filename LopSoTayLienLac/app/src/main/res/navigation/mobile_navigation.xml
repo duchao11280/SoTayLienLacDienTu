@@ -42,4 +42,9 @@
         android:name="com.example.lopsotaylienlac.ui.sbclass.ManagementClassFragment"
         android:label="fragment_admin_management_allclass"
         tools:layout="@layout/fragment_admin_management_allclass" />
+    <fragment
+        android:id="@+id/studentFeeFragment"
+        android:name="com.example.lopsotaylienlac.ui.fee.StudentFeeFragment"
+        android:label="fragment_student_fee"
+        tools:layout="@layout/fragment_student_fee" />
 </navigation>

@@ -94,4 +94,19 @@ public class Subjectofstudent {
     public void setTeacherName(String teacherName) {
         this.teacherName = teacherName;
     }
+
+    @Override
+    public String toString() {
+        return "Subjectofstudent{" +
+                "subjectID='" + subjectID + '\'' +
+                ", subjectName='" + subjectName + '\'' +
+                ", credit=" + credit +
+                ", room='" + room + '\'' +
+                ", isPaid=" + isPaid +
+                ", scoreMidTerm=" + scoreMidTerm +
+                ", scoreFinalTerm=" + scoreFinalTerm +
+                ", teacherID=" + teacherID +
+                ", teacherName='" + teacherName + '\'' +
+                '}';
+    }
 }
