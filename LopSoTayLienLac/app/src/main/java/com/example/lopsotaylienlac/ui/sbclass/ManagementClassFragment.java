@@ -40,7 +40,7 @@ public class ManagementClassFragment extends Fragment {
             @Override
             public void onResponse(Call<ArrayList<Subjectclass>> call, Response<ArrayList<Subjectclass>> response) {
                 System.out.println(response.body().toString());
-                subjectClassApdapter.setData(response.body());
+                subjectClassApdapter= new SubjectClassApdapter(response.body());
                 recyclerView.setAdapter(subjectClassApdapter);
                 recyclerView.setLayoutManager(layoutManager);
             }

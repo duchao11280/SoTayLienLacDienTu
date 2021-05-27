@@ -19,7 +19,7 @@ public class StudentFeeAdapter  extends RecyclerView.Adapter<StudentFeeAdapter.S
     private List<Subjectofstudent> mlstSubStudent = new ArrayList<>();
     public StudentFeeAdapter(List<Subjectofstudent> listAnnoucement) {
         this.mlstSubStudent= listAnnoucement;
-        notifyDataSetChanged();
+
     }
     /**
      * tao view layout
@@ -46,7 +46,7 @@ public class StudentFeeAdapter  extends RecyclerView.Adapter<StudentFeeAdapter.S
         if(subjectofstudent ==null)
             return;
         holder.txtMonHoc.setText( subjectofstudent.getSubjectName());
-        holder.txtPrice.setText(subjectofstudent.getCredit());
+        holder.txtPrice.setText(""+subjectofstudent.getCredit());
     }
     /**
      * Tra ve so luong item trong list

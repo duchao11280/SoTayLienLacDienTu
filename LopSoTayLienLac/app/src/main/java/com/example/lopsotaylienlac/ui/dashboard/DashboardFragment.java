@@ -53,7 +53,7 @@ public class DashboardFragment extends Fragment {
                 root = inflater.inflate(R.layout.fragment_student_dashboard, container, false);
                 itdbFee = root.findViewById(R.id.itdbFee);
                 itdbFee.setOnClickListener(v->{
-                    NavHostFragment.findNavController(DashboardFragment.this).navigate(R.id.studentFeeFragment);
+                    NavHostFragment.findNavController(DashboardFragment.this).navigate(R.id.fragment_student_fee);
                     System.out.println("Click success");
                 });
                 break;

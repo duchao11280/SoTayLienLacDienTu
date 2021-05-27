@@ -19,6 +19,10 @@ public class SubjectClassApdapter extends RecyclerView.Adapter<SubjectClassApdap
 
     private List<Subjectclass> lstSubject = new ArrayList<>();
 
+    public SubjectClassApdapter(List<Subjectclass> lstSubject) {
+        this.lstSubject = lstSubject;
+    }
+
     public void setData(List<Subjectclass> list){
         this.lstSubject = list;
         notifyDataSetChanged();
