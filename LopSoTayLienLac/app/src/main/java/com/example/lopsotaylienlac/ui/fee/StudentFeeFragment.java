@@ -20,6 +20,7 @@ import com.example.lopsotaylienlac.adapter.StudentFeeAdapter;
 import com.example.lopsotaylienlac.adapter.SubjectClassApdapter;
 import com.example.lopsotaylienlac.apis.UserApi;
 import com.example.lopsotaylienlac.beans.Announcement;
+import com.example.lopsotaylienlac.beans.Fee;
 import com.example.lopsotaylienlac.beans.Subjectofstudent;
 
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class StudentFeeFragment extends Fragment {
     private TextView txtSubject;
     private TextView txtPrice;
     SharedPreferences sharedPreferences;
+    private int feeofyear;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,10 +50,28 @@ public class StudentFeeFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         UserApi.apiService.getAllSubclassByStudentID(Integer.parseInt(id)).enqueue(new Callback<ArrayList<Subjectofstudent>>() {
             @Override
-            public void onResponse(Call<ArrayList<Subjectofstudent>> call, Response<ArrayList<Subjectofstudent>> response) {
-                studentFeeAdapter= new StudentFeeAdapter(response.body());
-                recyclerView.setAdapter(studentFeeAdapter);
-                recyclerView.setLayoutManager(layoutManager);
+            public void onResponse(Call<ArrayList<Subjectofstudent>> call, Response<ArrayList<Subjectofstudent>> responsemain) {
+                UserApi.apiService.getAllFee().enqueue(new Callback<ArrayList<Fee>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<Fee>> call, Response<ArrayList<Fee>> response) {
+                        List<Fee> lst = new ArrayList<>();
+
+                        lst =  response.body();
+                        int lastindex = lst.size();
+                        Fee lastfee = response.body().get(lastindex-1);
+                        feeofyear = lastfee.getMoney();
+
+                        studentFeeAdapter= new StudentFeeAdapter(responsemain.body(),feeofyear);
+                        recyclerView.setAdapter(studentFeeAdapter);
+                        recyclerView.setLayoutManager(layoutManager);
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<Fee>> call, Throwable t) {
+
+                    }
+                });
+
             }
 
             @Override
@@ -59,6 +79,7 @@ public class StudentFeeFragment extends Fragment {
                 Toast.makeText(getContext(),"Không có fee nào",Toast.LENGTH_LONG).show();
             }
         });
+
         return  root;
     }
 

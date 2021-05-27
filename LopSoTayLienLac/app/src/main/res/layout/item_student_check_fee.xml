@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
+    android:id="@+id/item_student_fee_row"
     android:background="@drawable/card_border_radius">
 
 
@@ -17,6 +17,7 @@
         android:fontFamily="@font/roboto"
         android:text="@string/title_monhoc"
         android:textColor="#333333"
+
         android:textSize="13sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

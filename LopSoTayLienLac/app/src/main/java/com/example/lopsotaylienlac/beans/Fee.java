@@ -46,4 +46,14 @@ public class Fee {
     public void setDateUpload(Date dateUpload) {
         this.dateUpload = dateUpload;
     }
+
+    @Override
+    public String toString() {
+        return "Fee{" +
+                "feeID=" + feeID +
+                ", year=" + year +
+                ", money=" + money +
+                ", dateUpload=" + dateUpload +
+                '}';
+    }
 }

@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lopsotaylienlac.R;
@@ -17,10 +18,13 @@ import java.util.List;
 public class StudentFeeAdapter  extends RecyclerView.Adapter<StudentFeeAdapter.StudentFeeViewHolder> {
 
     private List<Subjectofstudent> mlstSubStudent = new ArrayList<>();
-    public StudentFeeAdapter(List<Subjectofstudent> listAnnoucement) {
-        this.mlstSubStudent= listAnnoucement;
+    private int feeofyear;
 
+    public StudentFeeAdapter(List<Subjectofstudent> mlstSubStudent, int feeofyear) {
+        this.mlstSubStudent = mlstSubStudent;
+        this.feeofyear = feeofyear;
     }
+
     /**
      * tao view layout
      * @param parent
@@ -46,7 +50,7 @@ public class StudentFeeAdapter  extends RecyclerView.Adapter<StudentFeeAdapter.S
         if(subjectofstudent ==null)
             return;
         holder.txtMonHoc.setText( subjectofstudent.getSubjectName());
-        holder.txtPrice.setText(""+subjectofstudent.getCredit());
+        holder.txtPrice.setText(""+subjectofstudent.getCredit()*feeofyear);
     }
     /**
      * Tra ve so luong item trong list
@@ -74,6 +78,7 @@ public class StudentFeeAdapter  extends RecyclerView.Adapter<StudentFeeAdapter.S
             txtMonHoc = (TextView) itemView.findViewById(R.id.txtMonhoc);
             txtPrice = (TextView) itemView.findViewById(R.id.txtPrice);
 //            item_student_fee_row = itemView.findViewById(R.id.item_student_fee_row);
+
         }
     }
 }
