@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/card_round_corner_large"
     android:orientation="vertical">
 
@@ -38,18 +38,19 @@
 
     <Button
         android:id="@+id/btnStudentFeeOK"
+        android:textSize="25dp"
         android:layout_width="125dp"
         android:layout_height="45dp"
-        android:layout_marginStart="140dp"
+        android:layout_marginStart="104dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="40dp"
         android:background="@drawable/btn_round_corner"
-        android:text="@string/yes"
+        android:text="@string/ok"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_conf_del_noti"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.031" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
