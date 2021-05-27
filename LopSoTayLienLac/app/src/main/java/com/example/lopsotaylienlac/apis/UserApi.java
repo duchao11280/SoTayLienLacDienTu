@@ -52,7 +52,7 @@ public interface UserApi {
 
     //Lấy danh sách thông báo của 1 sinh viên
     @GET("User/GetAnnouncementStudent")
-    Call<List<Announcement>> getAnnounBySudentID(@Query("id") int id);
+    Call<ArrayList<Announcement>> getAnnounBySudentID(@Query("id") int id);
 
     //Xem chi tiết 1 thông báo cho học sinh
     @GET("User/GetDetailAnnounStudent")

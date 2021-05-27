@@ -85,4 +85,17 @@ public class Announcement {
     public void setReceiverName(String receiverName) {
         this.receiverName = receiverName;
     }
+
+    @Override
+    public String toString() {
+        return "Announcement{" +
+                "announID=" + announID +
+                ", title='" + title + '\'' +
+                ", announContent='" + announContent + '\'' +
+                ", senderName='" + senderName + '\'' +
+                ", isRead=" + isRead +
+                ", dateSend=" + dateSend +
+                ", receiverName='" + receiverName + '\'' +
+                '}';
+    }
 }

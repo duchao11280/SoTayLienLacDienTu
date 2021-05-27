@@ -18,6 +18,7 @@ import java.util.List;
 public class SubjectClassApdapter extends RecyclerView.Adapter<SubjectClassApdapter.SubjectClassViewHolder> {
 
     private List<Subjectclass> lstSubject = new ArrayList<>();
+
     public void setData(List<Subjectclass> list){
         this.lstSubject = list;
         notifyDataSetChanged();
