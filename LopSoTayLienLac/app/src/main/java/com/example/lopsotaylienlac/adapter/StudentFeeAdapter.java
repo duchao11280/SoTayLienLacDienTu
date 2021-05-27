@@ -23,6 +23,7 @@ public class StudentFeeAdapter  extends RecyclerView.Adapter<StudentFeeAdapter.S
     public StudentFeeAdapter(List<Subjectofstudent> mlstSubStudent, int feeofyear) {
         this.mlstSubStudent = mlstSubStudent;
         this.feeofyear = feeofyear;
+        notifyDataSetChanged();
     }
 
     /**

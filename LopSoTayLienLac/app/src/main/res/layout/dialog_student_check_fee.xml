@@ -38,19 +38,19 @@
 
     <Button
         android:id="@+id/btnStudentFeeOK"
-        android:textSize="25dp"
         android:layout_width="125dp"
         android:layout_height="45dp"
-        android:layout_marginStart="104dp"
+        android:layout_marginStart="128dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="40dp"
         android:background="@drawable/btn_round_corner"
         android:text="@string/ok"
         android:textColor="@color/white"
+        android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_conf_del_noti"
-        app:layout_constraintVertical_bias="0.031" />
+        app:layout_constraintVertical_bias="0.019" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

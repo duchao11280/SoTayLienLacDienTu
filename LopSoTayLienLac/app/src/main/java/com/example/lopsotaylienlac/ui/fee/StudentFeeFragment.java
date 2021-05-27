@@ -3,6 +3,8 @@ package com.example.lopsotaylienlac.ui.fee;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -95,18 +97,18 @@ public class StudentFeeFragment extends Fragment {
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
         View view = getLayoutInflater().inflate(R.layout.dialog_student_check_fee,null);
         AlertDialog alertDialog = builder.create();
-//        builder.setTitle("dsafhuie").setView(view).show();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         alertDialog.setView(view);
-//        alertDialog.setTitle("Category Form");
         alertDialog.show();
 
+
         /**
-         * su kien nut close
+         * su kien nut ok
          */
         btnStudentFeeOK = view.findViewById(R.id.btnStudentFeeOK);
         btnStudentFeeOK.setOnClickListener(v -> {
             alertDialog.cancel();
-//            categoryDao.deleteAll();
+
         });
 
 
