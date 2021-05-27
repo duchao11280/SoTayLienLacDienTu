@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 25/05/2021 18:33:44
+ Date: 27/05/2021 17:44:08
 */
 
 SET NAMES utf8mb4;
@@ -31,6 +31,7 @@ CREATE TABLE `admin`  (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
+INSERT INTO `admin` VALUES ('admin', '123', 'Day la Admin01');
 
 -- ----------------------------
 -- Table structure for announcement
@@ -136,7 +137,7 @@ CREATE TABLE `student`  (
 -- ----------------------------
 -- Records of student
 -- ----------------------------
-INSERT INTO `student` VALUES (1, '00000', 'con ông NV A', '2021-02-10', '2sadsdasd', 'sadzxcasdsad', 'CLC2A', 1);
+INSERT INTO `student` VALUES (1, '123', 'con ông NV A', '2021-02-10', '0906993034', 'The Duc', 'CLC2A', 1);
 INSERT INTO `student` VALUES (2, '213', 'con ong NV A nhưng bé hơn', '2020-10-28', 'sdasdsad', 'xcx', 'CLC2B', 1);
 INSERT INTO `student` VALUES (111, 'test student', 'paswordd', '2020-02-02', '0123456788', 'addressss', 'sdadasdas', 1);
 
@@ -301,6 +302,20 @@ end
 delimiter ;
 
 -- ----------------------------
+-- Procedure structure for sp_getAllSubjectByParentOfStudentID
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `sp_getAllSubjectByParentOfStudentID`;
+delimiter ;;
+CREATE PROCEDURE `sp_getAllSubjectByParentOfStudentID`(IN uid int)
+begin
+	select study.subjectID, subjectName, credit,room, isPaid, scoreMidTerm, scoreFinalTerm,teacher.teacherID, teacherName
+	from subjectclass,study,student,teacher
+	where subjectclass.subjectID = study.subjectID and study.studentID = student.studentID and student.parentID = uid and teacher.teacherID = subjectclass.teacherID;
+end
+;;
+delimiter ;
+
+-- ----------------------------
 -- Procedure structure for sp_getAllSubjectByStudentID
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `sp_getAllSubjectByStudentID`;
@@ -352,6 +367,20 @@ begin
 	select study.subjectID, subjectName, credit,room, isPaid, scoreMidTerm, scoreFinalTerm,teacher.teacherID, teacherName
 	from subjectclass,study,student,teacher
 	where subjectclass.subjectID = study.subjectID and study.studentID = student.studentID and student.studentID = uid and teacher.teacherID = subjectclass.teacherID and subjectclass.subjectID=sid;
+end
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for sp_getScheduleByStudentAndDate
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `sp_getScheduleByStudentAndDate`;
+delimiter ;;
+CREATE PROCEDURE `sp_getScheduleByStudentAndDate`(IN idd int(11), dt date)
+begin
+    Select timetable.timetableID,timetable.subjectID, timetable.date, timetable.timeStart, timetable.timeEnd, subjectclass.subjectName, subjectclass.room, subjectclass.credit,(SELECT  teacher.teacherName from teacher,subjectclass WHERE subjectclass.teacherID = teacher.teacherID lIMIT 1) as teachername,IF((hour(TIMEDIFF(time(timetable.timeStart),'07:00:00'))+1)<1,1,If((hour(TIMEDIFF(time(timetable.timeStart),'07:00:00'))+1)>12,12,(hour(TIMEDIFF(time(timetable.timeStart),'07:00:00'))+1))) as tietbd, IF((hour(TIMEDIFF(time(timetable.timeEnd),'07:00:00'))+1)<1,1,If((hour(TIMEDIFF(time(timetable.timeEnd),'07:00:00'))+1)>12,12,(hour(TIMEDIFF(time(timetable.timeEnd),'07:00:00'))+1))) as tietkt
+from timetable,subjectclass,study
+ WHERE timetable.subjectID = subjectclass.subjectID and study.subjectID = subjectclass.subjectID and study.studentID = idd and timetable.isOff=0 and timetable.date = dt;
 end
 ;;
 delimiter ;
