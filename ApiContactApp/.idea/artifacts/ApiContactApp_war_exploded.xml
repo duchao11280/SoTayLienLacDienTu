@@ -1,0 +1,24 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ApiContactApp:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/ApiContactApp_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ApiContactApp" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.5" />
+          <element id="library" level="project" name="Maven: org.apache.taglibs:taglibs-standard-spec:1.2.5" />
+          <element id="library" level="project" name="Maven: org.apache.taglibs:taglibs-standard-impl:1.2.5" />
+          <element id="library" level="project" name="Maven: org.sql2o:sql2o:1.5.4" />
+          <element id="library" level="project" name="Maven: at.favre.lib:bcrypt:0.9.0" />
+          <element id="library" level="project" name="Maven: at.favre.lib:bytes:1.3.0" />
+          <element id="library" level="project" name="Maven: com.cloudinary:cloudinary-taglib:1.27.0" />
+          <element id="library" level="project" name="Maven: com.cloudinary:cloudinary-core:1.27.0" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.1" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="ApiContactApp/web/Web" />
+    </root>
+  </artifact>
+</component>

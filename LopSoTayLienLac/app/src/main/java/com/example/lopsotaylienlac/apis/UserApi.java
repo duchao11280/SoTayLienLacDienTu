@@ -27,7 +27,7 @@ public interface UserApi {
     Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy").create();
 
     UserApi apiService = new Retrofit.Builder()
-            .baseUrl("http://192.168.0.1:8080/apicontactapp/")
+            .baseUrl("http://192.168.0.1:8080/ApiContactApp/")
             .client(Client.getOkHttpClient())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
@@ -74,9 +74,13 @@ public interface UserApi {
     @GET("User/GetAllSubjectclassID")
     Call<ArrayList<Subjectclass>> getAllSubjectclass();
 
-    //Laays toanf booj lopws cuar 1 sinnh vien
+    //Lay toan bo mon hoc cua 1 sinnh vien
     @GET("User/GetAllSubclassByStudentID")
     Call<ArrayList<Subjectofstudent>> getAllSubclassByStudentID(@Query("studentID") int studentID);
+
+    //Lay toan bo mon hoc cua con phu huynh
+    @GET("User/GetAllSubclassByParentID")
+    Call<ArrayList<Subjectofstudent>> getAllSubclassByParentID(@Query("parentID") int parentID);
 
     //Xem chi tiết lớp học của 1 sinh viên (điểm, học phí,...)
     @GET("User/GetDetailSubClass")

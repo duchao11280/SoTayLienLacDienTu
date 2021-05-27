@@ -60,17 +60,16 @@ public class HomeFragment extends Fragment {
     }
 
     private void makeRead() {
-        UserApi.apiService.getAllFee().enqueue(new Callback<ArrayList<Fee>>() {
+        UserApi.apiService.getAllSubclassByParentID(1).enqueue(new Callback<ArrayList<Subjectofstudent>>() {
             @Override
-            public void onResponse(Call<ArrayList<Fee>> call, Response<ArrayList<Fee>> response) {
-                Toast.makeText(getContext(),"Success",Toast.LENGTH_LONG).show();
-                System.out.println("Success");
+            public void onResponse(Call<ArrayList<Subjectofstudent>> call, Response<ArrayList<Subjectofstudent>> response) {
+                System.out.println("success");
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Fee>> call, Throwable t) {
-                Toast.makeText(getContext(),"Fail",Toast.LENGTH_LONG).show();
-                System.out.println("Fail");
+            public void onFailure(Call<ArrayList<Subjectofstudent>> call, Throwable t) {
+                System.out.println("fail");
+
             }
         });
     }

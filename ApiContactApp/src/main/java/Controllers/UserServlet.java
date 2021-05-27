@@ -87,6 +87,9 @@ public class UserServlet extends HttpServlet {
             case "/GetAllSubclassByStudentID":
                 doGetAllSubclassByStudentID(request,response);
                 break;
+            case "/GetAllSubclassByParentID":
+                doGetAllSubclassByParentIDofStudentID(request,response);
+                break;
             case "/GetDetailSubClass":
                 doGetDetailSubClass(request,response);
                 break;
@@ -97,7 +100,19 @@ public class UserServlet extends HttpServlet {
                 break;
         }
     }
-
+    private void doGetAllSubclassByParentIDofStudentID(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String apiRespont="";
+        String id = request.getParameter("parentID");
+        PrintWriter out2cal = response.getWriter();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
+        List<Subjectofstudent> lstSub = UserModel.getAllSubclassByParentIDofStudentID(id);
+        if(lstSub.size()>0) {
+            apiRespont = new Gson().toJson(lstSub);
+        }
+        out2cal.println(apiRespont);
+        out2cal.flush();
+    }
     private void doGetListStudentBySubjectID(HttpServletRequest request,HttpServletResponse response) throws IOException {
         String subjectID = request.getParameter("subjectID");
         String apiRespont="";

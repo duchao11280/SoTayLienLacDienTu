@@ -200,5 +200,12 @@ public class UserModel {
                     .executeUpdate();
         }
     }
-
+    public static List<Subjectofstudent> getAllSubclassByParentIDofStudentID(String parentID){
+        final String sql = "call sp_getAllSubjectByParentOfStudentID(:parentID)";
+        try(Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("parentID",parentID)
+                    .executeAndFetch(Subjectofstudent.class);
+        }
+    }
 }
