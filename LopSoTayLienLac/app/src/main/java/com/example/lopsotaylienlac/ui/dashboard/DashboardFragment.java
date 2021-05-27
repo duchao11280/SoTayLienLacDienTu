@@ -27,6 +27,7 @@ public class DashboardFragment extends Fragment {
     private SharedPreferences sharedPreferences;
     private TextView itdbClass;
     private TextView itdbFee;
+    private TextView itdbViewGrades;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -56,6 +57,13 @@ public class DashboardFragment extends Fragment {
                     NavHostFragment.findNavController(DashboardFragment.this).navigate(R.id.fragment_student_fee);
                     System.out.println("Click success");
                 });
+
+                itdbViewGrades = root.findViewById(R.id.itdbViewGrades);
+                itdbViewGrades.setOnClickListener(v->{
+                    NavHostFragment.findNavController(DashboardFragment.this).navigate(R.id.fragment_student_check_score);
+                    System.out.println("Click success");
+                });
+
                 break;
             case 2:
                 root = inflater.inflate(R.layout.fragment_parent_dashboard, container, false);

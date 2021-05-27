@@ -64,4 +64,10 @@
         android:label="fragment_parent_notification"
         tools:layout="@layout/fragment_parent_notification" />
 
+    <fragment
+        android:id="@+id/fragment_student_check_score"
+        android:name="com.example.lopsotaylienlac.ui.score.StudentScoreFragment"
+        android:label="fragment_student_check_score"
+        tools:layout="@layout/fragment_student_check_score" />
+
 </navigation>
