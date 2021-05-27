@@ -208,4 +208,51 @@ public class UserModel {
                     .executeAndFetch(Subjectofstudent.class);
         }
     }
+
+    public static void addNewAnnouncement(int announID,String title,String content,String sender,String receiver){
+        final String sql = "INSERT INTO announcement VALUES(:announID,:title,:content,:sender,NOW(),:receiver)";
+        try(Connection con = DBUtils.getConnection()){
+            con.createQuery(sql)
+                    .addParameter("announID",announID)
+                    .addParameter("title",title)
+                    .addParameter("content",content)
+                    .addParameter("sender",sender)
+                    .addParameter("receiver",receiver)
+                    .executeUpdate();
+        }
+    }
+
+    public static List<String> getAllParentID(){
+        final String sql = "select parentID from parent";
+        try(Connection con = DBUtils.getConnection()) {
+            return con.createQuery(sql).executeAndFetch(String.class);
+        }
+    }
+
+    public static List<String> getAllStudentID(){
+        final String sql = "select studentID from student";
+        try(Connection con = DBUtils.getConnection()) {
+            return con.createQuery(sql).executeAndFetch(String.class);
+        }
+    }
+
+    public static void addStudentAnnoun(int announID,String studentID){
+        final String sql = "insert into student_announcement values(:studentID,:announID,false)";
+        try(Connection con = DBUtils.getConnection()){
+            con.createQuery(sql)
+                    .addParameter("studentID",studentID)
+                    .addParameter("announID",announID)
+                    .executeUpdate();
+        }
+    }
+
+    public static void addParentAnnoun(int announID, String parentID){
+        final String sql = "insert into parent_announcement values(:parentID,:announID,false)";
+        try(Connection con = DBUtils.getConnection()) {
+            con.createQuery(sql)
+                    .addParameter("parentID",parentID)
+                    .addParameter("announID",announID)
+                    .executeUpdate();
+        }
+    }
 }

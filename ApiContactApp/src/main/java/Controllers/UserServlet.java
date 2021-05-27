@@ -35,7 +35,31 @@ public class UserServlet extends HttpServlet {
     }
 
     public void doAddNewAnnouncement(HttpServletRequest request,HttpServletResponse response){
-
+        String title = request.getParameter("title");
+        String senderName = request.getParameter("sender");
+        String content = request.getParameter("content");
+        int role = Integer.parseInt(request.getParameter("role"));
+        String receiver = request.getParameter("receiver");
+        int announID = UserModel.getAllAnnouncement().size()+1;
+//        UserModel.addNewAnnouncement(title,content,senderName,receiver);
+        List<String> lstParentID = UserModel.getAllParentID();
+        List<String> lstStudentID = UserModel.getAllStudentID();
+        if(role==1){
+            if(receiver.equals("All")){
+                UserModel.addNewAnnouncement(announID,title,content,senderName,receiver);
+                for (String id: lstStudentID){
+                    UserModel.addStudentAnnoun(announID,id);
+                }
+            }
+        }
+        else{
+            if(receiver.equals("All")){
+                UserModel.addNewAnnouncement(announID,title,content,senderName,receiver);
+                for (String id: lstParentID){
+                    UserModel.addParentAnnoun(announID,id);
+                }
+            }
+        }
     }
 
     private void doAddNewFee(HttpServletRequest request, HttpServletResponse response){
