@@ -21,7 +21,7 @@
         android:textStyle="bold"/>
 
     <Button
-        android:id="@+id/btnYes"
+        android:id="@+id/btnSOK"
         android:layout_width="125dp"
         android:layout_height="45dp"
         android:background="@drawable/btn_round_corner"

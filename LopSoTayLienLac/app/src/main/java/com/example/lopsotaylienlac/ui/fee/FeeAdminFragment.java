@@ -48,9 +48,20 @@ public class FeeAdminFragment extends Fragment {
             }
         });
 
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openStudentFeeSearchFragment();
+            }
+        });
+
         recyclerView = (RecyclerView)root.findViewById(R.id.rcvFee);
         showFeeList();
         return root;
+    }
+
+    private void openStudentFeeSearchFragment() {
+        NavHostFragment.findNavController(FeeAdminFragment.this).navigate(R.id.fragment_class_per_student);
     }
 
     private void showFeeList() {

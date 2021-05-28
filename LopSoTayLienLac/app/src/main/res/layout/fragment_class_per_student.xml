@@ -28,17 +28,21 @@
         android:layout_marginBottom="10dp">
 
         <ImageView
+            android:id="@+id/btnSearchStudent"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:src="@drawable/ic_search_solid"
             android:layout_gravity="start"/>
 
         <EditText
-            android:id="@+id/txtStudentID"
+            android:id="@+id/edtStudentID"
             android:layout_width="340dp"
             android:layout_height="64dp"
             android:layout_gravity="end"
-            android:gravity="center" />
+            android:gravity="left"
+            android:textSize="30dp"
+            android:inputType="number"
+            android:layout_marginLeft="40dp"/>
 
     </androidx.cardview.widget.CardView>
 
@@ -54,18 +58,18 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="298dp"
             android:orientation="vertical"
-            app:layout_constraintEnd_toStartOf="@+id/imageView2"
+            app:layout_constraintEnd_toStartOf="@+id/btnSaveFee"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/btnSaveFee"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_gravity="end"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="44dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/card_round_corner"
             android:src="@drawable/ic_baseline_save_24"
@@ -76,9 +80,9 @@
             android:id="@+id/txtNameStudent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="40dp"
-            android:text="name"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="84dp"
+            android:text="@string/label_hovaten"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -87,17 +91,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="ClassId"
+            android:text="@string/lop"
             app:layout_constraintStart_toStartOf="@+id/txtNameStudent"
             app:layout_constraintTop_toBottomOf="@+id/txtNameStudent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/dialog_border_radius"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp">
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rcvClassSub"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
+        android:id="@+id/rcvClassSub"/>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>
