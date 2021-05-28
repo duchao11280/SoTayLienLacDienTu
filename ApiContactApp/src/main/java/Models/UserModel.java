@@ -209,6 +209,17 @@ public class UserModel {
                     .executeUpdate();
         }
     }
+    public static void updateGrades(int studentID, String subjectID, float midGrades, float finalGrades){
+        final String sql = "Update study set scoreMidTerm=:midGrades,scoreFinalTerm = :finalGrades  where studentID = :studentID and subjectID = :subjectID";
+        try(Connection con = DBUtils.getConnection()){
+            con.createQuery(sql)
+                    .addParameter("midGrades",midGrades)
+                    .addParameter("finalGrades",finalGrades)
+                    .addParameter("studentID",studentID)
+                    .addParameter("subjectID",subjectID)
+                    .executeUpdate();
+        }
+    }
     public static List<Subjectofstudent> getAllSubclassByParentIDofStudentID(String parentID){
         final String sql = "call sp_getAllSubjectByParentOfStudentID(:parentID)";
         try(Connection con = DBUtils.getConnection()){

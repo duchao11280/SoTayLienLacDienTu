@@ -152,7 +152,12 @@ public interface UserApi {
             @Query("phonenumber") String phonenumber,
             @Query("address") String address
     );
-
+    // cập nhật điểm cho học sinh
+    @PUT("User/UpdateGrades")
+    Call<Void> updateGrades(@Query("studentID") int studentID,
+                            @Query("subjectID") String subjectID,
+                            @Query("midGrades") float midGrades,
+                            @Query("finalGrades") float finalGrades);
     //endregion
 
     //region Delete

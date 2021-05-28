@@ -426,10 +426,20 @@ public class UserServlet extends HttpServlet {
                 break;
             case "/UpdateInfoStudent":
                 doUpdateInfoStudent(request,response);
+            case "/UpdateGrades":
+                doUpdateGrades(request,response);
                 break;
             default:
                 break;
         }
+    }
+
+    private void doUpdateGrades(HttpServletRequest request, HttpServletResponse response) {
+        int studentID = Integer.parseInt(request.getParameter("studentID"));
+        String sID = request.getParameter("subjectID");
+        float midGrades= Float.parseFloat(request.getParameter("midGrades"));
+        float finalGrades= Float.parseFloat(request.getParameter("finalGrades"));
+        UserModel.updateGrades(studentID,sID,midGrades,finalGrades);
     }
 
     private void doUpdateInfoStudent(HttpServletRequest request, HttpServletResponse response){
