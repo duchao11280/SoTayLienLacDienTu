@@ -106,14 +106,16 @@ public class StudentScheduleFragment extends Fragment {
         UserApi.apiService.getScheduleByStudentIdandDate(id,dtpk).enqueue(new Callback<ArrayList<Schedule>>() {
             @Override
             public void onResponse(Call<ArrayList<Schedule>> call, Response<ArrayList<Schedule>> response) {
+                recyclerView.setVisibility(View.VISIBLE);
                 scheduleAdapter= new ScheduleAdapter(response.body());
                 recyclerView.setAdapter(scheduleAdapter);
-                System.out.println("Sucess get Schedule");
+
             }
 
             @Override
             public void onFailure(Call<ArrayList<Schedule>> call, Throwable t) {
                 Toast.makeText(getContext(),"Không có TKB",Toast.LENGTH_LONG).show();
+                recyclerView.setVisibility(View.INVISIBLE);
             }
         });
     }

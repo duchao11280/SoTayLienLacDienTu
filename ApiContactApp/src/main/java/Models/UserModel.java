@@ -162,6 +162,14 @@ public class UserModel {
 
         }
     }
+    public static List<Subjectclass> getSubjetclassBySubjectID(String sbid){
+        final String sql = "SELECT * FROM subjectclass WHERE subjectID = :sbid";
+        try(Connection con = DBUtils.getConnection()){
+            return con.createQuery(sql)
+                    .addParameter("sbid",sbid)
+                    .executeAndFetch(Subjectclass.class);
+        }
+    }
 
     public static void addNewFee(String money){
         final String sql = "call sp_addNewFee(:money)";

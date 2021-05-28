@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -227,9 +229,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void openLoginFailedDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this,R.style.login_failed_dialog);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = getLayoutInflater().inflate(R.layout.dialog_login_failed,null);
         AlertDialog alertDialog = builder.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         alertDialog.setView(view);
         alertDialog.getWindow().setLayout(400,800);
         Button btnOk = view.findViewById(R.id.btnLoginFailed);

@@ -136,9 +136,26 @@ public class UserServlet extends HttpServlet {
             case "/GetStudentIdByParentId":
                 doGetStudentIdByParentId(request,response);
                 break;
+            case "/GetSubjetclassBySubjectID":
+                doGetSubjetclassBySubjectID(request,response);
+                break;
             default:
                 break;
         }
+    }
+
+    private void doGetSubjetclassBySubjectID(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String apiRespont="";
+        String id = request.getParameter("subjectID");
+        List<Subjectclass> lst = UserModel.getSubjetclassBySubjectID(id);
+        PrintWriter out2view = response.getWriter();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
+        if(lst.size()>0) {
+            apiRespont = new Gson().toJson(lst);
+        }
+        out2view.println(apiRespont);
+        out2view.flush();
     }
 
     private void doGetStudentIdByParentId(HttpServletRequest request, HttpServletResponse response)throws IOException {

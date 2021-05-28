@@ -88,7 +88,8 @@ public interface UserApi {
     Call<Subjectofstudent> getDetailsSubjectclass(
             @Query("studentID") int studentID,
             @Query("subjectID") String subjectID);
-
+    @GET("User/GetSubjetclassBySubjectID")
+    Call<ArrayList<Subjectclass>> getSubjectclassBySubjectID(@Query("subjectID") String subjectID);
     //Xem danh sách sinh viên có trong 1 lớp
     @GET("User/GetListStudent")
     Call<ArrayList<Student>> getListUserBySubjectID(@Query("subjectID") String subjectID);

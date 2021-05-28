@@ -104,4 +104,10 @@
         android:name="com.example.lopsotaylienlac.ui.fee.FeeAdminEditFragment"
         android:label="fragment_admin_edit_fee"
         tools:layout="@layout/fragment_admin_edit_fee" />
+    <fragment
+
+        android:id="@+id/fragment_class_detail"
+        android:name="com.example.lopsotaylienlac.ui.sbclass.DetailSubjectFragment"
+        android:label="fragment_class_detail"
+        tools:layout="@layout/fragment_class_detail" />
 </navigation>

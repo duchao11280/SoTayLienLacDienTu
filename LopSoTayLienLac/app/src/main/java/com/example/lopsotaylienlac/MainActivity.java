@@ -1,16 +1,19 @@
 package com.example.lopsotaylienlac;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
 
         NavigationUI.setupWithNavController(navView, navController);
+
+        sharedPreferences = getSharedPreferences("subjectClass", MODE_PRIVATE);
     }
+
+
 
 }
