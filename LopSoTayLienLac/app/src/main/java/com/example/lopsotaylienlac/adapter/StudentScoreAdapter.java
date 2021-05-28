@@ -1,11 +1,13 @@
 package com.example.lopsotaylienlac.adapter;
 
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lopsotaylienlac.R;
@@ -64,15 +66,24 @@ public class StudentScoreAdapter extends RecyclerView.Adapter<StudentScoreAdapte
     /**
      * Thiet ke view truyen vao adapter
      */
-    public class StudentScoreViewHolder extends RecyclerView.ViewHolder
+    public class StudentScoreViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener
     {
         private TextView txtMonhocScore,txtDiemScore;
+        ConstraintLayout item_row_score;
 
         public StudentScoreViewHolder(@NonNull View itemView) {
             super(itemView);
             //Anh xa view thong qua find
             txtMonhocScore = (TextView) itemView.findViewById(R.id.txtMonhocScore);
             txtDiemScore = (TextView) itemView.findViewById(R.id.txtDiemScore);
+            item_row_score = itemView.findViewById(R.id.item_student_score_row);
+            item_row_score.setOnCreateContextMenuListener(this);
+
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            menu.add(this.getAdapterPosition(),001,0,"Xem Chi Tiet");
 
         }
     }

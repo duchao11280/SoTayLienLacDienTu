@@ -8,7 +8,7 @@
     android:elevation="10dp">
 
     <TextView
-        android:id="@+id/txtDiemGiuaKi"
+        android:id="@+id/txtDiemGiua"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
@@ -30,11 +30,11 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txtDiemGiuaKi"
+        app:layout_constraintStart_toEndOf="@+id/txtDiemGiua"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtDiemCuoiKi"
+        android:id="@+id/txtDiemCuoi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
@@ -43,7 +43,7 @@
         android:textColor="#333333"
         android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDiemGiuaKi" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDiemGiua" />
 
     <EditText
         android:id="@+id/editTextTextPersonName2"
@@ -59,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnScoreOK"
         android:layout_width="125dp"
         android:layout_height="45dp"
         android:layout_marginStart="98dp"

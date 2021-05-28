@@ -7,11 +7,15 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +41,7 @@ public class StudentScoreFragment extends Fragment {
     private LinearLayoutManager layoutManager;
     SharedPreferences sharedPreferences;
     private Button btnStudentFeeOK;
+    private Button btnScoreOK;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -106,5 +111,79 @@ public class StudentScoreFragment extends Fragment {
         });
 
 
+    }
+
+    public void openScoreDialog(int x){
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
+        View view = getLayoutInflater().inflate(R.layout.dialog_student_check_score,null);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        sharedPreferences = this.getActivity().getSharedPreferences("dataLogin", Context.MODE_PRIVATE);
+        String id = sharedPreferences.getString("userID","-1");
+        UserApi.apiService.getAllSubclassByStudentID(Integer.parseInt(id)).enqueue(new Callback<ArrayList<Subjectofstudent>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Subjectofstudent>> call, Response<ArrayList<Subjectofstudent>> response) {
+                /**
+                 * anh xa du lieu tu view
+                 */
+                TextView txtTenMonHoc = view.findViewById(R.id.txtTitle);
+                TextView txtDiemGiua = view.findViewById(R.id.txtDiemGiuaKi);
+                TextView txtDiemCuoi = view.findViewById(R.id.txtDiemCuoiKi);
+                TextView txtDiemTong = view.findViewById(R.id.txtDiemTongKet);
+
+                String sjname = response.body().get(x).getSubjectName();
+                float mid = response.body().get(x).getScoreMidTerm();
+                float finalscore = response.body().get(x).getScoreFinalTerm();
+                float tong = (mid+finalscore)/2;
+                String txtDiemGiuaKi = String.valueOf(mid);
+                String txtDiemCuoiKi = String.valueOf(finalscore);
+                String txtDiemTongKet = String.valueOf(tong);
+
+
+                txtDiemGiua.setText(txtDiemGiuaKi);
+                txtDiemCuoi.setText(txtDiemCuoiKi);
+                txtDiemTong.setText(txtDiemTongKet);
+                txtTenMonHoc.setText(sjname);
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Subjectofstudent>> call, Throwable t) {
+
+            }
+        });
+
+        alertDialog.setView(view);
+        alertDialog.show();
+
+        /**
+         * su kien nut OK
+         */
+        btnScoreOK = view.findViewById(R.id.btnScoreOK);
+        btnScoreOK.setOnClickListener(v -> {
+            alertDialog.cancel();
+        });
+    }
+
+
+    /**
+     * tao context menu cho tung item trong recyclerview
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        int x = item.getGroupId();
+        switch (item.getItemId()){
+            /**
+             * case 001 la nut xem chi tiet
+             */
+            case 001:
+                System.out.println("Day la xem chi tiet");
+                openScoreDialog(x);
+                return true;
+
+        }
+        return super.onContextItemSelected(item);
     }
 }

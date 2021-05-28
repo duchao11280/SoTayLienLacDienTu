@@ -22,17 +22,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/txtDiemGiuaKi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:textColor="@color/black"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="116dp"
         android:text="@string/diem10"
-        app:layout_constraintEnd_toEndOf="@+id/txtTitle"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
 
     <TextView
-        android:id="@+id/txtDiemCuoiKi"
+        android:id="@+id/txtDiemCuoi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -41,20 +42,21 @@
         android:textColor="#333333"
         android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDiemGiuaKi" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:textColor="@color/black"
-        android:text="@string/diem10"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDiemGiua" />
 
     <TextView
         android:id="@+id/txtDiemTongKet"
+        android:layout_width="23dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="112dp"
+        android:text="@string/diem10"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDiemCuoiKi" />
+
+    <TextView
+        android:id="@+id/txtDiemTong"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -63,34 +65,34 @@
         android:textColor="#333333"
         android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDiemCuoiKi" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDiemCuoi" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txtDiemCuoiKi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:textColor="@color/black"
+        android:layout_marginEnd="116dp"
         android:text="@string/diem10"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDiemGiuaKi" />
 
     <TextView
-        android:id="@+id/txtDiemGiuaKi"
+        android:id="@+id/txtDiemGiua"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:text="@string/label_diem_giua_ki"
         android:textColor="#333333"
         android:textSize="14dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintBottom_toBottomOf="@+id/txtDiemGiuaKi"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/txtDiemGiuaKi"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:textColor="@color/white"
-        android:id="@+id/button"
+        android:id="@+id/btnScoreOK"
         android:layout_width="142dp"
         android:layout_height="52dp"
         android:layout_marginStart="112dp"
@@ -98,6 +100,7 @@
         android:layout_marginBottom="50dp"
         android:background="@drawable/btn_round_corner"
         android:text="@string/ok"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
