@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : LDT
- Source Server Type    : MariaDB
+ Source Server         : Duc Hao
+ Source Server Type    : MySQL
  Source Server Version : 100417
  Source Host           : localhost:3306
  Source Schema         : contactapp
 
- Target Server Type    : MariaDB
+ Target Server Type    : MySQL
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 27/05/2021 17:44:08
+ Date: 28/05/2021 07:06:15
 */
 
 SET NAMES utf8mb4;
@@ -26,7 +26,7 @@ CREATE TABLE `admin`  (
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `adminName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`adminID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of admin
@@ -38,14 +38,14 @@ INSERT INTO `admin` VALUES ('admin', '123', 'Day la Admin01');
 -- ----------------------------
 DROP TABLE IF EXISTS `announcement`;
 CREATE TABLE `announcement`  (
-  `announID` int(11) NOT NULL AUTO_INCREMENT,
+  `announID` int NOT NULL AUTO_INCREMENT,
   `title` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `announContent` varchar(5000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `senderName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `dateSend` date NULL DEFAULT NULL,
   `receiverName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`announID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of announcement
@@ -59,12 +59,12 @@ INSERT INTO `announcement` VALUES (3, 'tb3', 'thông báo 3 là dây', 'người
 -- ----------------------------
 DROP TABLE IF EXISTS `fee`;
 CREATE TABLE `fee`  (
-  `feeID` int(11) NOT NULL AUTO_INCREMENT,
-  `year` int(11) NULL DEFAULT NULL,
-  `money` int(11) NULL DEFAULT NULL,
+  `feeID` int NOT NULL AUTO_INCREMENT,
+  `year` int NULL DEFAULT NULL,
+  `money` int NULL DEFAULT NULL,
   `dateUpload` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`feeID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of fee
@@ -81,14 +81,14 @@ INSERT INTO `fee` VALUES (6, 2021, 1000, '2021-05-25 17:39:12');
 -- ----------------------------
 DROP TABLE IF EXISTS `parent`;
 CREATE TABLE `parent`  (
-  `parentID` int(11) NOT NULL,
+  `parentID` int NOT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `parentName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `dob` date NULL DEFAULT NULL,
   `phonenumber` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`parentID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of parent
@@ -100,14 +100,14 @@ INSERT INTO `parent` VALUES (1, '1111', 'Nguyễn Văn A', '2021-04-06', '021321
 -- ----------------------------
 DROP TABLE IF EXISTS `parent_announcement`;
 CREATE TABLE `parent_announcement`  (
-  `parentID` int(11) NOT NULL,
-  `announID` int(11) NOT NULL,
+  `parentID` int NOT NULL,
+  `announID` int NOT NULL,
   `isRead` bit(1) NULL DEFAULT NULL,
   PRIMARY KEY (`parentID`, `announID`) USING BTREE,
   INDEX `FK_parentannoun_announcement`(`announID`) USING BTREE,
   CONSTRAINT `FK_parentannoun_announcement` FOREIGN KEY (`announID`) REFERENCES `announcement` (`announID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_parentannoun_parent` FOREIGN KEY (`parentID`) REFERENCES `parent` (`parentID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of parent_announcement
@@ -121,24 +121,24 @@ INSERT INTO `parent_announcement` VALUES (1, 3, b'0');
 -- ----------------------------
 DROP TABLE IF EXISTS `student`;
 CREATE TABLE `student`  (
-  `studentID` int(11) NOT NULL,
+  `studentID` int NOT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `studentName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `dob` date NULL DEFAULT NULL,
   `phonenumber` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `classname` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `parentID` int(11) NULL DEFAULT NULL,
+  `parentID` int NULL DEFAULT NULL,
   PRIMARY KEY (`studentID`) USING BTREE,
   INDEX `FK_student_parent`(`parentID`) USING BTREE,
   CONSTRAINT `FK_student_parent` FOREIGN KEY (`parentID`) REFERENCES `parent` (`parentID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of student
 -- ----------------------------
 INSERT INTO `student` VALUES (1, '123', 'con ông NV A', '2021-02-10', '0906993034', 'The Duc', 'CLC2A', 1);
-INSERT INTO `student` VALUES (2, '213', 'con ong NV A nhưng bé hơn', '2020-10-28', 'sdasdsad', 'xcx', 'CLC2B', 1);
+INSERT INTO `student` VALUES (2, '123', 'con ong NV A nhưng bé hơn', '2020-10-28', 'sdasdsad', 'xcx', 'CLC2B', 1);
 INSERT INTO `student` VALUES (111, 'test student', 'paswordd', '2020-02-02', '0123456788', 'addressss', 'sdadasdas', 1);
 
 -- ----------------------------
@@ -146,14 +146,14 @@ INSERT INTO `student` VALUES (111, 'test student', 'paswordd', '2020-02-02', '01
 -- ----------------------------
 DROP TABLE IF EXISTS `student_announcement`;
 CREATE TABLE `student_announcement`  (
-  `studentID` int(11) NOT NULL,
-  `announID` int(11) NOT NULL,
+  `studentID` int NOT NULL,
+  `announID` int NOT NULL,
   `isRead` bit(1) NULL DEFAULT NULL,
   PRIMARY KEY (`studentID`, `announID`) USING BTREE,
   INDEX `FK_studentannoun_announcement`(`announID`) USING BTREE,
   CONSTRAINT `FK_studentannoun_announcement` FOREIGN KEY (`announID`) REFERENCES `announcement` (`announID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_studentannoun_student` FOREIGN KEY (`studentID`) REFERENCES `student` (`studentID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of student_announcement
@@ -168,7 +168,7 @@ INSERT INTO `student_announcement` VALUES (2, 3, b'0');
 -- ----------------------------
 DROP TABLE IF EXISTS `study`;
 CREATE TABLE `study`  (
-  `studentID` int(11) NOT NULL,
+  `studentID` int NOT NULL,
   `subjectID` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `isPaid` bit(1) NULL DEFAULT NULL,
   `scoreMidTerm` float NULL DEFAULT NULL,
@@ -177,7 +177,7 @@ CREATE TABLE `study`  (
   INDEX `FK_study_subjectclass`(`subjectID`) USING BTREE,
   CONSTRAINT `FK_study_student` FOREIGN KEY (`studentID`) REFERENCES `student` (`studentID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_study_subjectclass` FOREIGN KEY (`subjectID`) REFERENCES `subjectclass` (`subjectID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of study
@@ -194,17 +194,16 @@ CREATE TABLE `subjectclass`  (
   `subjectID` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `subjectName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `room` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `credit` int(11) NULL DEFAULT NULL,
-  `teacherID` int(11) NULL DEFAULT NULL,
+  `credit` int NULL DEFAULT NULL,
+  `teacherID` int NULL DEFAULT NULL,
   PRIMARY KEY (`subjectID`) USING BTREE,
   INDEX `FK_subjectclass_teacher`(`teacherID`) USING BTREE,
   CONSTRAINT `FK_subjectclass_teacher` FOREIGN KEY (`teacherID`) REFERENCES `teacher` (`teacherID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of subjectclass
 -- ----------------------------
-INSERT INTO `subjectclass` VALUES ('', NULL, NULL, NULL, NULL);
 INSERT INTO `subjectclass` VALUES ('DBMS_01CLC', 'DBMS', 'A202', 3, 1);
 INSERT INTO `subjectclass` VALUES ('MP_01CLC', 'Mobile Programing', 'A303', 3, 1);
 
@@ -213,13 +212,13 @@ INSERT INTO `subjectclass` VALUES ('MP_01CLC', 'Mobile Programing', 'A303', 3, 1
 -- ----------------------------
 DROP TABLE IF EXISTS `teacher`;
 CREATE TABLE `teacher`  (
-  `teacherID` int(11) NOT NULL,
+  `teacherID` int NOT NULL,
   `teacherName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `phonenumber` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `dob` date NULL DEFAULT NULL,
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`teacherID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of teacher
@@ -231,7 +230,7 @@ INSERT INTO `teacher` VALUES (1, 'Thầy B', '123456789', '2021-03-24', 'sdsad')
 -- ----------------------------
 DROP TABLE IF EXISTS `timetable`;
 CREATE TABLE `timetable`  (
-  `timetableID` int(11) NOT NULL,
+  `timetableID` int NOT NULL,
   `subjectID` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `timeStart` datetime NULL DEFAULT NULL,
   `timeEnd` datetime NULL DEFAULT NULL,
@@ -240,11 +239,19 @@ CREATE TABLE `timetable`  (
   PRIMARY KEY (`timetableID`) USING BTREE,
   INDEX `FK_timetable_subjectclass`(`subjectID`) USING BTREE,
   CONSTRAINT `FK_timetable_subjectclass` FOREIGN KEY (`subjectID`) REFERENCES `subjectclass` (`subjectID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of timetable
 -- ----------------------------
+INSERT INTO `timetable` VALUES (1, 'MP_01CLC', '2021-06-01 07:00:00', '2021-06-01 10:00:00', '2021-06-01', b'0');
+INSERT INTO `timetable` VALUES (2, 'MP_01CLC', '2021-06-08 19:00:00', '2021-06-08 10:00:00', '2021-06-08', b'0');
+INSERT INTO `timetable` VALUES (3, 'MP_01CLC', '2021-06-15 07:00:00', '2021-06-15 10:00:00', '2021-06-13', b'0');
+INSERT INTO `timetable` VALUES (4, 'MP_01CLC', '2021-06-22 07:00:00', '2021-06-22 10:00:00', '2021-05-28', b'0');
+INSERT INTO `timetable` VALUES (5, 'DBMS_01CLC', '2021-06-02 07:00:00', '2021-06-02 10:00:00', '2021-06-01', b'0');
+INSERT INTO `timetable` VALUES (6, 'DBMS_01CLC', '2021-06-09 07:00:00', '2021-06-09 10:00:00', '2021-06-09', b'0');
+INSERT INTO `timetable` VALUES (7, 'DBMS_01CLC', '2021-06-16 07:00:00', '2021-06-16 10:00:00', '2021-06-16', b'0');
+INSERT INTO `timetable` VALUES (8, 'DBMS_01CLC', '2021-06-23 07:00:00', '2021-06-23 10:00:00', '2021-05-28', b'0');
 
 -- ----------------------------
 -- Procedure structure for sp_addNewFee
@@ -376,9 +383,9 @@ delimiter ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `sp_getScheduleByStudentAndDate`;
 delimiter ;;
-CREATE PROCEDURE `sp_getScheduleByStudentAndDate`(IN idd int(11), dt date)
+CREATE PROCEDURE `sp_getScheduleByStudentAndDate`(IN idd int(11), dt varchar(30))
 begin
-    Select timetable.timetableID,timetable.subjectID, timetable.date, timetable.timeStart, timetable.timeEnd, subjectclass.subjectName, subjectclass.room, subjectclass.credit,(SELECT  teacher.teacherName from teacher,subjectclass WHERE subjectclass.teacherID = teacher.teacherID lIMIT 1) as teachername,IF((hour(TIMEDIFF(time(timetable.timeStart),'07:00:00'))+1)<1,1,If((hour(TIMEDIFF(time(timetable.timeStart),'07:00:00'))+1)>12,12,(hour(TIMEDIFF(time(timetable.timeStart),'07:00:00'))+1))) as tietbd, IF((hour(TIMEDIFF(time(timetable.timeEnd),'07:00:00'))+1)<1,1,If((hour(TIMEDIFF(time(timetable.timeEnd),'07:00:00'))+1)>12,12,(hour(TIMEDIFF(time(timetable.timeEnd),'07:00:00'))+1))) as tietkt
+    Select timetable.timetableID,timetable.subjectID, timetable.date, DATE_FORMAT(timetable.timeStart, '%Hg%i') as tmStart, DATE_FORMAT(timetable.timeEnd, '%Hg%i')tmEnd, subjectclass.subjectName, subjectclass.room, subjectclass.credit,(SELECT  teacher.teacherName from teacher,subjectclass WHERE subjectclass.teacherID = teacher.teacherID lIMIT 1) as teachername,IF((hour(TIMEDIFF(time(timetable.timeStart),'07:00:00'))+1)<1,1,If((hour(TIMEDIFF(time(timetable.timeStart),'07:00:00'))+1)>12,12,(hour(TIMEDIFF(time(timetable.timeStart),'07:00:00'))+1))) as tietbd, IF((hour(TIMEDIFF(time(timetable.timeEnd),'07:00:00'))+1)<1,1,If((hour(TIMEDIFF(time(timetable.timeEnd),'07:00:00'))+1)>12,12,(hour(TIMEDIFF(time(timetable.timeEnd),'07:00:00'))+1))) as tietkt
 from timetable,subjectclass,study
  WHERE timetable.subjectID = subjectclass.subjectID and study.subjectID = subjectclass.subjectID and study.studentID = idd and timetable.isOff=0 and timetable.date = dt;
 end
