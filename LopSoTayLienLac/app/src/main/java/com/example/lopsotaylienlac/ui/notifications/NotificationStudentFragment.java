@@ -48,6 +48,7 @@ public class NotificationStudentFragment extends Fragment {
     private SharedPreferences sharedPreferences;
 
     private int UID;
+
     private int role;
 
     @Override
@@ -93,7 +94,7 @@ public class NotificationStudentFragment extends Fragment {
                 else    txtNotiNull.setVisibility(View.INVISIBLE);
                 //
                 //setdata
-                adapter = new AnnoucementAdapter(response.body(), role);
+                adapter = new AnnoucementAdapter(response.body(), NotificationStudentFragment.this);
                 adapter.notifyDataSetChanged();
                 //set Layout Management
                 layoutManager = new LinearLayoutManager(getContext());
@@ -195,10 +196,5 @@ public class NotificationStudentFragment extends Fragment {
                 Toast.makeText(getContext(), "Đã xóa", Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-    public void openDetailFragment(int role, int annID){
-        NotificationDetailFragment notificationDetailFragment = new NotificationDetailFragment(role, annID);
-        NavHostFragment.findNavController(NotificationStudentFragment.this).navigate(R.id.fragment_detail_notification);
     }
 }

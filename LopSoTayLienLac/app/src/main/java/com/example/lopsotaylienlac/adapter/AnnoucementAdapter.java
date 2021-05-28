@@ -9,6 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lopsotaylienlac.R;
@@ -21,10 +23,11 @@ import java.util.List;
 public class AnnoucementAdapter extends RecyclerView.Adapter<AnnoucementAdapter.AnouncementViewHolder> {
 
     private List<Announcement> listAnnoucement = new ArrayList<>();
-    private int role;
-    public AnnoucementAdapter(List<Announcement> listAnnoucement, int role) {
+    Fragment fragment;
+
+    public AnnoucementAdapter(List<Announcement> listAnnoucement, Fragment fragment) {
         this.listAnnoucement= listAnnoucement;
-        this.role = role;
+        this.fragment = fragment;
         notifyDataSetChanged();
     }
 
@@ -68,17 +71,17 @@ public class AnnoucementAdapter extends RecyclerView.Adapter<AnnoucementAdapter.
             txtTitleNoti = (TextView)itemView.findViewById(R.id.txtTitleNotification);
             txtContentNoti =(TextView) itemView.findViewById(R.id.txtContentNotification);
             txtDateSendnoti = (TextView) itemView.findViewById(R.id.txtdateSendNotification);
-            txtAnnouID = (TextView) itemView.findViewById(R.id.txtAnnID);
+            item_noti = (LinearLayout) itemView.findViewById(R.id.item_noti);
 
-//            System.out.println("Role in Fragment: "+role);
-            switch (role){
-                case 0:
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-            }
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    NavHostFragment.findNavController(fragment).navigate(R.id.fragment_detail_notification);
+
+                }
+            });
+
+
 
         }
     }

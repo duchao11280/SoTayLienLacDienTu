@@ -93,7 +93,6 @@ public class NotificationsFragment extends Fragment {
         NavHostFragment.findNavController(NotificationsFragment.this).navigate(R.id.fragment_parent_notification);
     }
     private void showAdminNotification() {
-        System.out.println("Going to Admin View....");
         NavHostFragment.findNavController(NotificationsFragment.this).navigate(R.id.fragment_admin_notification);
     }
     private void showStudentNotification() {

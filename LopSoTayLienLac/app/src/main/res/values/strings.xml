@@ -86,6 +86,12 @@
     <string name="check_info_login">Kiểm tra thông tin đăng nhập</string>
     <string name="temp">temp</string>
     <string name="title_chitietthongbao">Chi tiết thông báo</string>
+    <string name="noti_chinhapso">Chỉ nhập số</string>
+    <string name="noti_dathem">Đã thêm</string>
+    <string name="noti_themthatbai">Thêm không thành công</string>
+    <string name="noti_load">Load thành công</string>
+    <string name="noti_load_fail">Load thất bại</string>
+    <string name="label_hocphinam">Học phí năm </string>
 
 
 </resources>

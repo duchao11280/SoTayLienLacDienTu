@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:background="@drawable/card_border_black"
-    android:padding="15dp">
+    android:padding="15dp"
+    android:id="@+id/item_noti">
 
 
     <ImageView

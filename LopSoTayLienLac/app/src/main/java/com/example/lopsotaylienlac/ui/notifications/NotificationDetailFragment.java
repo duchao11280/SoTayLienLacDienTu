@@ -15,10 +15,6 @@ public class NotificationDetailFragment extends Fragment {
 
     private int role, announID;
 
-    public NotificationDetailFragment(int role, int announID){
-        this.role = role;
-        this.announID = announID;
-    }
 
     @Nullable
     @Override
@@ -28,5 +24,10 @@ public class NotificationDetailFragment extends Fragment {
         System.out.println("In Detail Fragment: "+role+announID);
 
         return  root;
+    }
+
+    public void getDate(int role, int uid) {
+        this.role = role;
+        this.announID = uid;
     }
 }

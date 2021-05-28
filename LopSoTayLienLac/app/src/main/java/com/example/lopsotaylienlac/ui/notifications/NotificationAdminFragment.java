@@ -68,7 +68,7 @@ public class NotificationAdminFragment extends Fragment {
                 else  txtNotiNull.setVisibility(View.INVISIBLE);
                 //
                 //setdata
-                adapter = new AnnoucementAdapter(response.body(), role);
+                adapter = new AnnoucementAdapter(response.body(), NotificationAdminFragment.this);
                 //set Layout Management
                 layoutManager= new LinearLayoutManager(getContext());
                 recyclerView.setAdapter(adapter);

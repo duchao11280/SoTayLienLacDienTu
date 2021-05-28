@@ -48,9 +48,18 @@ public class DashboardFragment extends Fragment {
                     public void onClick(View v) {
                         // chuyen toi fragment Admin management class
                         NavHostFragment.findNavController(DashboardFragment.this).navigate(R.id.fragment_admin_management_allclass);
-
                     }
                 });
+
+                //chuyen den Fragment fee cua admin
+                itdbFee = (TextView)root.findViewById(R.id.itdbFee);
+                itdbFee.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        NavHostFragment.findNavController(DashboardFragment.this).navigate(R.id.fragment_admin_fee);
+                    }
+                });
+
                 break;
             case 1:
 

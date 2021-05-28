@@ -94,5 +94,14 @@
         android:name="com.example.lopsotaylienlac.ui.score.ParentScoreFragment"
         android:label="fragment_parent_check_score"
         tools:layout="@layout/fragment_parent_check_score" />
-
+    <fragment
+        android:id="@+id/fragment_admin_fee"
+        android:name="com.example.lopsotaylienlac.ui.fee.FeeAdminFragment"
+        android:label="fragment_admin_fee"
+        tools:layout="@layout/fragment_admin_fee" />
+    <fragment
+        android:id="@+id/fragment_admin_edit_fee"
+        android:name="com.example.lopsotaylienlac.ui.fee.FeeAdminEditFragment"
+        android:label="fragment_admin_edit_fee"
+        tools:layout="@layout/fragment_admin_edit_fee" />
 </navigation>
