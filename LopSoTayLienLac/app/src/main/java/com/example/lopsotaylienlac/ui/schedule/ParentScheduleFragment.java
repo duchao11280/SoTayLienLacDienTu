@@ -3,6 +3,12 @@ package com.example.lopsotaylienlac.ui.schedule;
 import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +17,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.lopsotaylienlac.R;
 import com.example.lopsotaylienlac.adapter.ScheduleAdapter;
-import com.example.lopsotaylienlac.adapter.SubjectClassApdapter;
 import com.example.lopsotaylienlac.apis.UserApi;
 import com.example.lopsotaylienlac.beans.Schedule;
 
@@ -33,48 +32,68 @@ import retrofit2.Response;
 import static android.content.Context.MODE_PRIVATE;
 
 
-public class StudentScheduleFragment extends Fragment {
+public class ParentScheduleFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     private ScheduleAdapter scheduleAdapter;
     private SharedPreferences sharedPreferences;
-    private Button btnXemLich;
+    private Button btnXemLichpr;
     private int studentID;
+    private String currDate;
+
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_student_schedule, container, false);
-        recyclerView = (RecyclerView)root.findViewById(R.id.rcvSchedule);
-        btnXemLich = root.findViewById(R.id.btnXemLich);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View root = inflater.inflate(R.layout.fragment_parent_schedule, container, false);
+        recyclerView = (RecyclerView)root.findViewById(R.id.rcvSchedulepr);
+        btnXemLichpr = root.findViewById(R.id.btnXemLichpr);
         /**
          * tao va set layout cho recylerview
          */
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        // lay student id tu sharedPreference khi da dang nhap
+        // lay parent id tu sharedPreference khi da dang nhap
         sharedPreferences = this.getActivity().getSharedPreferences("dataLogin", MODE_PRIVATE);
         String id = sharedPreferences.getString("userID","-1");
-        System.out.println(id);
-        studentID = Integer.parseInt(id);
+
         /**
          * lay ngay hien tai
          */
         Calendar cal = Calendar.getInstance();
-        String currDate = DateFormat.format("yyyy-MM-dd",cal).toString();
+        currDate = DateFormat.format("yyyy-MM-dd",cal).toString();
+
         /**
-         * Lay thoi khoa bieu ngay hien tai
+         * Lay student id va thoi khoa bieu ngay hien tai
          */
-        getSchedule(studentID,currDate);
+        getStudentId(Integer.parseInt(id));
+
         /**
          * Mo Datetimepicker khi click vao button
          */
-        btnXemLich.setOnClickListener(v -> {
+        btnXemLichpr.setOnClickListener(v -> {
             openCalender();
         });
         return root;
     }
 
+    private void getStudentId(int id){
+        UserApi.apiService.getStudentIdByParentId(id).enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                studentID= response.body();
+                getSchedule(studentID,currDate);
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                Toast.makeText(getContext(),"Không có Student",Toast.LENGTH_LONG).show();
+            }
+        });
+    }
     private void openCalender() {
         //Initialize year, month, day
         Calendar cal = Calendar.getInstance();
@@ -93,16 +112,16 @@ public class StudentScheduleFragment extends Fragment {
                         date.set(year,month,day);
                         String sdate = DateFormat.format("yyyy-MM-dd",date).toString();
                         //Display Schedule
+                        System.out.println("trk: "+studentID);
                         getSchedule(studentID,sdate);
-
+                        System.out.println("sau: "+studentID);
                     }
                 },year,month,day);
         //Show Date Picker Dialog
 
         datePickerDialog.show();
     }
-
-    public void getSchedule(int id, String dtpk){
+    private void getSchedule(int id, String dtpk){
         UserApi.apiService.getScheduleByStudentIdandDate(id,dtpk).enqueue(new Callback<ArrayList<Schedule>>() {
             @Override
             public void onResponse(Call<ArrayList<Schedule>> call, Response<ArrayList<Schedule>> response) {
@@ -117,5 +136,4 @@ public class StudentScheduleFragment extends Fragment {
             }
         });
     }
-
 }

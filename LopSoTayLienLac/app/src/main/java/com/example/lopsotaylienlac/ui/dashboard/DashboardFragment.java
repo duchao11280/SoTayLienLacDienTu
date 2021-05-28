@@ -26,7 +26,7 @@ public class DashboardFragment extends Fragment {
     private DashboardViewModel dashboardViewModel;
     private SharedPreferences sharedPreferences;
     private TextView itdbClass;
-    private TextView itdbFee,itdbSchedule;
+    private TextView itdbFee,itdbSchedule,itdbSchedulepr;
     private TextView itdbViewGrades;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -46,7 +46,6 @@ public class DashboardFragment extends Fragment {
                     public void onClick(View v) {
                         // chuyen toi fragment Admin management class
                         NavHostFragment.findNavController(DashboardFragment.this).navigate(R.id.fragment_admin_management_allclass);
-                        System.out.println("Click success");
 
                     }
                 });
@@ -55,12 +54,12 @@ public class DashboardFragment extends Fragment {
 
                 root = inflater.inflate(R.layout.fragment_student_dashboard, container, false);
                 /**
-                 * chuyen toi trang xem hoc phi cua hoc sinh
+                 * chuyen toi trang xem TKB cua hoc sinh
                  */
                 itdbSchedule = root.findViewById(R.id.itdbSchedule);
                 itdbSchedule.setOnClickListener(v -> {
                     NavHostFragment.findNavController(DashboardFragment.this).navigate(R.id.fragment_student_schedule);
-                    System.out.println("Click success");
+
                 });
                 /**
                  * chuyen toi trang xem hoc phi cua hoc sinh
@@ -68,7 +67,7 @@ public class DashboardFragment extends Fragment {
                 itdbFee = root.findViewById(R.id.itdbFee);
                 itdbFee.setOnClickListener(v->{
                     NavHostFragment.findNavController(DashboardFragment.this).navigate(R.id.fragment_student_fee);
-                    System.out.println("Click success");
+
                 });
                 /**
                  * chuyen toi trang xem diem cua hoc sinh
@@ -76,12 +75,20 @@ public class DashboardFragment extends Fragment {
                 itdbViewGrades = root.findViewById(R.id.itdbViewGrades);
                 itdbViewGrades.setOnClickListener(v->{
                     NavHostFragment.findNavController(DashboardFragment.this).navigate(R.id.fragment_student_check_score);
-                    System.out.println("Click success");
+
                 });
 
                 break;
             case 2:
                 root = inflater.inflate(R.layout.fragment_parent_dashboard, container, false);
+                /**
+                 * chuyen toi trang xem TKB cua hoc sinh
+                 */
+                itdbSchedulepr = root.findViewById(R.id.itdbSchedulepr);
+                itdbSchedulepr.setOnClickListener(v -> {
+                    NavHostFragment.findNavController(DashboardFragment.this).navigate(R.id.fragment_parent_schedule);
+
+                });
                 break;
             default:
                 break;

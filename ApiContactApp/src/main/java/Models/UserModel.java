@@ -265,4 +265,14 @@ public class UserModel {
                     .executeAndFetch(Schedule.class);
         }
     }
+    public static int getStudentIdByParentID(int id) {
+        final String sql = "SELECT studentID FROM student WHERE parentID =:id LIMIT 1";
+
+        try (Connection con = DBUtils.getConnection()) {
+            return con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeScalar(int.class);
+
+        }
+    }
 }

@@ -38,7 +38,7 @@
 
 
         <Button
-            android:id="@+id/btnXemLich"
+            android:id="@+id/btnXemLichpr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="3dp"
@@ -58,11 +58,11 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcvSchedule"
+            android:id="@+id/rcvSchedulepr"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="66dp"
-            app:layout_constraintBottom_toTopOf="@+id/btnXemLich"
+            app:layout_constraintBottom_toTopOf="@+id/btnXemLichpr"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

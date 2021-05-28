@@ -100,6 +100,8 @@ public interface UserApi {
     @GET("User/GetScheduleByStudentIdandDate")
     Call<ArrayList<Schedule>> getScheduleByStudentIdandDate(@Query("studentID")int id,
                                                             @Query("dtpk")String dtpk);
+    @GET("User/GetStudentIdByParentId")
+    Call<Integer> getStudentIdByParentId(@Query("parentID") int id);
 
     //endregion
 
