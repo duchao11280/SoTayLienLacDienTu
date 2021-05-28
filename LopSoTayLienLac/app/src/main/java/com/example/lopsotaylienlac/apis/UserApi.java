@@ -100,12 +100,23 @@ public interface UserApi {
     @GET("User/GetScheduleByStudentIdandDate")
     Call<ArrayList<Schedule>> getScheduleByStudentIdandDate(@Query("studentID")int id,
                                                             @Query("dtpk")String dtpk);
+
     //endregion
 
     //region Post
     //Thêm học phí mới
     @POST("User/AddNewFee")
     Call<Void> addNewFee(@Query("money") int money);
+
+    //LINK: http://localhost:8080/ApiContactApp/User/AddNewAnnouncement?title=tbPHLopDBMS_01CLC&sender=LDT&content=phụhuynhcóconemhọclớpB&role=2&receiver=All
+    @POST("User/AddNewAnnouncement")
+    Call<Void> addNewAnnouncement(
+            @Query("title") String title,//Tiêu đề
+            @Query("sender") String sender,//Tên người gửi
+            @Query("content") String content,// nội dung thông báo
+            @Query("role") int role,//role = 1 là gửi cho học sinh, role != 1 là gửi cho phụ huynh
+            @Query("receiver") String receiver //Mã lớp nhận thông báo, receiver=All để gửi toàn bộ
+    );
 
     //endregion
 

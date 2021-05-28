@@ -42,24 +42,32 @@ public class UserServlet extends HttpServlet {
         String content = request.getParameter("content");
         int role = Integer.parseInt(request.getParameter("role"));
         String receiver = request.getParameter("receiver");
+        System.out.println(role + receiver);
         int announID = UserModel.getAllAnnouncement().size()+1;
-//        UserModel.addNewAnnouncement(title,content,senderName,receiver);
+        UserModel.addNewAnnouncement(announID,title,content,senderName,receiver);
         List<String> lstParentID = UserModel.getAllParentID();
         List<String> lstStudentID = UserModel.getAllStudentID();
+        List<Student> lstAllStudent = UserModel.getListStudentBySubjectID(receiver);
         if(role==1){
-            if(receiver.equals("All")){
-                UserModel.addNewAnnouncement(announID,title,content,senderName,receiver);
+            if(receiver.trim().equals("All")){
                 for (String id: lstStudentID){
                     UserModel.addStudentAnnoun(announID,id);
                 }
             }
+            else{
+                for (Student s: lstAllStudent) {
+                    UserModel.addStudentAnnoun(announID,String.valueOf(s.getStudentID()));
+                }
+            }
         }
         else{
-            if(receiver.equals("All")){
-                UserModel.addNewAnnouncement(announID,title,content,senderName,receiver);
+            if(receiver.trim().equals("All")){
                 for (String id: lstParentID){
                     UserModel.addParentAnnoun(announID,id);
                 }
+            }
+            for (Student s: lstAllStudent) {
+                UserModel.addParentAnnoun(announID,String.valueOf(s.getParentID()));
             }
         }
     }
@@ -121,6 +129,7 @@ public class UserServlet extends HttpServlet {
                 break;
             case "/GetListStudent":
                 doGetListStudentBySubjectID(request,response);
+                break;
             case "/GetScheduleByStudentIdandDate":
                 doGetScheduleByStudentIdandDate(request,response);
                 break;
