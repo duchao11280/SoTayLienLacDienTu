@@ -11,7 +11,7 @@
     <string name="label_hovaten">Họ và Tên</string>
     <string name="label_diem_cuoi_ki">Điểm cuối kì:</string>
     <string name="label_diem_giua_ki">Điểm giữa kì:</string>
-
+    <string name="txtParentScore_noscore">Bạn không có môn học để xem</string>
 
     <string name="txtConf">Bạn chắc chắn?</string>
     <string name="txt_conf_del_noti">Xóa tất cả thông báo?</string>

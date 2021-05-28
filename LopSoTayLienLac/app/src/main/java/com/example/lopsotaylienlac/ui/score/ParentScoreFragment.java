@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,14 +20,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lopsotaylienlac.R;
-import com.example.lopsotaylienlac.adapter.StudentFeeAdapter;
 import com.example.lopsotaylienlac.adapter.StudentScoreAdapter;
 import com.example.lopsotaylienlac.apis.UserApi;
-import com.example.lopsotaylienlac.beans.Fee;
 import com.example.lopsotaylienlac.beans.Subjectofstudent;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -80,7 +76,7 @@ public class ParentScoreFragment extends Fragment {
 
     public void openInfoDialog(){
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
-        View view = getLayoutInflater().inflate(R.layout.dialog_student_check_fee,null);
+        View view = getLayoutInflater().inflate(R.layout.dialog_parent_check_score_nosubj,null);
         AlertDialog alertDialog = builder.create();
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         alertDialog.setView(view);
