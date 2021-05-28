@@ -63,6 +63,11 @@ public class NotificationsFragment extends Fragment {
         System.out.println(sharedPreferences.getString("userFullName","none"));
         int role = sharedPreferences.getInt("role", -1);
 
+//
+//        String id = sharedPreferences.getString("userID", "null");
+//
+//        System.out.println("Uid: "+Integer.parseInt(id));
+
         System.out.println("Role: "+role);
         switch (role){
             case 0:

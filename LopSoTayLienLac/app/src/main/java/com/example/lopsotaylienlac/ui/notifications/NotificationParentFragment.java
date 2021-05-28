@@ -46,26 +46,37 @@ public class NotificationParentFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    SharedPreferences sharedPreferences;
+    private int UID;
+    private int role;
+
+    private SharedPreferences sharedPreferences;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_parent_notification, container, false);
 
+        //get UID from share
+        sharedPreferences = this.getActivity().getSharedPreferences("dataLogin", Context.MODE_PRIVATE);
+        String id = sharedPreferences.getString("userID","-1");
+        role = sharedPreferences.getInt("rolw", -1);
+        System.out.println(id);
+        UID = Integer.parseInt(id);
+
+
         txtNotiNull = (TextView)root.findViewById(R.id.txtNotiNull);
         imageView = (ImageView)root.findViewById(R.id.imgPopUp);
 
         //recyclerView
         recyclerView = (RecyclerView)root.findViewById(R.id.rcvNoti);
-        showNotification();
+        showNotification(UID);
         //end recyclerView
 
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPopUpMenu();
+                showPopUpMenu(UID);
             }
         });
 
@@ -73,12 +84,10 @@ public class NotificationParentFragment extends Fragment {
     }
 
 
-    private void showNotification() {
+    private void showNotification(int UID) {
 
         List<Announcement> list = new ArrayList<>();
-        sharedPreferences = this.getActivity().getSharedPreferences("dataLogin", Context.MODE_PRIVATE);
-        String id = sharedPreferences.getString("userID", "null");
-        UserApi.apiService.getAnnounBySudentID(Integer.parseInt(id)).enqueue(new Callback<ArrayList<Announcement>>() {
+        UserApi.apiService.getAnnounByParentID(UID).enqueue(new Callback<ArrayList<Announcement>>() {
             @Override
             public void onResponse(Call<ArrayList<Announcement>> call, Response<ArrayList<Announcement>> response) {
 
@@ -88,7 +97,7 @@ public class NotificationParentFragment extends Fragment {
                 else  txtNotiNull.setVisibility(View.INVISIBLE);
                 //
                 //setdata
-                adapter = new AnnoucementAdapter(response.body());
+                adapter = new AnnoucementAdapter(response.body(), role);
                 //set Layout Management
                 layoutManager= new LinearLayoutManager(getContext());
                 recyclerView.setAdapter(adapter);
@@ -104,16 +113,8 @@ public class NotificationParentFragment extends Fragment {
     }
 
 
-
-    //POPUP MENU
-//    private void setText(int numItem){
-//        if (numItem == 0) {
-//            textView.setVisibility(View.INVISIBLE);
-//        }
-//        else return;
-//    }
     @SuppressLint("RestrictedApi")
-    private void showPopUpMenu() {
+    private void showPopUpMenu(int UID) {
         PopupMenu popup = new PopupMenu(getContext(), this.imageView);
         popup.inflate(R.menu.menu_notification_popup);
 
@@ -123,17 +124,30 @@ public class NotificationParentFragment extends Fragment {
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                return menuItemClicked(item);
+                return menuItemClicked(item, UID);
             }
         });
 
         // Show the PopupMenu.
         popup.show();
     }
-    private boolean menuItemClicked(MenuItem item) {
+
+    private boolean menuItemClicked(MenuItem item, int UID) {
         switch (item.getItemId()) {
             case R.id.mark_as_read:
-                Toast.makeText(getContext(), "da doc!!!", Toast.LENGTH_SHORT).show();
+                UserApi.apiService.markAllAnnounReaderByStudentID(UID).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        System.out.println("Success");
+                        //refresh RecyclerView
+                        showNotification(UID);
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        System.out.println("Fail");
+                    }
+                });
                 break;
             case R.id.delete:
                 openConfirmDialog();
@@ -145,16 +159,41 @@ public class NotificationParentFragment extends Fragment {
 
     private void openConfirmDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        View view = getLayoutInflater().inflate(R.layout.dialog_confirm,null);
+        View view = getLayoutInflater().inflate(R.layout.dialog_confirm, null);
         Button btnYes = view.findViewById(R.id.btnYes);
         Button btnNo = view.findViewById(R.id.btnNo);
 
         AlertDialog alertDialog = builder.create();
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         alertDialog.setView(view);
-
         alertDialog.show();
+
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserApi.apiService.deleteAllAnnounByStudentID(UID).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        System.out.println("Success");
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        System.out.println("Fail");
+                    }
+                });
+                alertDialog.dismiss();
+                //refresh Recycler View
+                showNotification(UID);
+                Toast.makeText(getContext(), "Đã xóa", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
-
-

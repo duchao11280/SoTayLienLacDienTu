@@ -1,9 +1,11 @@
 package com.example.lopsotaylienlac.adapter;
 
+import android.graphics.Color;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lopsotaylienlac.R;
 import com.example.lopsotaylienlac.beans.Announcement;
+import com.example.lopsotaylienlac.ui.notifications.NotificationStudentFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +21,10 @@ import java.util.List;
 public class AnnoucementAdapter extends RecyclerView.Adapter<AnnoucementAdapter.AnouncementViewHolder> {
 
     private List<Announcement> listAnnoucement = new ArrayList<>();
-    public AnnoucementAdapter(List<Announcement> listAnnoucement) {
+    private int role;
+    public AnnoucementAdapter(List<Announcement> listAnnoucement, int role) {
         this.listAnnoucement= listAnnoucement;
+        this.role = role;
         notifyDataSetChanged();
     }
 
@@ -37,12 +42,16 @@ public class AnnoucementAdapter extends RecyclerView.Adapter<AnnoucementAdapter.
         if(itemAnnou== null)
             return;
 
+        //set read or didnt read noti
+        if(itemAnnou.isRead()==true)
+        {holder.txtTitleNoti.setTextColor(Color.rgb(204,204,204));}
+        else
+            holder.txtTitleNoti.setTextColor(Color.rgb(0,0,0));
+
         holder.txtTitleNoti.setText(itemAnnou.getTitle());
         holder.txtContentNoti.setText(itemAnnou.getAnnounContent());
         holder.txtDateSendnoti.setText(DateFormat.format("yyyy-MM-dd",itemAnnou.getDateSend()).toString());
-
     }
-
     //return amount of item
     @Override
     public int getItemCount() {
@@ -51,13 +60,26 @@ public class AnnoucementAdapter extends RecyclerView.Adapter<AnnoucementAdapter.
 
     public class AnouncementViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtTitleNoti, txtContentNoti, txtDateSendnoti;
+        TextView txtTitleNoti, txtContentNoti, txtDateSendnoti, txtAnnouID;
+        LinearLayout item_noti;
         //getView
         public AnouncementViewHolder(@NonNull View itemView) {
             super(itemView);
             txtTitleNoti = (TextView)itemView.findViewById(R.id.txtTitleNotification);
             txtContentNoti =(TextView) itemView.findViewById(R.id.txtContentNotification);
             txtDateSendnoti = (TextView) itemView.findViewById(R.id.txtdateSendNotification);
+            txtAnnouID = (TextView) itemView.findViewById(R.id.txtAnnID);
+
+//            System.out.println("Role in Fragment: "+role);
+            switch (role){
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+            }
+
         }
     }
 }

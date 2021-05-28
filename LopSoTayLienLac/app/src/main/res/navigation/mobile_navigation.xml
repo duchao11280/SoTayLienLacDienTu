@@ -79,4 +79,10 @@
         android:name="com.example.lopsotaylienlac.ui.schedule.ParentScheduleFragment"
         android:label="fragment_parent_schedule"
         tools:layout="@layout/fragment_parent_schedule" />
+    <fragment
+        android:id="@+id/fragment_detail_notification"
+        android:name="com.example.lopsotaylienlac.ui.notifications.NotificationDetailFragment"
+        android:label="fragment_student_schedule"
+        tools:layout="@layout/fragment_noti_detail" />
+
 </navigation>

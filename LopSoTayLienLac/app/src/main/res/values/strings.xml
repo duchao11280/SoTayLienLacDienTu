@@ -85,6 +85,7 @@
     <string name="login_failed">Đăng nhập thất bại</string>
     <string name="check_info_login">Kiểm tra thông tin đăng nhập</string>
     <string name="temp">temp</string>
+    <string name="title_chitietthongbao">Chi tiết thông báo</string>
 
 
 </resources>

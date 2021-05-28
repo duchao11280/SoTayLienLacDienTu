@@ -2,6 +2,8 @@
 
 package com.example.lopsotaylienlac.ui.notifications;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,12 +36,17 @@ public class NotificationAdminFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
+    private SharedPreferences sharedPreferences;
+
+    private int role;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_admin_notification, container, false);
 
+        sharedPreferences = this.getActivity().getSharedPreferences("dataLogin", Context.MODE_PRIVATE);
+        role = sharedPreferences.getInt("role", -1);
 
-        System.out.println("Admin Here");
         txtNotiNull = (TextView)root.findViewById(R.id.txtNotiNull);
         //recyclerView
         recyclerView = (RecyclerView)root.findViewById(R.id.rcvNoti);
@@ -61,7 +68,7 @@ public class NotificationAdminFragment extends Fragment {
                 else  txtNotiNull.setVisibility(View.INVISIBLE);
                 //
                 //setdata
-                adapter = new AnnoucementAdapter(response.body());
+                adapter = new AnnoucementAdapter(response.body(), role);
                 //set Layout Management
                 layoutManager= new LinearLayoutManager(getContext());
                 recyclerView.setAdapter(adapter);

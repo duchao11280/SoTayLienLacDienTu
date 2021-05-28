@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
+<<<<<<< Updated upstream
 Built-By: Duc Hao
+=======
+Built-By: Gin Ichimaru
+>>>>>>> Stashed changes
 Build-Jdk: version 11.0.9
 
