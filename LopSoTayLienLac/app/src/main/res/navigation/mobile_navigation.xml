@@ -84,5 +84,15 @@
         android:name="com.example.lopsotaylienlac.ui.notifications.NotificationDetailFragment"
         android:label="fragment_student_schedule"
         tools:layout="@layout/fragment_noti_detail" />
+    <fragment
+        android:id="@+id/fragment_parent_check_fee"
+        android:name="com.example.lopsotaylienlac.ui.fee.ParentFeeFragment"
+        android:label="fragment_parent_check_fee"
+        tools:layout="@layout/fragment_parent_check_fee" />
+    <fragment
+        android:id="@+id/fragment_parent_check_score"
+        android:name="com.example.lopsotaylienlac.ui.score.ParentScoreFragment"
+        android:label="fragment_parent_check_score"
+        tools:layout="@layout/fragment_parent_check_score" />
 
 </navigation>

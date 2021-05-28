@@ -28,6 +28,8 @@ public class DashboardFragment extends Fragment {
     private TextView itdbClass;
     private TextView itdbFee,itdbSchedule,itdbSchedulepr;
     private TextView itdbViewGrades;
+    private TextView itdbFeepr;
+    private TextView itdbViewGradespr;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -87,6 +89,22 @@ public class DashboardFragment extends Fragment {
                 itdbSchedulepr = root.findViewById(R.id.itdbSchedulepr);
                 itdbSchedulepr.setOnClickListener(v -> {
                     NavHostFragment.findNavController(DashboardFragment.this).navigate(R.id.fragment_parent_schedule);
+
+                });
+                /**
+                 * chuyen toi trang xem hoc phi cua phu huynh
+                 */
+                itdbFeepr = root.findViewById(R.id.itdbFeepr);
+                itdbFeepr.setOnClickListener(v->{
+                    NavHostFragment.findNavController(DashboardFragment.this).navigate(R.id.fragment_parent_check_fee);
+
+                });
+                /**
+                 * chuyen toi trang xem diem cua phu huynh
+                 */
+                itdbViewGradespr = root.findViewById(R.id.itdbViewGradespr);
+                itdbViewGradespr.setOnClickListener(v->{
+                    NavHostFragment.findNavController(DashboardFragment.this).navigate(R.id.fragment_parent_check_score);
 
                 });
                 break;
