@@ -169,7 +169,7 @@ public class ParentScoreFragment extends Fragment {
             public void onResponse(Call<ArrayList<Subjectofstudent>> call, Response<ArrayList<Subjectofstudent>> response) {
 
 
-                studentScoreAdapter= new StudentScoreAdapter(response.body());
+                studentScoreAdapter= new StudentScoreAdapter(response.body(),getContext());
                 recyclerView.setAdapter(studentScoreAdapter);
                 recyclerView.setLayoutManager(layoutManager);
                 /*UserApi.apiService.getAllFee().enqueue(new Callback<ArrayList<Fee>>() {

@@ -56,7 +56,7 @@ public class StudentScoreFragment extends Fragment {
             public void onResponse(Call<ArrayList<Subjectofstudent>> call, Response<ArrayList<Subjectofstudent>> response) {
 
 
-                studentScoreAdapter= new StudentScoreAdapter(response.body());
+                studentScoreAdapter= new StudentScoreAdapter(response.body(),getContext());
                 recyclerView.setAdapter(studentScoreAdapter);
                 recyclerView.setLayoutManager(layoutManager);
                 /*UserApi.apiService.getAllFee().enqueue(new Callback<ArrayList<Fee>>() {
@@ -165,19 +165,19 @@ public class StudentScoreFragment extends Fragment {
         });
     }
 
-
-    /**
+/*
+    *//**
      * tao context menu cho tung item trong recyclerview
      * @param item
      * @return
-     */
+     *//*
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         int x = item.getGroupId();
         switch (item.getItemId()){
-            /**
+            *//**
              * case 001 la nut xem chi tiet
-             */
+             *//*
             case 001:
                 System.out.println("Day la xem chi tiet");
                 openScoreDialog(x);
@@ -185,5 +185,5 @@ public class StudentScoreFragment extends Fragment {
 
         }
         return super.onContextItemSelected(item);
-    }
+    }*/
 }
