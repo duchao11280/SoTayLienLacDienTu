@@ -82,9 +82,9 @@ public class FeeAdminResultSearch extends Fragment {
         UserApi.apiService.getStudentByID(id).enqueue(new Callback<Student>() {
             @Override
             public void onResponse(Call<Student> call, Response<Student> response) {
-
-                if(response.body() == null)
-                    openNullDialog();
+              //check con bi loi
+                if(response.body() == null){
+                    openNullDialog();}
                 else{
                 txtStudentName.setText(response.body().getStudentName());
                 txtClassname.setText(response.body().getClassname());
@@ -95,12 +95,14 @@ public class FeeAdminResultSearch extends Fragment {
 
             @Override
             public void onFailure(Call<Student> call, Throwable t) {
+                openNullDialog();
                 Toast.makeText(getContext(), R.string.noti_load_fail, Toast.LENGTH_LONG).show();
             }
         });
     }
 
     private void openNullDialog() {
+        System.out.println("Hong co gi ne");
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         View view = getLayoutInflater().inflate(R.layout.dialog_search_confirm, null);
         Button btnOK = view.findViewById(R.id.btnSOK);

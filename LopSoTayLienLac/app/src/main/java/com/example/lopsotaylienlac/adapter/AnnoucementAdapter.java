@@ -14,6 +14,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lopsotaylienlac.R;
+import com.example.lopsotaylienlac.apis.UserApi;
 import com.example.lopsotaylienlac.beans.Announcement;
 import com.example.lopsotaylienlac.ui.notifications.NotificationStudentFragment;
 
@@ -77,7 +78,6 @@ public class AnnoucementAdapter extends RecyclerView.Adapter<AnnoucementAdapter.
                 @Override
                 public void onClick(View v) {
                     NavHostFragment.findNavController(fragment).navigate(R.id.fragment_detail_notification);
-
                 }
             });
 

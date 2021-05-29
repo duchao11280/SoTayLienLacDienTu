@@ -41,11 +41,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/label_ng_nhan"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginLeft="20dp"
                     android:textColor="@color/black"
                     android:textStyle="bold"/>
                 <Spinner
+                    android:id="@+id/spnReceiver"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginLeft="20dp"
@@ -62,6 +63,7 @@
                     android:textColor="@color/black"
                     android:textStyle="bold"/>
                <EditText
+                   android:id="@+id/edtTitleAddNoti"
                    android:layout_width="match_parent"
                    android:layout_height="40dp"
                    android:layout_marginLeft="20dp"
@@ -73,19 +75,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/title_lop"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="40dp"
                     android:layout_marginLeft="20dp"
                     android:textColor="@color/black"
                     android:textStyle="bold"/>
                 <Spinner
+                    android:id="@+id/spnClassReceive"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/spiner_round"/>
-
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -95,6 +96,7 @@
                     android:textColor="@color/black"
                     android:textStyle="bold"/>
                 <EditText
+                    android:id="@+id/edtContent"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginLeft="20dp"
@@ -107,7 +109,7 @@
                     android:scrollHorizontally="false"/>
 
                 <Button
-                    android:id="@+id/btnOK"
+                    android:id="@+id/btnSend"
                     android:layout_width="125dp"
                     android:layout_height="45dp"
                     android:layout_marginBottom="128dp"

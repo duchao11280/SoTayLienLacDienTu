@@ -44,6 +44,9 @@ public class UserServlet extends HttpServlet {
         String receiver = request.getParameter("receiver");
         System.out.println(role + receiver);
         int announID = UserModel.getAllAnnouncement().size()+1;
+
+        System.out.println(title + senderName + content + role + receiver);
+
         UserModel.addNewAnnouncement(announID,title,content,senderName,receiver);
         List<String> lstParentID = UserModel.getAllParentID();
         List<String> lstStudentID = UserModel.getAllStudentID();

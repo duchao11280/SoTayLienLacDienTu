@@ -92,6 +92,11 @@
     <string name="noti_load">Load thành công</string>
     <string name="noti_load_fail">Load thất bại</string>
     <string name="label_hocphinam">Học phí năm </string>
-
+    <string name="label_nguoigui">Người gửi</string>
+    <string name="hocsinh">Học sinh</string>
+    <string-array name="spn_Receiver">
+        <item>Học sinh</item>
+        <item>Phụ huynh</item>
+    </string-array>
 
 </resources>

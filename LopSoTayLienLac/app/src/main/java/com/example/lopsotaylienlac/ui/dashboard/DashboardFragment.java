@@ -26,7 +26,7 @@ public class DashboardFragment extends Fragment {
     private DashboardViewModel dashboardViewModel;
     private SharedPreferences sharedPreferences;
     private TextView itdbClass;
-    private TextView itdbFee,itdbSchedule,itdbSchedulepr;
+    private TextView itdbFee,itdbSchedule,itdbSchedulepr, itdbNotification;
     private TextView itdbViewGrades;
     private TextView itdbFeepr;
     private TextView itdbViewGradespr;
@@ -42,6 +42,16 @@ public class DashboardFragment extends Fragment {
         switch (role){
             case 0:
                 root = inflater.inflate(R.layout.fragment_admin_dashboard, container, false);
+
+                itdbNotification = root.findViewById(R.id.itdbNotification);
+                itdbNotification.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        NavHostFragment.findNavController(DashboardFragment.this).navigate(R.id.fragment_admin_management_notification);
+                    }
+                });
+
+
                 itdbClass = root.findViewById(R.id.itdbClass);
                 itdbClass.setOnClickListener(new View.OnClickListener() {
                     @Override
