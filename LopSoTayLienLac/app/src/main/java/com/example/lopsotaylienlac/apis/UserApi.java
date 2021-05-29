@@ -57,9 +57,8 @@ public interface UserApi {
     Call<ArrayList<Announcement>> getAnnounByStudentID(@Query("id") int id);
 
     //Xem chi tiết 1 thông báo cho học sinh
-    @GET("User/GetDetailAnnounStudent")
-    Call<Announcement> getDetailAnnounByStudentID(
-            @Query("studentID") int studentID,
+    @GET("User//GetDetailAnnoun")
+    Call<Announcement> getDetailAnnounByAnnounID(
             @Query("announID") int announID);
 
     //Xem chi tiết 1 thông báo cho phụ huynh

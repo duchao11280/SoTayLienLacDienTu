@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,20 +41,25 @@ public class NotificationManagementAdminFragment extends Fragment {
 
     private SharedPreferences sharedPreferences;
 
-    private int role;
+    private int role, UID;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_admin_management_notification, container, false);
 
         sharedPreferences = this.getActivity().getSharedPreferences("dataLogin", Context.MODE_PRIVATE);
+        String id = sharedPreferences.getString("userID","-1");
         role = sharedPreferences.getInt("role", -1);
+        UID = Integer.parseInt(id);
+
+        NavController navController = NavHostFragment.findNavController(NotificationManagementAdminFragment.this);
+        Context context = this.getContext();
 
         txtNotiNull = (TextView)root.findViewById(R.id.txtNotiNull);
         btnAddNotification = (ImageView)root.findViewById(R.id.btnAddNotification);
         //recyclerView
         recyclerView = (RecyclerView)root.findViewById(R.id.rcvNoti);
-        showNotification();
+        showNotification(navController, context, role, UID);
         //end recyclerView
 
         //addNotification
@@ -72,7 +78,7 @@ public class NotificationManagementAdminFragment extends Fragment {
         NavHostFragment.findNavController(NotificationManagementAdminFragment.this).navigate(R.id.fragment_admin_add_notification);
     }
 
-    private void showNotification() {
+    private void showNotification(NavController navController, Context context, int role, int UID) {
         List<Announcement> list = new ArrayList<>();
         UserApi.apiService.getAllAnnouncement().enqueue(new Callback<ArrayList<Announcement>>() {
             @Override
@@ -84,7 +90,7 @@ public class NotificationManagementAdminFragment extends Fragment {
                 else  txtNotiNull.setVisibility(View.INVISIBLE);
                 //
                 //setdata
-                adapter = new AnnoucementAdapter(response.body(), NotificationManagementAdminFragment.this);
+                adapter = new AnnoucementAdapter(response.body(), navController, context, role, UID);
                 //set Layout Management
                 layoutManager= new LinearLayoutManager(getContext());
                 recyclerView.setAdapter(adapter);

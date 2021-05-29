@@ -106,7 +106,7 @@ public class UserServlet extends HttpServlet {
             case "/GetAnnouncementParent":
                 doGetAnnouncementParent(request,response);
                 break;
-            case "/GetDetailAnnounStudent":
+            case "/GetDetailAnnoun":
                 doGetDetailAnnounByStudentID(request,response);
                 break;
             case "/GetDetailAnnounParent":
@@ -386,11 +386,9 @@ public class UserServlet extends HttpServlet {
     }
 
     private void doGetDetailAnnounByStudentID(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String uID = request.getParameter("studentID");
         String aID = request.getParameter("announID");
-        System.out.println("out: "+uID + " --- "+aID);
         String apiRespont="";
-        List<Announcement> lstAnnoun = UserModel.getDetailAnnounByStudentID(uID,aID);
+        List<Announcement> lstAnnoun = UserModel.getDetailAnnounByAnnounID(aID);
         if(lstAnnoun.size()>0){
             apiRespont = new Gson().toJson(lstAnnoun.get(0));
         }

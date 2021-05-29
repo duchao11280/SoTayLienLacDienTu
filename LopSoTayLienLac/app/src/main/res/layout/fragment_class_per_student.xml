@@ -32,7 +32,8 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:src="@drawable/ic_search_solid"
-            android:layout_gravity="start"/>
+            android:layout_gravity="start"
+            android:padding="15dp"/>
 
         <EditText
             android:id="@+id/edtStudentID"
@@ -42,7 +43,7 @@
             android:gravity="left"
             android:textSize="30dp"
             android:inputType="number"
-            android:layout_marginLeft="40dp"/>
+            android:layout_marginLeft="60dp"/>
 
     </androidx.cardview.widget.CardView>
 

@@ -84,11 +84,10 @@ public class UserModel {
         }
     }
 
-    public static List<Announcement> getDetailAnnounByStudentID(String studentID, String announID){
-        final String sql = "call sp_getDetailAnnounByStudentID(:studentID,:announID)";
+    public static List<Announcement> getDetailAnnounByAnnounID(String announID){
+        final String sql = "select * from announcement where announID = :announID";
         try(Connection con = DBUtils.getConnection()){
             return con.createQuery(sql)
-                    .addParameter("studentID",studentID)
                     .addParameter("announID",announID)
                     .executeAndFetch(Announcement.class);
         }

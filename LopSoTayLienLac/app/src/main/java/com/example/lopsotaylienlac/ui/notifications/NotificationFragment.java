@@ -19,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +28,7 @@ import com.example.lopsotaylienlac.R;
 import com.example.lopsotaylienlac.adapter.AnnoucementAdapter;
 import com.example.lopsotaylienlac.apis.UserApi;
 import com.example.lopsotaylienlac.beans.Announcement;
+import com.example.lopsotaylienlac.ui.sbclass.ManagementClassFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +58,9 @@ public class NotificationFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_notification, container, false);
 
+        NavController navController = NavHostFragment.findNavController(NotificationFragment.this);
+        Context context = this.getContext();
+
         //getUID from share
         sharedPreferences = this.getActivity().getSharedPreferences("dataLogin", Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("userID","-1");
@@ -66,7 +72,7 @@ public class NotificationFragment extends Fragment {
 
         //recyclerView
         recyclerView = (RecyclerView) root.findViewById(R.id.rcvNoti);
-        showNotification(Integer.parseInt(id), role);
+        showNotification(Integer.parseInt(id), role, navController, context);
         //end recyclerView
 
         if(role == 0)
@@ -75,7 +81,7 @@ public class NotificationFragment extends Fragment {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPopUpMenu(UID);
+                showPopUpMenu(UID, role);
             }
         });
 
@@ -83,15 +89,15 @@ public class NotificationFragment extends Fragment {
     }
 
 
-    private void showNotification(int UID, int role) {
+    private void showNotification(int UID, int role, NavController navController, Context context) {
         if(role == 0)
-            showAdminNotification();
+            showAdminNotification(UID, navController, context);
         else if(role == 1)
-            showStudentNotification(UID);
-        else showParentNotification(UID);
+            showStudentNotification(UID, navController, context);
+        else showParentNotification(UID, navController, context);
     }
 
-    private void showParentNotification(int uid) {
+    private void showParentNotification(int uid, NavController navController, Context context) {
         List<Announcement> list = new ArrayList<>();
         UserApi.apiService.getAnnounByParentID(UID).enqueue(new Callback<ArrayList<Announcement>>() {
             @Override
@@ -103,7 +109,7 @@ public class NotificationFragment extends Fragment {
                 else  txtNotiNull.setVisibility(View.INVISIBLE);
                 //
                 //setdata
-                adapter = new AnnoucementAdapter(response.body(), NotificationFragment.this);
+                adapter = new AnnoucementAdapter(response.body(),navController, context, role, UID);
                 //set Layout Management
                 layoutManager= new LinearLayoutManager(getContext());
                 recyclerView.setAdapter(adapter);
@@ -117,7 +123,7 @@ public class NotificationFragment extends Fragment {
         });
     }
 
-    private void showAdminNotification() {
+    private void showAdminNotification(int UID, NavController navController, Context context) {
         List<Announcement> list = new ArrayList<>();
         UserApi.apiService.getAllAnnouncement().enqueue(new Callback<ArrayList<Announcement>>() {
             @Override
@@ -129,7 +135,7 @@ public class NotificationFragment extends Fragment {
                 else  txtNotiNull.setVisibility(View.INVISIBLE);
                 //
                 //setdata
-                adapter = new AnnoucementAdapter(response.body(), NotificationFragment.this);
+                adapter = new AnnoucementAdapter(response.body(), navController, context, role, UID);
                 //set Layout Management
                 layoutManager= new LinearLayoutManager(getContext());
                 recyclerView.setAdapter(adapter);
@@ -143,7 +149,7 @@ public class NotificationFragment extends Fragment {
         });
     }
 
-    private void showStudentNotification(int UID){
+    private void showStudentNotification(int UID, NavController navController, Context context){
         List<Announcement> list = new ArrayList<>();
         UserApi.apiService.getAnnounByStudentID(UID).enqueue(new Callback<ArrayList<Announcement>>() {
             @Override
@@ -155,7 +161,7 @@ public class NotificationFragment extends Fragment {
                 else    txtNotiNull.setVisibility(View.INVISIBLE);
                 //
                 //setdata
-                adapter = new AnnoucementAdapter(response.body(), NotificationFragment.this);
+                adapter = new AnnoucementAdapter(response.body(), navController, context, role, UID);
                 adapter.notifyDataSetChanged();
                 //set Layout Management
                 layoutManager = new LinearLayoutManager(getContext());
@@ -174,7 +180,7 @@ public class NotificationFragment extends Fragment {
     }
 
     @SuppressLint("RestrictedApi")
-    private void showPopUpMenu(int UID) {
+    private void showPopUpMenu(int UID, int role) {
         PopupMenu popup = new PopupMenu(getContext(), this.imageView);
         popup.inflate(R.menu.menu_notification_popup);
 
@@ -184,7 +190,7 @@ public class NotificationFragment extends Fragment {
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                return menuItemClicked(item, UID);
+                return menuItemClicked(item, UID, role);
             }
         });
 
@@ -192,12 +198,20 @@ public class NotificationFragment extends Fragment {
         popup.show();
     }
 
-    private boolean menuItemClicked(MenuItem item, int UID) {
+    private boolean menuItemClicked(MenuItem item, int uid, int role) {
+        if(role == 1)
+            menuItemClickedStudent(item);
+        else menuItemClickedParent(item);
+        return true;
+    }
+
+    private void menuItemClickedParent(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.mark_as_read:
-                UserApi.apiService.markAllAnnounReaderByStudentID(UID).enqueue(new Callback<Void>() {
+                UserApi.apiService.markAllAnnounReaderByParentID(UID).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
+                        NavHostFragment.findNavController(NotificationFragment.this).navigate(R.id.navigation_nofitication);
                         System.out.println("Success");
                     }
 
@@ -211,7 +225,28 @@ public class NotificationFragment extends Fragment {
                 openConfirmDialog();
                 break;
         }
-        return true;
+    }
+
+    private void menuItemClickedStudent(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mark_as_read:
+                UserApi.apiService.markAllAnnounReaderByStudentID(UID).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        NavHostFragment.findNavController(NotificationFragment.this).navigate(R.id.navigation_nofitication);
+                        System.out.println("Success");
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        System.out.println("Fail");
+                    }
+                });
+                break;
+            case R.id.delete:
+                openConfirmDialog();
+                break;
+        }
     }
     //END POPUPMENU
 
@@ -247,6 +282,7 @@ public class NotificationFragment extends Fragment {
                         System.out.println("Fail");
                     }
                 });
+                NavHostFragment.findNavController(NotificationFragment.this).navigate(R.id.navigation_nofitication);
                 alertDialog.dismiss();
                 Toast.makeText(getContext(), "Đã xóa", Toast.LENGTH_LONG).show();
             }
