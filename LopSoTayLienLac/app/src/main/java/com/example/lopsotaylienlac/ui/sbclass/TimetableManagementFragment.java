@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ public class TimetableManagementFragment extends Fragment {
     private SharedPreferences sharedPreferences;
     private TimetableAdapter timetableAdapter;
     private LinearLayoutManager layoutManager;
+    ImageView imgSave;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_edit_schedule, container, false);
@@ -37,6 +39,12 @@ public class TimetableManagementFragment extends Fragment {
         recyclerView = root.findViewById(R.id.rcvTimetable);
         layoutManager = new LinearLayoutManager(getContext());
         loadTimetable(sbID);
+
+        imgSave = root.findViewById(R.id.imgSave);
+        imgSave.setOnClickListener(v -> {
+            System.out.println(timetableAdapter.getListTimetable().toString());
+
+        });
         return root;
     }
     public void loadTimetable(String id){

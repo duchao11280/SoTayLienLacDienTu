@@ -112,9 +112,7 @@ public class ParentScheduleFragment extends Fragment {
                         date.set(year,month,day);
                         String sdate = DateFormat.format("yyyy-MM-dd",date).toString();
                         //Display Schedule
-                        System.out.println("trk: "+studentID);
                         getSchedule(studentID,sdate);
-                        System.out.println("sau: "+studentID);
                     }
                 },year,month,day);
         //Show Date Picker Dialog

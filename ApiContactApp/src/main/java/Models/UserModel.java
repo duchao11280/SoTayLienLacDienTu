@@ -162,6 +162,14 @@ public class UserModel {
 
         }
     }
+    public static void updateIsOffByTimetableID(int timetableID){
+        final String sql ="call sp_UpdateOff(:timetableID)";
+        try (Connection con = DBUtils.getConnection()){
+            con.createQuery(sql)
+                    .addParameter("timetableID",timetableID)
+                    .executeUpdate();
+        }
+    }
     public static List<Subjectclass> getSubjetclassBySubjectID(String sbid){
         final String sql = "SELECT * FROM subjectclass WHERE subjectID = :sbid";
         try(Connection con = DBUtils.getConnection()){
@@ -304,4 +312,5 @@ public class UserModel {
 
         }
     }
+
 }

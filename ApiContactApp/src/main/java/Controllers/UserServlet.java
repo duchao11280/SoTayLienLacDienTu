@@ -449,9 +449,17 @@ public class UserServlet extends HttpServlet {
             case "/UpdateGrades":
                 doUpdateGrades(request,response);
                 break;
+            case"/UpdateIsOff":
+                doUpdateIsOff(request,response);
+                break;
             default:
                 break;
         }
+    }
+
+    private void doUpdateIsOff(HttpServletRequest request, HttpServletResponse response) {
+        int timetableID = Integer.parseInt(request.getParameter("timetableID"));
+        UserModel.updateIsOffByTimetableID(timetableID);
     }
 
     private void doUpdateGrades(HttpServletRequest request, HttpServletResponse response) {

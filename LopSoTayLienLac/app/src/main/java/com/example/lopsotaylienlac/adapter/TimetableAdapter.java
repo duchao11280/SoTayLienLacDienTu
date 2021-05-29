@@ -1,6 +1,7 @@
 package com.example.lopsotaylienlac.adapter;
 
 import android.content.Context;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.example.lopsotaylienlac.R;
 import com.example.lopsotaylienlac.beans.Timetable;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -24,6 +26,11 @@ public class TimetableAdapter extends RecyclerView.Adapter<TimetableAdapter.Time
     public TimetableAdapter(List<Timetable> listTimetable, Context context) {
         this.listTimetable = listTimetable;
         this.context = context;
+        notifyDataSetChanged();
+    }
+
+    public List<Timetable> getListTimetable() {
+        return listTimetable;
     }
 
     /**
@@ -49,9 +56,18 @@ public class TimetableAdapter extends RecyclerView.Adapter<TimetableAdapter.Time
         if (timetable==null)
             return;
         boolean checked;
+        if(timetable.isOff() == true)
+            holder.chkStudy.setChecked(false);
+        else
+            holder.chkStudy.setChecked(true);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timetable.getDate().getTime());
+        String date = DateFormat.format("dd/MM/yyyy",calendar).toString();
+        holder.txtDateSchedule.setText(date);
+        holder.chkStudy.setOnClickListener(v -> {
+            System.out.println(timetable.getTimetableID());
+        });
 
-        holder.txtDateSchedule.setText(""+timetable.getDate());
-        holder.chkStudy.setChecked(timetable.isOff());
     }
 
     @Override
@@ -68,6 +84,7 @@ public class TimetableAdapter extends RecyclerView.Adapter<TimetableAdapter.Time
         public TimetableViewHolder(@NonNull View itemView) {
             super(itemView);
             txtDateSchedule = (TextView) itemView.findViewById(R.id.txtDateSchedule);
+            chkStudy =(CheckBox) itemView.findViewById(R.id.chkStudy);
         }
     }
 }

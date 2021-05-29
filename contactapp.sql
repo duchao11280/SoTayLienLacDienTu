@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 28/05/2021 07:06:15
+ Date: 29/05/2021 14:45:08
 */
 
 SET NAMES utf8mb4;
@@ -31,7 +31,7 @@ CREATE TABLE `admin`  (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES ('admin', '123', 'Day la Admin01');
+INSERT INTO `admin` VALUES ('1', '123', 'Day la Admin01');
 
 -- ----------------------------
 -- Table structure for announcement
@@ -93,7 +93,8 @@ CREATE TABLE `parent`  (
 -- ----------------------------
 -- Records of parent
 -- ----------------------------
-INSERT INTO `parent` VALUES (1, '1111', 'Nguyễn Văn A', '2021-04-06', '0213216546', '215121');
+INSERT INTO `parent` VALUES (1, '123', 'Nguyễn Văn A', '2021-04-06', '0213216546', '215121');
+INSERT INTO `parent` VALUES (2, '123', 'Nguyễn Văn B', '1990-04-07', '012456789', 'aa');
 
 -- ----------------------------
 -- Table structure for parent_announcement
@@ -138,7 +139,7 @@ CREATE TABLE `student`  (
 -- Records of student
 -- ----------------------------
 INSERT INTO `student` VALUES (1, '123', 'con ông NV A', '2021-02-10', '0906993034', 'The Duc', 'CLC2A', 1);
-INSERT INTO `student` VALUES (2, '123', 'con ong NV A nhưng bé hơn', '2020-10-28', 'sdasdsad', 'xcx', 'CLC2B', 1);
+INSERT INTO `student` VALUES (2, '123', 'con ong NV A nhưng bé hơn', '2020-10-28', 'sdasdsad', 'xcx', 'CLC2B', 2);
 INSERT INTO `student` VALUES (111, 'test student', 'paswordd', '2020-02-02', '0123456788', 'addressss', 'sdadasdas', 1);
 
 -- ----------------------------
@@ -183,8 +184,8 @@ CREATE TABLE `study`  (
 -- Records of study
 -- ----------------------------
 INSERT INTO `study` VALUES (1, 'DBMS_01CLC', b'0', 7, 8);
-INSERT INTO `study` VALUES (1, 'MP_01CLC', b'1', 8, 8);
-INSERT INTO `study` VALUES (2, 'MP_01CLC', b'1', 9, 7);
+INSERT INTO `study` VALUES (1, 'MP_01CLC', b'1', 4, 4);
+INSERT INTO `study` VALUES (2, 'MP_01CLC', b'1', 1, 4);
 
 -- ----------------------------
 -- Table structure for subjectclass
@@ -246,7 +247,7 @@ CREATE TABLE `timetable`  (
 -- ----------------------------
 INSERT INTO `timetable` VALUES (1, 'MP_01CLC', '2021-06-01 07:00:00', '2021-06-01 10:00:00', '2021-06-01', b'0');
 INSERT INTO `timetable` VALUES (2, 'MP_01CLC', '2021-06-08 19:00:00', '2021-06-08 10:00:00', '2021-06-08', b'0');
-INSERT INTO `timetable` VALUES (3, 'MP_01CLC', '2021-06-15 07:00:00', '2021-06-15 10:00:00', '2021-06-13', b'0');
+INSERT INTO `timetable` VALUES (3, 'MP_01CLC', '2021-06-15 07:00:00', '2021-06-15 10:00:00', '2021-06-13', b'1');
 INSERT INTO `timetable` VALUES (4, 'MP_01CLC', '2021-06-22 07:00:00', '2021-06-22 10:00:00', '2021-05-28', b'0');
 INSERT INTO `timetable` VALUES (5, 'DBMS_01CLC', '2021-06-02 07:00:00', '2021-06-02 10:00:00', '2021-06-01', b'0');
 INSERT INTO `timetable` VALUES (6, 'DBMS_01CLC', '2021-06-09 07:00:00', '2021-06-09 10:00:00', '2021-06-09', b'0');
@@ -388,6 +389,22 @@ begin
     Select timetable.timetableID,timetable.subjectID, timetable.date, DATE_FORMAT(timetable.timeStart, '%Hg%i') as tmStart, DATE_FORMAT(timetable.timeEnd, '%Hg%i')tmEnd, subjectclass.subjectName, subjectclass.room, subjectclass.credit,(SELECT  teacher.teacherName from teacher,subjectclass WHERE subjectclass.teacherID = teacher.teacherID lIMIT 1) as teachername,IF((hour(TIMEDIFF(time(timetable.timeStart),'07:00:00'))+1)<1,1,If((hour(TIMEDIFF(time(timetable.timeStart),'07:00:00'))+1)>12,12,(hour(TIMEDIFF(time(timetable.timeStart),'07:00:00'))+1))) as tietbd, IF((hour(TIMEDIFF(time(timetable.timeEnd),'07:00:00'))+1)<1,1,If((hour(TIMEDIFF(time(timetable.timeEnd),'07:00:00'))+1)>12,12,(hour(TIMEDIFF(time(timetable.timeEnd),'07:00:00'))+1))) as tietkt
 from timetable,subjectclass,study
  WHERE timetable.subjectID = subjectclass.subjectID and study.subjectID = subjectclass.subjectID and study.studentID = idd and timetable.isOff=0 and timetable.date = dt;
+end
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for sp_UpdateOff
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `sp_UpdateOff`;
+delimiter ;;
+CREATE PROCEDURE `sp_UpdateOff`(IN id int(11))
+begin
+IF ((select isOff from timetable where timetableID = id)=true) THEN
+	Update timetable set isOff=false where timetableID = id;
+ELSE
+	Update timetable set isOff=true where timetableID = id;
+END IF;
 end
 ;;
 delimiter ;
