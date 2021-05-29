@@ -8,6 +8,7 @@ import com.example.lopsotaylienlac.beans.Schedule;
 import com.example.lopsotaylienlac.beans.Student;
 import com.example.lopsotaylienlac.beans.Subjectclass;
 import com.example.lopsotaylienlac.beans.Subjectofstudent;
+import com.example.lopsotaylienlac.beans.Timetable;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -97,13 +98,16 @@ public interface UserApi {
     //Lấy toàn bộ thông tin về học phí qua các năm
     @GET("User/GetAllFee")
     Call<ArrayList<Fee>> getAllFee();
-
+    //Lấy thời khóa biểu bằng studentID và Time
     @GET("User/GetScheduleByStudentIdandDate")
     Call<ArrayList<Schedule>> getScheduleByStudentIdandDate(@Query("studentID")int id,
                                                             @Query("dtpk")String dtpk);
+    // Lấy ra StudentId dựa vào parentID
     @GET("User/GetStudentIdByParentId")
     Call<Integer> getStudentIdByParentId(@Query("parentID") int id);
-
+    //Lấy ra thời khóa biểu từ subjectID
+    @GET("User/GetTimetableBySubjectId")
+    Call<ArrayList<Timetable>> getTimetableBySubjectId(@Query("subjectID") String subjectID);
     //endregion
 
     //region Post

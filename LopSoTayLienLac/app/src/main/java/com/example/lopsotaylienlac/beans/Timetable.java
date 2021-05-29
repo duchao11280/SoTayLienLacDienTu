@@ -1,6 +1,5 @@
-package Beans;
+package com.example.lopsotaylienlac.beans;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Timetable {
@@ -10,6 +9,15 @@ public class Timetable {
     private Date timeEnd;
     private Date date;
     private boolean isOff;
+
+    public Timetable(int timetableID, String subjectID, Date timeStart, Date timeEnd, Date date, boolean isOff) {
+        this.timetableID = timetableID;
+        this.subjectID = subjectID;
+        this.timeStart = timeStart;
+        this.timeEnd = timeEnd;
+        this.date = date;
+        this.isOff = isOff;
+    }
 
     public int getTimetableID() {
         return timetableID;
@@ -59,12 +67,15 @@ public class Timetable {
         isOff = off;
     }
 
-    public Timetable(int timetableID, String subjectID, Date timeStart, Date timeEnd, Date date, boolean isOff) {
-        this.timetableID = timetableID;
-        this.subjectID = subjectID;
-        this.timeStart = timeStart;
-        this.timeEnd = timeEnd;
-        this.date = date;
-        this.isOff = isOff;
+    @Override
+    public String toString() {
+        return "Timetable{" +
+                "timetableID=" + timetableID +
+                ", subjectID='" + subjectID + '\'' +
+                ", timeStart=" + timeStart +
+                ", timeEnd=" + timeEnd +
+                ", date=" + date +
+                ", isOff=" + isOff +
+                '}';
     }
 }

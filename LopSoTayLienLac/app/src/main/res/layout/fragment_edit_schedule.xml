@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgSave"
         android:layout_width="70dp"
         android:layout_height="67dp"
         android:layout_gravity="end"
@@ -35,6 +35,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvTimetable"
         android:layout_width="335dp"
         android:layout_height="473dp"
         android:layout_marginStart="20dp"

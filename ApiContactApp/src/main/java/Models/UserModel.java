@@ -294,4 +294,14 @@ public class UserModel {
 
         }
     }
+    public static List<Timetable> getTimetableBySubjectId(String id){
+        final String sql = "SELECT * FROM timetable Where subjectID=:id";
+
+        try (Connection con = DBUtils.getConnection()) {
+            return con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeAndFetch(Timetable.class);
+
+        }
+    }
 }

@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +22,7 @@ import com.example.lopsotaylienlac.adapter.StudentAdapter;
 import com.example.lopsotaylienlac.apis.UserApi;
 import com.example.lopsotaylienlac.beans.Student;
 import com.example.lopsotaylienlac.beans.Subjectclass;
+import com.example.lopsotaylienlac.ui.dashboard.DashboardFragment;
 
 import java.util.ArrayList;
 
@@ -32,7 +36,7 @@ public class DetailSubjectFragment extends Fragment {
     private StudentAdapter studentAdapter;
     private LinearLayoutManager linearLayoutManager;
     private TextView txtTenHP,txtMaLopHP,txtSoTC,txtSoSV;
-
+    private ImageView imgTimetable;
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_class_detail, container, false);
         sharedPreferences = getContext().getSharedPreferences("subjectClass", Context.MODE_PRIVATE);
@@ -45,9 +49,16 @@ public class DetailSubjectFragment extends Fragment {
         txtMaLopHP=root.findViewById(R.id.txtMaLopHP);
         txtSoTC=root.findViewById(R.id.txtSoTC);
         txtSoSV=root.findViewById(R.id.txtSoSV);
+        imgTimetable = root.findViewById(R.id.imgTimetable);
         System.out.println(sbID);
+        // Lay thong tin cua Class
         getDetailClass(sbID);
+        // Lay danh sach sinh vien
         getListStudent(sbID);
+        //Khi click vao bieu tuong thoi khoa bieu
+        imgTimetable.setOnClickListener(v -> {
+            NavHostFragment.findNavController(DetailSubjectFragment.this).navigate(R.id.fragment_edit_schedule);
+        });
         return root;
     }
     public void getDetailClass(String id){
@@ -79,7 +90,7 @@ public class DetailSubjectFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<Student>> call, Throwable t) {
-
+                Toast.makeText(getContext(),"Error 404",Toast.LENGTH_SHORT).show();
             }
         });
     }

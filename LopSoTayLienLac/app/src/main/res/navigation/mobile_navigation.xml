@@ -114,4 +114,9 @@
         android:name="com.example.lopsotaylienlac.ui.fee.FeeAdminResultSearch"
         android:label="fragment_class_per_student"
         tools:layout="@layout/fragment_class_per_student" />
+    <fragment
+        android:id="@+id/fragment_edit_schedule"
+        android:name="com.example.lopsotaylienlac.ui.sbclass.TimetableManagementFragment"
+        android:label="fragment_edit_schedule"
+        tools:layout="@layout/fragment_edit_schedule" />
 </navigation>

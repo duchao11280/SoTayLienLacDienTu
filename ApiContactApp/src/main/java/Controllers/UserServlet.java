@@ -139,9 +139,26 @@ public class UserServlet extends HttpServlet {
             case "/GetSubjetclassBySubjectID":
                 doGetSubjetclassBySubjectID(request,response);
                 break;
+            case "/GetTimetableBySubjectId":
+                dogetTimetableBySubjectId(request,response);
+                break;
             default:
                 break;
         }
+    }
+
+    private void dogetTimetableBySubjectId(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String apiRespont="";
+        String id = request.getParameter("subjectID");
+        List<Timetable> lst = UserModel.getTimetableBySubjectId(id);
+        PrintWriter out2view = response.getWriter();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
+        if(lst.size()>0) {
+            apiRespont = new Gson().toJson(lst);
+        }
+        out2view.println(apiRespont);
+        out2view.flush();
     }
 
     private void doGetSubjetclassBySubjectID(HttpServletRequest request, HttpServletResponse response) throws IOException {
