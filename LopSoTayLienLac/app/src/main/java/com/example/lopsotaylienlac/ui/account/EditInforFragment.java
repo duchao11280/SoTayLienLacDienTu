@@ -31,9 +31,6 @@ public class EditInforFragment extends Fragment {
 
     SharedPreferences sharedPreferences;
 
-    public EditInforFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,7 +38,7 @@ public class EditInforFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_account_edit_infor, container, false);
 
-
+        //Get info from sharedPreferences
         sharedPreferences = this.getActivity().getSharedPreferences("dataLogin", Context.MODE_PRIVATE);
         txtUserFullname = root.findViewById(R.id.txtName);
         txtRole = root.findViewById(R.id.txtRole);
@@ -61,12 +58,14 @@ public class EditInforFragment extends Fragment {
                 break;
         }
 
+        //Initial View with elements
         edtPhonenumber = root.findViewById(R.id.edtChangePhonenumber);
         edtAddress = root.findViewById(R.id.edtChangeAddress);
         edtAddress.setText(sharedPreferences.getString("address",""));
         edtPhonenumber.setText(sharedPreferences.getString("phonenumber",""));
-
         btnSaveInfo = root.findViewById(R.id.btnSaveInfor);
+
+        //do click button save info
         btnSaveInfo.setOnClickListener(v -> {
             String userID = sharedPreferences.getString("userID","-1");
             String newPhone = edtPhonenumber.getText().toString();
@@ -74,7 +73,7 @@ public class EditInforFragment extends Fragment {
             UserApi.apiService.updateInfo(userID,newPhone,newAddress).enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
-                    Toast.makeText(getContext(),"Change successfully",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"Thay đổi thành công",Toast.LENGTH_LONG).show();
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("address",newAddress);
                     editor.putString("phonenumber",newPhone);

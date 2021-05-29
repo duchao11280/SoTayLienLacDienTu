@@ -20,6 +20,10 @@ import com.example.lopsotaylienlac.beans.Admin;
 import com.example.lopsotaylienlac.beans.Parent;
 import com.example.lopsotaylienlac.beans.Student;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,7 +34,6 @@ public class LoginActivity extends AppCompatActivity {
     Button btnSignin;
     EditText edtID;
     EditText edtPass;
-
     SharedPreferences sharedPreferences;
 
     @Override
@@ -40,6 +43,9 @@ public class LoginActivity extends AppCompatActivity {
         initView();
     }
 
+    /**
+     * Initial View with elements
+     */
     private void initView(){
         btnSignin = findViewById(R.id.btnSignin);
         edtID = findViewById(R.id.edtUsername);
@@ -67,9 +73,15 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * do singin
+     * @throws InterruptedException
+     */
     private void doSignin() throws InterruptedException {
         String username = edtID.getText().toString().trim();
         String password = edtPass.getText().toString();
+        String hassPass = getHashMd5(password);
+        System.out.println(hassPass);
         if(username.length() == 0){
             edtID.setError("Bạn chưa nhập tài khoản!");
             return;
@@ -94,13 +106,13 @@ public class LoginActivity extends AppCompatActivity {
 
         switch (role){
             case 0:
-                getAdmin(username, password);
+                getAdmin(username, hassPass);
                 break;
             case 1:
-                getStudent(username, password);
+                getStudent(username, hassPass);
                 break;
             case 2:
-                getParent(username, password);
+                getParent(username, hassPass);
                 break;
             default:
                 break;
@@ -108,6 +120,35 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Hass password input by Md5
+     * @param password password input
+     * @return
+     */
+    public String getHashMd5(String password){
+        try {
+            // Create MD5 Hash
+            MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
+            digest.update(password.getBytes());
+            byte messageDigest[] = digest.digest();
+
+            // Create Hex String
+            StringBuffer hexString = new StringBuffer();
+            for (int i=0; i<messageDigest.length; i++)
+                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    /**
+     * Find Admin and Login
+     * @param username Input adminID
+     * @param password Input password
+     */
     private void getAdmin(String username, String password){
         UserApi.apiService.getAdminByAdminID(username).enqueue(new Callback<Admin>() {
             @Override
@@ -118,6 +159,7 @@ public class LoginActivity extends AppCompatActivity {
                         openLoginFailedDialog();
                         return;
                     }
+                    //Put Login info into SharePreferences
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putInt("role",0);
                     editor.putString("userID",String.valueOf(response.body().getAdminID()));
@@ -148,6 +190,11 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Find Student and Login
+     * @param username Input StudentID
+     * @param password Input password
+     */
     private void getStudent(String username, String password){
         UserApi.apiService.getStudentByID(username).enqueue(new Callback<Student>() {
             @Override
@@ -158,11 +205,12 @@ public class LoginActivity extends AppCompatActivity {
                         openLoginFailedDialog();
                         return;
                     }
+                    //Put Login info into SharePreferences
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putInt("role",1);
                     editor.putString("userID",String.valueOf(response.body().getStudentID()));
                     editor.putString("userFullName",response.body().getStudentName());
-                    editor.putString("dob",String.valueOf(response.body().getDob()));
+                    editor.putString("dob", new SimpleDateFormat("dd/MM/yyyy").format(response.body().getDob()));
                     editor.putString("phonenumber",response.body().getPhonenumber());
                     editor.putString("address",response.body().getAddress());
                     editor.putString("class",response.body().getClassname());
@@ -189,6 +237,11 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Find Parent and Login
+     * @param username Input ParentID
+     * @param password Input password
+     */
     private void getParent(String username, String password){
         UserApi.apiService.getParentByParentID(username).enqueue(new Callback<Parent>() {
             @Override
@@ -198,11 +251,12 @@ public class LoginActivity extends AppCompatActivity {
                         openLoginFailedDialog();
                         return;
                     }
+                    //Put Login info into SharePreferences
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putInt("role",2);
                     editor.putString("userID",String.valueOf(response.body().getParentID()));
                     editor.putString("userFullName",response.body().getParentName());
-                    editor.putString("dob",String.valueOf(response.body().getDob()));
+                    editor.putString("dob", new SimpleDateFormat("dd/MM/yyyy").format(response.body().getDob()));
                     editor.putString("phonenumber",response.body().getPhonenumber());
                     editor.putString("address",response.body().getAddress());
                     editor.putString("class","");
@@ -228,6 +282,9 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Open dialog when login failed
+     */
     private void openLoginFailedDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = getLayoutInflater().inflate(R.layout.dialog_login_failed,null);
@@ -240,5 +297,13 @@ public class LoginActivity extends AppCompatActivity {
             alertDialog.cancel();
         });
         alertDialog.show();
+    }
+
+    /**
+     * Make app can't back previous activity
+     */
+    @Override
+    public void onBackPressed(){
+        Toast.makeText(this,"Không thể quay lại",Toast.LENGTH_LONG).show();
     }
 }

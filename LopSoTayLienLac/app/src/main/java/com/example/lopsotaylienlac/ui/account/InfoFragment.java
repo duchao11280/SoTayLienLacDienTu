@@ -28,38 +28,32 @@ public class InfoFragment extends Fragment {
     TextView txtTitleClass;
     TextView txtUserFullname;
     TextView txtRole;
-
     private SharedPreferences sharedPreferences;
-
-    public InfoFragment() {
-        // Required empty public constructor
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_account_info, container, false);
+
+        //Initial view with elements
         txtName = root.findViewById(R.id.txtFullName);
         txtDob = root.findViewById(R.id.txtDob);
         txtPhonenumber = root.findViewById(R.id.txtPhonenumber);
         txtAddress = root.findViewById(R.id.txtAddress);
         txtClass = root.findViewById(R.id.txtUserClass);
         txtTitleClass = root.findViewById(R.id.txtTitleClass);
+        txtUserFullname = root.findViewById(R.id.txtName);
+        txtRole = root.findViewById(R.id.txtRole);
 
-        //Set Text for view
+        //Set text for view
         sharedPreferences = this.getActivity().getSharedPreferences("dataLogin", Context.MODE_PRIVATE);
         txtName.setText(sharedPreferences.getString("userFullName",""));
         txtDob.setText(sharedPreferences.getString("dob",""));
         txtPhonenumber.setText(sharedPreferences.getString("phonenumber",""));
         txtAddress.setText(sharedPreferences.getString("address",""));
         txtClass.setText(sharedPreferences.getString("class",""));
-
-        txtUserFullname = root.findViewById(R.id.txtName);
-        txtRole = root.findViewById(R.id.txtRole);
         txtUserFullname.setText(sharedPreferences.getString("userFullName","Người dùng"));
-
         btnEditInfo = root.findViewById(R.id.btnEditInfo);
         int role = sharedPreferences.getInt("role",-1);
         switch (role){
@@ -73,15 +67,17 @@ public class InfoFragment extends Fragment {
             case 2:
                 txtRole.setText("Phụ huynh");
                 btnEditInfo.setVisibility(View.INVISIBLE);
+                txtTitleClass.setVisibility(View.INVISIBLE);
                 break;
             default:
                 break;
         }
 
-
+        //Do button click change info
         btnEditInfo.setOnClickListener(v -> {
             NavHostFragment.findNavController(InfoFragment.this).navigate(R.id.fragment_account_edit_info);
         });
+
         return root;
     }
 }

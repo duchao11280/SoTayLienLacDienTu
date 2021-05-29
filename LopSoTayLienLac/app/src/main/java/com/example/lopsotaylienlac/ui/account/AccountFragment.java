@@ -75,6 +75,7 @@ public class AccountFragment extends Fragment {
             editor.putBoolean("checkLogin",false);
             editor.apply();
             editor.commit();
+            getActivity().finish();
             startActivity(new Intent(getContext(),LoginActivity.class));
         });
         return root;
