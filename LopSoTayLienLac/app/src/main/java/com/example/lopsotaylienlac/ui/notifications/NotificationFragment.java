@@ -19,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class NotificationStudentFragment extends Fragment {
+public class NotificationFragment extends Fragment {
 
 
     private TextView txtNotiNull;
@@ -54,7 +53,7 @@ public class NotificationStudentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_student_notification, container, false);
+        View root = inflater.inflate(R.layout.fragment_notification, container, false);
 
         //getUID from share
         sharedPreferences = this.getActivity().getSharedPreferences("dataLogin", Context.MODE_PRIVATE);
@@ -67,10 +66,12 @@ public class NotificationStudentFragment extends Fragment {
 
         //recyclerView
         recyclerView = (RecyclerView) root.findViewById(R.id.rcvNoti);
-        showNotification(Integer.parseInt(id));
+        showNotification(Integer.parseInt(id), role);
         //end recyclerView
 
-
+        if(role == 0)
+            imageView.setVisibility(View.INVISIBLE);
+        else
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +83,67 @@ public class NotificationStudentFragment extends Fragment {
     }
 
 
-    private void showNotification(int UID) {
+    private void showNotification(int UID, int role) {
+        if(role == 0)
+            showAdminNotification();
+        else if(role == 1)
+            showStudentNotification(UID);
+        else showParentNotification(UID);
+    }
+
+    private void showParentNotification(int uid) {
+        List<Announcement> list = new ArrayList<>();
+        UserApi.apiService.getAnnounByParentID(UID).enqueue(new Callback<ArrayList<Announcement>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Announcement>> call, Response<ArrayList<Announcement>> response) {
+
+                //set visible or invisible for textview
+                if (response.body()==null)
+                    txtNotiNull.setVisibility(View.VISIBLE);
+                else  txtNotiNull.setVisibility(View.INVISIBLE);
+                //
+                //setdata
+                adapter = new AnnoucementAdapter(response.body(), NotificationFragment.this);
+                //set Layout Management
+                layoutManager= new LinearLayoutManager(getContext());
+                recyclerView.setAdapter(adapter);
+                recyclerView.setLayoutManager(layoutManager);
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Announcement>> call, Throwable t) {
+                System.out.println("Fail");
+            }
+        });
+    }
+
+    private void showAdminNotification() {
+        List<Announcement> list = new ArrayList<>();
+        UserApi.apiService.getAllAnnouncement().enqueue(new Callback<ArrayList<Announcement>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Announcement>> call, Response<ArrayList<Announcement>> response) {
+
+                //set visible or invisible for textview
+                if (response.body()==null)
+                    txtNotiNull.setVisibility(View.VISIBLE);
+                else  txtNotiNull.setVisibility(View.INVISIBLE);
+                //
+                //setdata
+                adapter = new AnnoucementAdapter(response.body(), NotificationFragment.this);
+                //set Layout Management
+                layoutManager= new LinearLayoutManager(getContext());
+                recyclerView.setAdapter(adapter);
+                recyclerView.setLayoutManager(layoutManager);
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Announcement>> call, Throwable t) {
+                System.out.println("Fail");
+            }
+        });
+    }
+
+    private void showStudentNotification(int UID){
         List<Announcement> list = new ArrayList<>();
         UserApi.apiService.getAnnounByStudentID(UID).enqueue(new Callback<ArrayList<Announcement>>() {
             @Override
@@ -94,7 +155,7 @@ public class NotificationStudentFragment extends Fragment {
                 else    txtNotiNull.setVisibility(View.INVISIBLE);
                 //
                 //setdata
-                adapter = new AnnoucementAdapter(response.body(), NotificationStudentFragment.this);
+                adapter = new AnnoucementAdapter(response.body(), NotificationFragment.this);
                 adapter.notifyDataSetChanged();
                 //set Layout Management
                 layoutManager = new LinearLayoutManager(getContext());
@@ -110,9 +171,7 @@ public class NotificationStudentFragment extends Fragment {
 
             }
         });
-
     }
-
 
     @SuppressLint("RestrictedApi")
     private void showPopUpMenu(int UID) {
@@ -140,8 +199,6 @@ public class NotificationStudentFragment extends Fragment {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         System.out.println("Success");
-                        //refresh RecyclerView
-                        showNotification(UID);
                     }
 
                     @Override
@@ -191,8 +248,6 @@ public class NotificationStudentFragment extends Fragment {
                     }
                 });
                 alertDialog.dismiss();
-                //refresh Recycler View
-                showNotification(UID);
                 Toast.makeText(getContext(), "Đã xóa", Toast.LENGTH_LONG).show();
             }
         });

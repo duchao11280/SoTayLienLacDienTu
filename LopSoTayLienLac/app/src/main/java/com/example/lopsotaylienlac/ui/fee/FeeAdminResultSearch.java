@@ -25,7 +25,6 @@ import com.example.lopsotaylienlac.adapter.SubClassStudentAdapter;
 import com.example.lopsotaylienlac.apis.UserApi;
 import com.example.lopsotaylienlac.beans.Student;
 import com.example.lopsotaylienlac.beans.Subjectofstudent;
-import com.example.lopsotaylienlac.ui.notifications.NotificationsFragment;
 
 import java.util.ArrayList;
 

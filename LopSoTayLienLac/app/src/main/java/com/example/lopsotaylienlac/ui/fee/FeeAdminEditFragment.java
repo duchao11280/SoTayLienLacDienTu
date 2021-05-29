@@ -1,18 +1,12 @@
 package com.example.lopsotaylienlac.ui.fee;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.InputFilter;
-import android.text.InputType;
-import android.text.Spanned;
-import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +18,6 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.lopsotaylienlac.R;
 import com.example.lopsotaylienlac.apis.UserApi;
-import com.example.lopsotaylienlac.ui.notifications.NotificationsFragment;
 
 import java.util.Calendar;
 import java.util.Date;

@@ -19,9 +19,9 @@
 
     <fragment
         android:id="@+id/navigation_nofitication"
-        android:name="com.example.lopsotaylienlac.ui.notifications.NotificationsFragment"
+        android:name="com.example.lopsotaylienlac.ui.notifications.NotificationFragment"
         android:label="@string/title_thongbao"
-        tools:layout="@layout/fragment_all_role_notification" />
+        tools:layout="@layout/fragment_notification" />
     <fragment
         android:id="@+id/navigation_account"
         android:name="com.example.lopsotaylienlac.ui.account.AccountFragment"
@@ -52,18 +52,7 @@
         android:id="@+id/fragment_admin_management_notification"
         android:name="com.example.lopsotaylienlac.ui.notifications.NotificationManagementAdminFragment"
         android:label="fragment_admin_notification"
-        tools:layout="@layout/fragment_admin_management_notification" />
-    <fragment
-        android:id="@+id/fragment_student_notification"
-        android:name="com.example.lopsotaylienlac.ui.notifications.NotificationStudentFragment"
-        android:label="fragment_student_notification"
-        tools:layout="@layout/fragment_student_notification" />
-    <fragment
-        android:id="@+id/fragment_parent_notification"
-        android:name="com.example.lopsotaylienlac.ui.notifications.NotificationParentFragment"
-        android:label="fragment_parent_notification"
-        tools:layout="@layout/fragment_parent_notification" />
-
+        tools:layout="@layout/fragment_admin_management_notification" />/
     <fragment
         android:id="@+id/fragment_student_check_score"
         android:name="com.example.lopsotaylienlac.ui.score.StudentScoreFragment"
@@ -119,11 +108,6 @@
         android:name="com.example.lopsotaylienlac.ui.sbclass.TimetableManagementFragment"
         android:label="fragment_edit_schedule"
         tools:layout="@layout/fragment_edit_schedule" />
-    <fragment
-        android:id="@+id/fragment_admin_notification"
-        android:name="com.example.lopsotaylienlac.ui.notifications.NotificationAdminFragment"
-        android:label="fragment_admin_notification"
-        tools:layout="@layout/fragment_admin_notification" />
     <fragment
         android:id="@+id/fragment_admin_add_notification"
         android:name="com.example.lopsotaylienlac.ui.notifications.NotificationAdminAddFragment"

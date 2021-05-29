@@ -14,9 +14,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lopsotaylienlac.R;
-import com.example.lopsotaylienlac.apis.UserApi;
 import com.example.lopsotaylienlac.beans.Announcement;
-import com.example.lopsotaylienlac.ui.notifications.NotificationStudentFragment;
 
 import java.util.ArrayList;
 import java.util.List;
