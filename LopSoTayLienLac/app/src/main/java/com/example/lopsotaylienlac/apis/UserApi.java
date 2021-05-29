@@ -148,7 +148,8 @@ public interface UserApi {
     @PUT("User/UpdateIsPaid")
     Call<Void> updateIsPaid(@Query("studentID") int studentID,
                             @Query("subjectID") String subjectID);
-
+    @PUT("User/UpdateIsOff")
+    Call<Void> updateIsOff(@Query("timetableID") int timetableID);
     //Cập nhật thông tin cho học sinh
     @PUT("User/UpdateInfoStudent")
     Call<Void> updateInfo(

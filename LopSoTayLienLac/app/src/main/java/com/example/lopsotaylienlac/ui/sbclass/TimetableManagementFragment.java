@@ -42,7 +42,7 @@ public class TimetableManagementFragment extends Fragment {
 
         imgSave = root.findViewById(R.id.imgSave);
         imgSave.setOnClickListener(v -> {
-            System.out.println(timetableAdapter.getListTimetable().toString());
+            Toast.makeText(getContext(),"Saved",Toast.LENGTH_SHORT).show();
 
         });
         return root;

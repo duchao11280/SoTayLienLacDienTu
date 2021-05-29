@@ -7,16 +7,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lopsotaylienlac.R;
+import com.example.lopsotaylienlac.apis.UserApi;
 import com.example.lopsotaylienlac.beans.Timetable;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class TimetableAdapter extends RecyclerView.Adapter<TimetableAdapter.TimetableViewHolder> {
@@ -65,7 +71,17 @@ public class TimetableAdapter extends RecyclerView.Adapter<TimetableAdapter.Time
         String date = DateFormat.format("dd/MM/yyyy",calendar).toString();
         holder.txtDateSchedule.setText(date);
         holder.chkStudy.setOnClickListener(v -> {
-            System.out.println(timetable.getTimetableID());
+            UserApi.apiService.updateIsOff(timetable.getTimetableID()).enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    Toast.makeText(context,"Ngày "+date+"đã được thay đổi",Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Toast.makeText(context,"Error",Toast.LENGTH_SHORT).show();
+                }
+            });
         });
 
     }
