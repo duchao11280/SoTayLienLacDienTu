@@ -42,21 +42,32 @@ public class MainActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences("subjectClass", MODE_PRIVATE);
 
+        setSharePre();
+
+    }
+
+    private void setSharePre() {
+
+        //gọi api lấy danh sách các lớp
         UserApi.apiService.getAllSubjectclass().enqueue(new Callback<ArrayList<Subjectclass>>() {
             @Override
             public void onResponse(Call<ArrayList<Subjectclass>> call, Response<ArrayList<Subjectclass>> response) {
 
+                //tạo list lưu danh sách các lớp
                 List<String> lst = new ArrayList<>();
+
+                //lấy giá trị từ response
                 for (Subjectclass ele: response.body())
                     lst.add(ele.getSubjectID());
 
+                //tạo set và gán giá trị cho set
                 Set<String> set = new HashSet<String>();
                 set.addAll(lst);
 
-                System.out.println("set size: "+ set.size());
-
+                //tạo editor
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
+                //share allSubjectClassName để load vào Spinner ở FragmentAddNotification
                 editor.putStringSet("allSubjectClassName", set);
                 editor.commit();
 
@@ -64,12 +75,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ArrayList<Subjectclass>> call, Throwable t) {
-
+                System.out.println("Fail");
             }
         });
 
     }
-
 
 
 }

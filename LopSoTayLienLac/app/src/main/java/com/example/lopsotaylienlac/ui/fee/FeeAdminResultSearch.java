@@ -50,6 +50,7 @@ public class FeeAdminResultSearch extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //get view from layout
         View root = inflater.inflate(R.layout.fragment_class_per_student, container, false);
 
         btnSearchStudent = (ImageView) root.findViewById(R.id.btnSearchStudent);
@@ -71,27 +72,32 @@ public class FeeAdminResultSearch extends Fragment {
             }
         });
 
+        //return to FeeAdminFragment
         btnSaveFee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                returnFeeadminFragment();
+                saveChange();
             }
         });
 
         return root;
     }
 
-    private void returnFeeadminFragment() {
+    private void saveChange() {
+        //use sharePreferneces to get data
         sharedPreferences = this.getActivity().getSharedPreferences("listIsPaid", Context.MODE_PRIVATE);
-        Set<String> set = new HashSet<String>();
-        List<String> lstSubClassID = new ArrayList<>();
-        set = sharedPreferences.getStringSet("subClassID", null);
-        int stID = sharedPreferences.getInt("studentID", -1);
 
+        //createSet to get value
+        Set<String> set = new HashSet<String>();
+        List<String> lstSubClassID = new ArrayList<>();//list subclass ID
+        set = sharedPreferences.getStringSet("subClassID", null);//setstring subclass id
+        int stID = sharedPreferences.getInt("studentID", -1); //student id
+
+        //set value for list
         for (Object ob: set)
             lstSubClassID.add((String) ob);
 
-
+        //call api update isPaid for each subClassID in listsubClassID
         for (String subClassID: lstSubClassID){
             UserApi.apiService.updateIsPaid(stID, subClassID.trim()).enqueue(new Callback<Void>() {
                 @Override
@@ -105,34 +111,37 @@ public class FeeAdminResultSearch extends Fragment {
                 }
             });
         }
+        //return to FeeAdminFragment
         NavHostFragment.findNavController(FeeAdminResultSearch.this).navigate(R.id.fragment_admin_fee);
     }
 
     private void loadStudentInfor(Context context, String id) {
-
+        // load student info
+        //call api to get student info
         UserApi.apiService.getStudentByID(id).enqueue(new Callback<Student>() {
             @Override
             public void onResponse(Call<Student> call, Response<Student> response) {
-              //check con bi loi
-                if(response.body() == null){
-                    openNullDialog();}
-                else{
-                txtStudentName.setText(response.body().getStudentName());
-                txtClassname.setText(response.body().getClassname());
-                loadSearchResult(context, id);
+                //set value for view
+                txtStudentName.setText(response.body().getStudentName());//student namw
+                txtClassname.setText(response.body().getClassname());//class name
+                loadSearchResult(context, id);//load list subclass of student
+
+                //call success
                 Toast.makeText(getContext(), R.string.noti_load, Toast.LENGTH_LONG).show();
-                }
             }
 
             @Override
             public void onFailure(Call<Student> call, Throwable t) {
+                //open notify that device can not find selected student
                 openNullDialog();
+                //call fail
                 Toast.makeText(getContext(), R.string.noti_load_fail, Toast.LENGTH_LONG).show();
             }
         });
     }
 
     private void openNullDialog() {
+        //dialog notify null return
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         View view = getLayoutInflater().inflate(R.layout.dialog_search_confirm, null);
         Button btnOK = view.findViewById(R.id.btnSOK);
@@ -152,19 +161,26 @@ public class FeeAdminResultSearch extends Fragment {
 
     private void loadSearchResult(Context context, String id) {
 
+        //load list subclass of student
+        //up to student id
+        //convert to int
         int uid = Integer.parseInt(id);
         UserApi.apiService.getAllSubclassByStudentID(uid).enqueue(new Callback<ArrayList<Subjectofstudent>>() {
             @Override
             public void onResponse(Call<ArrayList<Subjectofstudent>> call, Response<ArrayList<Subjectofstudent>> response) {
-                adapter = new SubClassStudentAdapter(response.body(), context, uid);
-                layoutManager = new LinearLayoutManager(getContext());
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(layoutManager);
+                adapter = new SubClassStudentAdapter(response.body(), context, uid);//create adapter
+                layoutManager = new LinearLayoutManager(getContext());//create layout manager
+
+                recyclerView.setAdapter(adapter);//set adapter
+                recyclerView.setLayoutManager(layoutManager);//set layout manager
+
+                //call success
                 Toast.makeText(getContext(), R.string.noti_load, Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Call<ArrayList<Subjectofstudent>> call, Throwable t) {
+                //call fail
                 Toast.makeText(getContext(), R.string.noti_load_fail, Toast.LENGTH_LONG).show();
             }
         });

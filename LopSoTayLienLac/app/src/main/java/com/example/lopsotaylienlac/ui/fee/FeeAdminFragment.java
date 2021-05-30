@@ -43,12 +43,13 @@ public class FeeAdminFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //get view
         View root = inflater.inflate(R.layout.fragment_admin_fee, container, false);
-       // System.out.println("Fee Admin: "+id);
 
         btnEdit =(ImageView) root.findViewById(R.id.btnEdit);
         btnSearch = (ImageView)root.findViewById(R.id.btnSearch);
-
+        recyclerView = (RecyclerView)root.findViewById(R.id.rcvFee);
+        //change to edit fee fragment
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +57,7 @@ public class FeeAdminFragment extends Fragment {
             }
         });
 
+        //change to Search Student Fragment
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +65,7 @@ public class FeeAdminFragment extends Fragment {
             }
         });
 
-        recyclerView = (RecyclerView)root.findViewById(R.id.rcvFee);
+        //show History Fee List
         showFeeList();
         return root;
     }
@@ -73,21 +75,23 @@ public class FeeAdminFragment extends Fragment {
     }
 
     private void showFeeList() {
+        //call api to get all fee history
         UserApi.apiService.getAllFee().enqueue(new Callback<ArrayList<Fee>>() {
             @Override
             public void onResponse(Call<ArrayList<Fee>> call, Response<ArrayList<Fee>> response) {
-                adapter = new AdminFeeAdapter(response.body());
-                layoutManager = new LinearLayoutManager(getContext());
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(layoutManager);
+                adapter = new AdminFeeAdapter(response.body());//adapter
+                layoutManager = new LinearLayoutManager(getContext());//layout manager
 
-                System.out.println(response.body().get(1).getYear());
+                recyclerView.setAdapter(adapter);//set adapter
+                recyclerView.setLayoutManager(layoutManager);//set layput manager
 
+                //call success
                 Toast.makeText(getContext(), R.string.noti_load, Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Call<ArrayList<Fee>> call, Throwable t) {
+                //call fail
                 Toast.makeText(getContext(), R.string.noti_load_fail, Toast.LENGTH_LONG).show();
             }
         });

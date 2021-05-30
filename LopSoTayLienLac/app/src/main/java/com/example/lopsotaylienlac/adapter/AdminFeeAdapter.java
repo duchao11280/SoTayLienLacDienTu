@@ -16,11 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-//public class AnnoucementAdapter extends RecyclerView.Adapter<AnnoucementAdapter.AnouncementViewHolder>
 public class AdminFeeAdapter extends RecyclerView.Adapter<AdminFeeAdapter.AdminFeeViewHolder> {
 
+  //list fee history through years
     private List<Fee> lstFee = new ArrayList<>();
 
+    //constructor
     public AdminFeeAdapter(List<Fee> lstFee) {
         this.lstFee = lstFee;
         notifyDataSetChanged();
@@ -29,25 +30,28 @@ public class AdminFeeAdapter extends RecyclerView.Adapter<AdminFeeAdapter.AdminF
     @NonNull
     @Override
     public AdminFeeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //get view
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_fee, parent, false);
         return new AdminFeeViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AdminFeeViewHolder holder, int position) {
+        //get data of an item
         Fee feeItem = lstFee.get(position);
+
+        //check null
         if(feeItem == null)
             return;
 
-
+        //format date string
         String dateUpload = DateFormat.format("yyyy-MM-dd",feeItem.getDateUpload()).toString();
-        System.out.println(dateUpload);
-
         String year = "Học phí năm "+ feeItem.getYear()+":";
+
+        //set value for views
         holder.txtTilte.setText(year);
         holder.txtFee.setText(feeItem.getMoney()+" đ/tc");
         holder.txtDate.setText(DateFormat.format("yyyy-MM-dd",feeItem.getDateUpload()).toString());
-
     }
 
     @Override
@@ -56,13 +60,16 @@ public class AdminFeeAdapter extends RecyclerView.Adapter<AdminFeeAdapter.AdminF
     }
 
     public class AdminFeeViewHolder extends RecyclerView.ViewHolder{
+
         private TextView txtTilte, txtFee, txtDate;
+
         public AdminFeeViewHolder(@NonNull View itemView) {
             super(itemView);
+
+        //get view
             txtTilte = (TextView)itemView.findViewById(R.id.txt_year_fee);
             txtFee = (TextView)itemView.findViewById(R.id.fee);
             txtDate = (TextView)itemView.findViewById(R.id.txt_date);
-
         }
     }
 }
