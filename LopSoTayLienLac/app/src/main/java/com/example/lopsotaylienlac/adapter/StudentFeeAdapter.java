@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.lopsotaylienlac.R;
 import com.example.lopsotaylienlac.beans.Subjectofstudent;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +52,9 @@ public class StudentFeeAdapter  extends RecyclerView.Adapter<StudentFeeAdapter.S
         if(subjectofstudent ==null)
             return;
         holder.txtMonHoc.setText( subjectofstudent.getSubjectName());
-        holder.txtPrice.setText(""+subjectofstudent.getCredit()*feeofyear);
+        String x = customFormat("###,###.###", subjectofstudent.getCredit()*feeofyear);
+        holder.txtPrice.setText(""+ x  +" VND");
+
     }
     /**
      * Tra ve so luong item trong list
@@ -81,5 +84,12 @@ public class StudentFeeAdapter  extends RecyclerView.Adapter<StudentFeeAdapter.S
 //            item_student_fee_row = itemView.findViewById(R.id.item_student_fee_row);
 
         }
+    }
+
+    static public String customFormat(String pattern, double value ) {
+        DecimalFormat myFormatter = new DecimalFormat(pattern);
+        String output = myFormatter.format(value);
+        System.out.println(value + "  " + pattern + "  " + output);
+        return output;
     }
 }
