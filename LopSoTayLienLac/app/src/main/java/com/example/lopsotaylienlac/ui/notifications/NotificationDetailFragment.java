@@ -108,8 +108,8 @@ public class NotificationDetailFragment extends Fragment {
 
 
                 txtTitle.setText(response.body().getTitle());
-                txtSender.setText(response.body().getSenderName());
-                txtReceiver.setText(response.body().getReceiverName());
+                txtSender.setText("> from "+response.body().getSenderName());
+                txtReceiver.setText("to "+response.body().getReceiverName());
                 txtDateSend.setText(dateSend);
                 txtContent.setText(response.body().getAnnounContent());
 

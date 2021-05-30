@@ -1,5 +1,7 @@
 package com.example.lopsotaylienlac.ui.fee;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,9 @@ import com.example.lopsotaylienlac.apis.UserApi;
 import com.example.lopsotaylienlac.beans.Fee;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,10 +38,13 @@ public class FeeAdminFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
+    private SharedPreferences sharedPreferences;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_admin_fee, container, false);
+       // System.out.println("Fee Admin: "+id);
 
         btnEdit =(ImageView) root.findViewById(R.id.btnEdit);
         btnSearch = (ImageView)root.findViewById(R.id.btnSearch);

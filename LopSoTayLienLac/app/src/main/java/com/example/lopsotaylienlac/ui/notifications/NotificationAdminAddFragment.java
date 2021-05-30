@@ -37,8 +37,6 @@ public class NotificationAdminAddFragment extends Fragment {
     private Button btnSendNotification;
 
     private SharedPreferences sharedPreferences;
-
-    private String[] listSubClassName;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
