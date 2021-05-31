@@ -29,6 +29,7 @@ import com.example.lopsotaylienlac.beans.Student;
 import com.example.lopsotaylienlac.beans.Subjectofstudent;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -168,6 +169,10 @@ public class FeeAdminResultSearch extends Fragment {
         UserApi.apiService.getAllSubclassByStudentID(uid).enqueue(new Callback<ArrayList<Subjectofstudent>>() {
             @Override
             public void onResponse(Call<ArrayList<Subjectofstudent>> call, Response<ArrayList<Subjectofstudent>> response) {
+
+                //reverse list in response
+                Collections.reverse(response.body());
+                //set data adapter
                 adapter = new SubClassStudentAdapter(response.body(), context, uid);//create adapter
                 layoutManager = new LinearLayoutManager(getContext());//create layout manager
 

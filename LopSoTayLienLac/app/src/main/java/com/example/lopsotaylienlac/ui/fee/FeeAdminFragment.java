@@ -22,6 +22,7 @@ import com.example.lopsotaylienlac.apis.UserApi;
 import com.example.lopsotaylienlac.beans.Fee;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -79,6 +80,10 @@ public class FeeAdminFragment extends Fragment {
         UserApi.apiService.getAllFee().enqueue(new Callback<ArrayList<Fee>>() {
             @Override
             public void onResponse(Call<ArrayList<Fee>> call, Response<ArrayList<Fee>> response) {
+
+                //reverse list in response
+                Collections.reverse(response.body());
+                //set data, adapter
                 adapter = new AdminFeeAdapter(response.body());//adapter
                 layoutManager = new LinearLayoutManager(getContext());//layout manager
 

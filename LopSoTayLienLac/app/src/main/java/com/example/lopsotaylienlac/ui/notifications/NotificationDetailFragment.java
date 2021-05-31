@@ -127,7 +127,7 @@ public class NotificationDetailFragment extends Fragment {
             @Override
             public void onResponse(Call<Announcement> call, Response<Announcement> response) {
                 //format date
-                String dateSend =  DateFormat.format("yyyy-MM-dd",response.body().getDateSend()).toString();
+                String dateSend =  DateFormat.format("dd/MM/yyyy",response.body().getDateSend()).toString();
 
                 //set value for view
                 txtTitle.setText(response.body().getTitle());

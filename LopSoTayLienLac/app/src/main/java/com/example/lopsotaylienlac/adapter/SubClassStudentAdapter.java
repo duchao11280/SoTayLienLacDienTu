@@ -86,6 +86,12 @@ public class SubClassStudentAdapter extends RecyclerView.Adapter<SubClassStudent
                         {   lstIsPaid.add(sid);
                             set.add(sid);//add to SetString to putStringSet
                         }
+                    else
+                    {
+                        //remove if id is contained in list
+                        lstIsPaid.remove(sid);
+                        set.remove(sid);
+                    }
 
                     editor.putStringSet("subClassID",set);
                     editor.putInt("studentID", id);

@@ -116,6 +116,17 @@ public class NotificationAdminAddFragment extends Fragment {
             role = 1;
         else role = 2;
 
+        //check constraint
+        //check, setError if title is empty
+        if(title.length() == 0)
+        {edtTitle.setError("Nhập tiêu đề thông báo"); return;}
+        //check, setError if content is empty
+        if(content.length() == 0)
+        {
+            edtContent.setError("Nhập nội dung thông báo");
+            return;
+        }
+
         //class receive notification
         String receive = spnClassReveive.getSelectedItem().toString();
 

@@ -45,13 +45,14 @@ public class AdminFeeAdapter extends RecyclerView.Adapter<AdminFeeAdapter.AdminF
             return;
 
         //format date string
-        String dateUpload = DateFormat.format("yyyy-MM-dd",feeItem.getDateUpload()).toString();
+        String dateUpload = DateFormat.format("dd/MM/yyyy",feeItem.getDateUpload()).toString();
         String year = "Học phí năm "+ feeItem.getYear()+":";
+        String fee = feeItem.getMoney()+" đ/tc";
 
         //set value for views
         holder.txtTilte.setText(year);
-        holder.txtFee.setText(feeItem.getMoney()+" đ/tc");
-        holder.txtDate.setText(DateFormat.format("yyyy-MM-dd",feeItem.getDateUpload()).toString());
+        holder.txtFee.setText(fee);
+        holder.txtDate.setText(dateUpload);
     }
 
     @Override

@@ -15,7 +15,7 @@
         android:gravity="start"
         android:textStyle="bold"
         android:textAllCaps="true"
-        android:padding="14dp"
+        android:padding="25dp"
         android:textColor="@color/black"/>
 
 
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/card_round_corner">
 
         <ScrollView
@@ -69,6 +69,7 @@
                    android:layout_marginLeft="20dp"
                    android:layout_marginRight="20dp"
                    android:layout_marginTop="20dp"
+                   android:paddingLeft="20dp"
                    android:background="@drawable/card_round_corner"/>
 
                 <TextView
@@ -98,14 +99,16 @@
                 <EditText
                     android:id="@+id/edtContent"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="100dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="20dp"
+                    android:gravity="bottom"
                     android:background="@drawable/card_round_corner"
                     android:inputType="textMultiLine"
                     android:lines="10"
                     android:minLines="5"
+                    android:paddingLeft="20dp"
                     android:scrollHorizontally="false"/>
 
                 <Button

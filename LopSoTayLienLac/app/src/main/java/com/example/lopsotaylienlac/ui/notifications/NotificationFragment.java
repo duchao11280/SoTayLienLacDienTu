@@ -31,6 +31,7 @@ import com.example.lopsotaylienlac.beans.Announcement;
 import com.example.lopsotaylienlac.ui.sbclass.ManagementClassFragment;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -119,8 +120,11 @@ public class NotificationFragment extends Fragment {
                 if (response.body()==null)
                     txtNotiNull.setVisibility(View.VISIBLE);
                 else  txtNotiNull.setVisibility(View.INVISIBLE);
-                //
-                //setdata
+
+                //reverse list in response
+                Collections.reverse(response.body());
+
+                 //setdata
                 adapter = new AnnoucementAdapter(response.body(),navController, context, role, UID, client);
                 //set Layout Management
                 layoutManager= new LinearLayoutManager(getContext());
@@ -146,6 +150,10 @@ public class NotificationFragment extends Fragment {
                     txtNotiNull.setVisibility(View.VISIBLE);
                 else  txtNotiNull.setVisibility(View.INVISIBLE);
                 //
+
+                //reverse list in response
+                Collections.reverse(response.body());
+
                 //setdata
                 adapter = new AnnoucementAdapter(response.body(), navController, context, role, UID, client);
                 //set Layout Management
@@ -172,6 +180,10 @@ public class NotificationFragment extends Fragment {
                     txtNotiNull.setVisibility(View.VISIBLE);
                 else    txtNotiNull.setVisibility(View.INVISIBLE);
                 //
+
+                //reverse list in response
+                Collections.reverse(response.body());
+
                 //setdata
                 adapter = new AnnoucementAdapter(response.body(), navController, context, role, UID, client);
                 adapter.notifyDataSetChanged();

@@ -68,7 +68,7 @@ public class AnnoucementAdapter extends RecyclerView.Adapter<AnnoucementAdapter.
         //set data for views
         holder.txtTitleNoti.setText(itemAnnou.getTitle());
         holder.txtContentNoti.setText(itemAnnou.getAnnounContent());
-        holder.txtDateSendnoti.setText(DateFormat.format("yyyy-MM-dd",itemAnnou.getDateSend()).toString());
+        holder.txtDateSendnoti.setText(DateFormat.format("dd/MM/yyyy",itemAnnou.getDateSend()).toString());
 
         //get announID
         int announID = itemAnnou.getAnnounID();

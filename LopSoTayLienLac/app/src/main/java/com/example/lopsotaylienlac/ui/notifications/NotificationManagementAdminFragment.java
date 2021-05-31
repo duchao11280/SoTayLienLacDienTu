@@ -25,6 +25,7 @@ import com.example.lopsotaylienlac.apis.UserApi;
 import com.example.lopsotaylienlac.beans.Announcement;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -97,6 +98,10 @@ public class NotificationManagementAdminFragment extends Fragment {
                     txtNotiNull.setVisibility(View.VISIBLE);
                 else  txtNotiNull.setVisibility(View.INVISIBLE);
                 //
+
+                //reverse list in response
+                Collections.reverse(response.body());
+
                 //setdata
                 adapter = new AnnoucementAdapter(response.body(), navController, context, role, UID, man);
                 //set Layout Management

@@ -17,7 +17,8 @@
         android:gravity="start"
         android:textStyle="bold"
         android:textAllCaps="true"
-        android:padding="14dp" />
+        android:padding="25dp"
+        android:textColor="@color/black"/>
 
     <ImageView
         android:id="@+id/btnReturn"
@@ -61,11 +62,11 @@
                 android:layout_width="172dp"
                 android:layout_height="39dp"
                 android:layout_marginTop="88dp"
-                android:inputType="number"
                 android:background="@drawable/card_border_black"
+                android:inputType="number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.648"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txtYear"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
