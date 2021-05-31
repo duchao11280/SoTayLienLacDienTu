@@ -25,6 +25,7 @@
             android:id="@+id/txtTitleNotification"
             android:text="@string/temp"
             android:textSize="20dp"
+            android:maxLines="1"
             android:textColor="@color/black"
             android:textStyle="bold"
         />

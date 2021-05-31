@@ -1,6 +1,7 @@
 package com.example.lopsotaylienlac.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,9 @@ import com.example.lopsotaylienlac.beans.Timetable;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +30,9 @@ import retrofit2.Response;
 
 public class TimetableAdapter extends RecyclerView.Adapter<TimetableAdapter.TimetableViewHolder> {
     List<Timetable> listTimetable = new ArrayList<>();
-    Context context;
+    private Context context;
+    //Convert list to HashSet to add array to sharedpreference
+    private Set<String> set = new HashSet<>();
 
     public TimetableAdapter(List<Timetable> listTimetable, Context context) {
         this.listTimetable = listTimetable;
@@ -71,17 +76,22 @@ public class TimetableAdapter extends RecyclerView.Adapter<TimetableAdapter.Time
         String date = DateFormat.format("dd/MM/yyyy",calendar).toString();
         holder.txtDateSchedule.setText(date);
         holder.chkStudy.setOnClickListener(v -> {
-            UserApi.apiService.updateIsOff(timetable.getTimetableID()).enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-                    Toast.makeText(context,"Ngày "+date+"đã được thay đổi",Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-                    Toast.makeText(context,"Error",Toast.LENGTH_SHORT).show();
-                }
-            });
+            holder.sharedPreferences = context.getSharedPreferences("timetable",Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = holder.sharedPreferences.edit();
+            String timetableId= String.valueOf(timetable.getTimetableID());
+            /**
+             * when user checked, it will add timetableid to Hashset
+             * if Hashset has the timetableId, which has checked it will remove
+             * add the list to sharedpreference to TimetableManagementFragment use to Save any changes
+             */
+            if(!set.contains(timetableId)){
+                set.add(timetableId);//add to SetString to putStringSet
+            }
+            else
+                set.remove(timetableId);
+            editor.putStringSet("timetableID",set);
+            editor.apply();
+            editor.commit();
         });
 
     }
@@ -97,6 +107,7 @@ public class TimetableAdapter extends RecyclerView.Adapter<TimetableAdapter.Time
 
         private CheckBox chkStudy;
         private TextView txtDateSchedule;
+        private SharedPreferences sharedPreferences;
         public TimetableViewHolder(@NonNull View itemView) {
             super(itemView);
             txtDateSchedule = (TextView) itemView.findViewById(R.id.txtDateSchedule);

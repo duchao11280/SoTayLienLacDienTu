@@ -42,36 +42,10 @@ public class HomeFragment extends Fragment {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-        Button btnTestApi = root.findViewById(R.id.btnTestAPI);
-        btnTestApi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                makeRead();
-            }
-        });
+
         return root;
     }
 
-    private void makeRead() {
-        UserApi.apiService.getAllSubclassByParentID(1).enqueue(new Callback<ArrayList<Subjectofstudent>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Subjectofstudent>> call, Response<ArrayList<Subjectofstudent>> response) {
-                System.out.println("success");
-            }
 
-            @Override
-            public void onFailure(Call<ArrayList<Subjectofstudent>> call, Throwable t) {
-                System.out.println("fail");
-
-            }
-        });
-    }
 
 }

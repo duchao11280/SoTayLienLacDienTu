@@ -20,6 +20,8 @@ import com.example.lopsotaylienlac.apis.UserApi;
 import com.example.lopsotaylienlac.beans.Timetable;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,26 +29,46 @@ import retrofit2.Response;
 
 public class TimetableManagementFragment extends Fragment {
     private RecyclerView recyclerView;
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferencesforload, sharedPreferencesforupdate;
     private TimetableAdapter timetableAdapter;
     private LinearLayoutManager layoutManager;
     ImageView imgSave;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_edit_schedule, container, false);
-        sharedPreferences = getContext().getSharedPreferences("subjectClass", Context.MODE_PRIVATE);
-        String sbID = sharedPreferences.getString("subjectclassID","-1");
+        sharedPreferencesforload = getContext().getSharedPreferences("subjectClass", Context.MODE_PRIVATE);
+        sharedPreferencesforupdate = getContext().getSharedPreferences("timetable", Context.MODE_PRIVATE);
+        String sbID = sharedPreferencesforload.getString("subjectclassID","-1");
         recyclerView = root.findViewById(R.id.rcvTimetable);
         layoutManager = new LinearLayoutManager(getContext());
         loadTimetable(sbID);
 
         imgSave = root.findViewById(R.id.imgSave);
         imgSave.setOnClickListener(v -> {
-            Toast.makeText(getContext(),"Saved",Toast.LENGTH_SHORT).show();
-
+            saveChange();
         });
         return root;
     }
+
+    private void saveChange() {
+        Set<String> set =new HashSet<>();
+        set = sharedPreferencesforupdate.getStringSet("timetableID",null);
+        for (String timetableID : set){
+            UserApi.apiService.updateIsOff(Integer.parseInt(timetableID)).enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    Toast.makeText(getContext(),"Save Success",Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Toast.makeText(getContext(),"Save Failure",Toast.LENGTH_SHORT).show();
+
+                }
+            });
+        }
+    }
+
     public void loadTimetable(String id){
         UserApi.apiService.getTimetableBySubjectId(id).enqueue(new Callback<ArrayList<Timetable>>() {
             @Override

@@ -23,12 +23,12 @@
         android:textColor="@color/black" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="485dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginLeft="50dp"
+        android:layout_marginTop="60dp"
         android:layout_marginRight="50dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/dialog_border_radius">
 
 
@@ -68,12 +68,16 @@
             android:layout_height="103dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="28dp"
+
+            android:layout_marginEnd="18dp"
             android:background="@drawable/it_dasboard_radius"
             android:drawableTop="@drawable/ic_db_class"
             android:paddingTop="15dp"
             android:text="@string/lop"
             android:textAlignment="center"
             android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+
             app:layout_constraintStart_toEndOf="@+id/itdbFee"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
