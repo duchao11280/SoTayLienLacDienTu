@@ -97,6 +97,8 @@ public class FeeAdminEditFragment extends Fragment {
                 Toast.makeText(getContext(), R.string.noti_dathem, Toast.LENGTH_LONG).show();
                 //set default value of textview
                 edtFee.setText("");
+                //returm FeeAdminFragment
+                NavHostFragment.findNavController(FeeAdminEditFragment.this).navigate(R.id.fragment_admin_fee);
             }
 
             @Override

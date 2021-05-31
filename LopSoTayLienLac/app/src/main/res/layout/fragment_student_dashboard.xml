@@ -23,12 +23,14 @@
         android:textColor="@color/black"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginTop="60dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginBottom="60dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="20dp"
+        android:padding="10dp"
+        android:layout_gravity="center"
         android:background="@drawable/dialog_border_radius">
 
 
@@ -36,7 +38,7 @@
             android:id="@+id/itdbSchedule"
             android:layout_width="89dp"
             android:layout_height="103dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="28dp"
             android:background="@drawable/it_dasboard_radius"
             android:drawableTop="@drawable/ic_schedule_pink"
@@ -51,14 +53,14 @@
             android:id="@+id/itdbFee"
             android:layout_width="82dp"
             android:layout_height="103dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="28dp"
             android:background="@drawable/it_dasboard_radius"
             android:drawableTop="@drawable/ic_fee_stpr"
             android:paddingTop="15dp"
-            android:textSize="12dp"
             android:text="@string/hocphi"
             android:textAlignment="center"
+            android:textSize="12dp"
             app:layout_constraintStart_toEndOf="@+id/itdbSchedule"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,11 +71,13 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="28dp"
             android:background="@drawable/it_dasboard_radius"
-            android:paddingTop="15dp"
-            android:textSize="12dp"
             android:drawableTop="@drawable/ic_view_grades"
+            android:paddingTop="15dp"
             android:text="@string/txt_view_grade"
             android:textAlignment="center"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/itdbFee"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

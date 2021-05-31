@@ -481,9 +481,13 @@ public class UserServlet extends HttpServlet {
     }
 
     private void doUpdateIsPaid(HttpServletRequest request,HttpServletResponse response){
+
+        String listsubjID = request.getParameter("subjectID");
         String uID = request.getParameter("studentID");
-        String sID = request.getParameter("subjectID");
-        UserModel.updateIsPaidByStudentID(uID,sID);
+        Object[] lstOb = Arrays.stream(listsubjID.split(",")).toArray();
+        for (Object o:lstOb) {
+            UserModel.updateIsPaidByStudentID(uID,(String) o);
+        }
     }
 
     private void doMarkReadedStudent(HttpServletRequest request, HttpServletResponse response) throws IOException{

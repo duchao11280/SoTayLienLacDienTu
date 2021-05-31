@@ -27,8 +27,8 @@
         android:layout_width="70dp"
         android:layout_height="67dp"
         android:layout_gravity="end"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="6dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="28dp"
         android:background="@drawable/card_round_corner"
         android:padding="5dp"
         android:src="@drawable/ic_calendar_alt_solid"
@@ -40,14 +40,15 @@
         android:layout_width="345dp"
         android:layout_height="224dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="159dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/card_grey_radius"
 
+        android:background="@drawable/card_grey_radius"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/imgTimetable">
 
 
         <TextView
@@ -66,9 +67,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
-            android:textStyle="bold"
-            android:textSize="23dp"
             android:text="TextView"
+            android:textSize="23dp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titleTenHP" />
 

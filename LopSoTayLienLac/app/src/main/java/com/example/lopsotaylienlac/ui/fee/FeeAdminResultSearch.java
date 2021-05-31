@@ -90,17 +90,21 @@ public class FeeAdminResultSearch extends Fragment {
 
         //createSet to get value
         Set<String> set = new HashSet<String>();
-        List<String> lstSubClassID = new ArrayList<>();//list subclass ID
+        String lstsubClassID = "";
         set = sharedPreferences.getStringSet("subClassID", null);//setstring subclass id
         int stID = sharedPreferences.getInt("studentID", -1); //student id
 
         //set value for list
-        for (Object ob: set)
-            lstSubClassID.add((String) ob);
+        for (String subClassID: set) {
+            //add set item to string
+            lstsubClassID += subClassID;
+            //sign to split in web code
+            lstsubClassID += ",";
+            //
+        }
 
         //call api update isPaid for each subClassID in listsubClassID
-        for (String subClassID: lstSubClassID){
-            UserApi.apiService.updateIsPaid(stID, subClassID.trim()).enqueue(new Callback<Void>() {
+            UserApi.apiService.updateIsPaid(stID, lstsubClassID).enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     System.out.println("Success");
@@ -111,7 +115,6 @@ public class FeeAdminResultSearch extends Fragment {
                     System.out.println("Fail");
                 }
             });
-        }
         //return to FeeAdminFragment
         NavHostFragment.findNavController(FeeAdminResultSearch.this).navigate(R.id.fragment_admin_fee);
     }
@@ -123,8 +126,8 @@ public class FeeAdminResultSearch extends Fragment {
             @Override
             public void onResponse(Call<Student> call, Response<Student> response) {
                 //set value for view
-                txtStudentName.setText(response.body().getStudentName());//student namw
-                txtClassname.setText(response.body().getClassname());//class name
+                txtStudentName.setText("Họ và tên: " + response.body().getStudentName());//student namw
+                txtClassname.setText("Lớp: " + response.body().getClassname());//class name
                 loadSearchResult(context, id);//load list subclass of student
 
                 //call success

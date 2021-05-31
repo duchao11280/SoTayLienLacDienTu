@@ -103,17 +103,23 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
             float midGrades = Float.parseFloat(edtMidGrades.getText().toString());
             float finalGrades = Float.parseFloat(edtFinalGrades.getText().toString());
 
-            UserApi.apiService.updateGrades(studentID,subjectID,midGrades,finalGrades).enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-                    alertDialog.cancel();
-                }
+            if(checkPoint(midGrades) == false)
+                edtMidGrades.setError("Nhập số điểm hợp lệ");
+            else
+                if(checkPoint(finalGrades) == false)
+                    edtFinalGrades.setError("Nhập số điểm hợp lệ");
+                else
+                    UserApi.apiService.updateGrades(studentID,subjectID,midGrades,finalGrades).enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            alertDialog.cancel();
+                        }
 
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-                    Toast.makeText(context,"Error 404", Toast.LENGTH_SHORT).show();
-                }
-            });
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Toast.makeText(context,"Error 404", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
         });
         alertDialog.setView(view);
@@ -151,5 +157,11 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
         public boolean onLongClick(View v) {
             return false;
         }
+    }
+
+    private boolean checkPoint(float inp){
+        if(inp>(float)10)
+            return false;
+        return true;
     }
 }

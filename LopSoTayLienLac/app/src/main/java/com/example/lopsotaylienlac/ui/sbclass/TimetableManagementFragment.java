@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +19,7 @@ import com.example.lopsotaylienlac.R;
 import com.example.lopsotaylienlac.adapter.TimetableAdapter;
 import com.example.lopsotaylienlac.apis.UserApi;
 import com.example.lopsotaylienlac.beans.Timetable;
+import com.example.lopsotaylienlac.ui.fee.FeeAdminResultSearch;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -62,6 +64,8 @@ public class TimetableManagementFragment extends Fragment {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 Toast.makeText(getContext(),"Saved Success",Toast.LENGTH_SHORT).show();
+                //return to Management Class Frament
+                NavHostFragment.findNavController(TimetableManagementFragment.this).navigate(R.id.fragment_class_detail);
             }
 
             @Override
