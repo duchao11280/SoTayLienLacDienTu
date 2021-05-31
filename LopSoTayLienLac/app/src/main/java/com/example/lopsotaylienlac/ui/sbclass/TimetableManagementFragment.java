@@ -53,20 +53,22 @@ public class TimetableManagementFragment extends Fragment {
     private void saveChange() {
         Set<String> set =new HashSet<>();
         set = sharedPreferencesforupdate.getStringSet("timetableID",null);
+        String ttbID="";
         for (String timetableID : set){
-            UserApi.apiService.updateIsOff(Integer.parseInt(timetableID)).enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-                    Toast.makeText(getContext(),"Save Success",Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-                    Toast.makeText(getContext(),"Save Failure",Toast.LENGTH_SHORT).show();
-
-                }
-            });
+            ttbID += timetableID;
+            ttbID +=",";
         }
+        UserApi.apiService.updateIsOff(ttbID).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Toast.makeText(getContext(),"Saved Success",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(getContext(),"Saved Failure",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void loadTimetable(String id){

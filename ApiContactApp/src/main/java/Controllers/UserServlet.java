@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -456,8 +457,12 @@ public class UserServlet extends HttpServlet {
     }
 
     private void doUpdateIsOff(HttpServletRequest request, HttpServletResponse response) {
-        int timetableID = Integer.parseInt(request.getParameter("timetableID"));
-        UserModel.updateIsOffByTimetableID(timetableID);
+        String timetableID = request.getParameter("timetableID");
+        Object[] testid = Arrays.stream(timetableID.split(",")).toArray();
+        for (Object o:testid) {
+            UserModel.updateIsOffByTimetableID(Integer.parseInt((String) o));
+        }
+
     }
 
     private void doUpdateGrades(HttpServletRequest request, HttpServletResponse response) {
@@ -472,16 +477,12 @@ public class UserServlet extends HttpServlet {
         String studentID = request.getParameter("studentID");
         String phonenumber = request.getParameter("phonenumber");
         String address = request.getParameter("address");
-        System.out.println(studentID);
-        System.out.println(phonenumber);
-        System.out.println(address);
         UserModel.updateInfor(studentID,phonenumber,address);
     }
 
     private void doUpdateIsPaid(HttpServletRequest request,HttpServletResponse response){
         String uID = request.getParameter("studentID");
         String sID = request.getParameter("subjectID");
-        System.out.println(uID + sID);
         UserModel.updateIsPaidByStudentID(uID,sID);
     }
 

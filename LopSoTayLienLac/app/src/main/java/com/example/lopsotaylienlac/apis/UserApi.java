@@ -147,8 +147,9 @@ public interface UserApi {
     @PUT("User/UpdateIsPaid")
     Call<Void> updateIsPaid(@Query("studentID") int studentID,
                             @Query("subjectID") String subjectID);
+    // đánh dấu là off
     @PUT("User/UpdateIsOff")
-    Call<Void> updateIsOff(@Query("timetableID") int timetableID);
+    Call<Void> updateIsOff(@Query("timetableID") String timetableID);
     //Cập nhật thông tin cho học sinh
     @PUT("User/UpdateInfoStudent")
     Call<Void> updateInfo(
