@@ -45,6 +45,7 @@ public class ParentScoreFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_student_check_score, container, false);
+        //Lấy thông tin đăng nhập của phụ huynh
         sharedPreferences = this.getActivity().getSharedPreferences("dataLogin", Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("userID","-1");
         recyclerView = (RecyclerView)root.findViewById(R.id.rcvStudentCheckScore);
@@ -147,11 +148,16 @@ public class ParentScoreFragment extends Fragment {
         });
     }
 
+    /**
+     * api lấy student id bằng parent id
+     * @param id
+     */
     private void getStudentId(int id){
         UserApi.apiService.getStudentIdByParentId(id).enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 studentID = response.body();
+                //Lấy các môn học của học sinh bằng id của học ính
                 getSubject(studentID);
             }
 
@@ -162,6 +168,10 @@ public class ParentScoreFragment extends Fragment {
         });
     }
 
+    /**
+     * api lấy tất cả môn học của học sinh
+     * @param id
+     */
     private void getSubject(int id){
 
         UserApi.apiService.getAllSubclassByStudentID(id).enqueue(new Callback<ArrayList<Subjectofstudent>>() {
@@ -197,7 +207,7 @@ public class ParentScoreFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<Subjectofstudent>> call, Throwable t) {
-
+                //Mở dialog hiển thị không có môn học
                 openInfoDialog();
             }
         });

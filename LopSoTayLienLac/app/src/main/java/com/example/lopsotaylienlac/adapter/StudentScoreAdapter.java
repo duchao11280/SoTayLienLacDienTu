@@ -69,6 +69,7 @@ public class StudentScoreAdapter extends RecyclerView.Adapter<StudentScoreAdapte
         holder.txtMonhocScore.setText( subjectofstudent.getSubjectName());
         holder.txtDiemScore.setText(""+((subjectofstudent.getScoreMidTerm() + subjectofstudent.getScoreFinalTerm())/2));
 
+        //Su kien click vao tung item trong recyclerview
         holder.setItemClickListener(new ItemClickListener() {
 
             @Override
@@ -103,7 +104,6 @@ public class StudentScoreAdapter extends RecyclerView.Adapter<StudentScoreAdapte
     public class StudentScoreViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener
     {
         private TextView txtMonhocScore,txtDiemScore;
-//        ConstraintLayout item_row_score;
         private ItemClickListener itemClickListener;
         SharedPreferences sharedPreferences;
 
@@ -112,8 +112,6 @@ public class StudentScoreAdapter extends RecyclerView.Adapter<StudentScoreAdapte
             //Anh xa view thong qua find
             txtMonhocScore = (TextView) itemView.findViewById(R.id.txtMonhocScore);
             txtDiemScore = (TextView) itemView.findViewById(R.id.txtDiemScore);
-//            item_row_score = itemView.findViewById(R.id.item_student_score_row);
-//            item_row_score.setOnCreateContextMenuListener(this);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
 
@@ -137,13 +135,18 @@ public class StudentScoreAdapter extends RecyclerView.Adapter<StudentScoreAdapte
         }
     }
 
+    /**
+     * Dialog hiện điểm của môn học
+     * @param x
+     * @param idd
+     */
     public void openScoreDialog(int x,int idd){
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
         LayoutInflater li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = li.inflate(R.layout.dialog_student_check_score,null);
         AlertDialog alertDialog = builder.create();
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
+        //Gọi api lấy tất cả môn học của học sinh
         UserApi.apiService.getAllSubclassByStudentID(idd).enqueue(new Callback<ArrayList<Subjectofstudent>>() {
             @Override
             public void onResponse(Call<ArrayList<Subjectofstudent>> call, Response<ArrayList<Subjectofstudent>> response) {
@@ -154,7 +157,7 @@ public class StudentScoreAdapter extends RecyclerView.Adapter<StudentScoreAdapte
                 TextView txtDiemGiua = view.findViewById(R.id.txtDiemGiuaKi);
                 TextView txtDiemCuoi = view.findViewById(R.id.txtDiemCuoiKi);
                 TextView txtDiemTong = view.findViewById(R.id.txtDiemTongKet);
-
+                //Lấy học phí mới nhất trong db
                 String sjname = response.body().get(x).getSubjectName();
                 float mid = response.body().get(x).getScoreMidTerm();
                 float finalscore = response.body().get(x).getScoreFinalTerm();
@@ -163,7 +166,7 @@ public class StudentScoreAdapter extends RecyclerView.Adapter<StudentScoreAdapte
                 String txtDiemCuoiKi = String.valueOf(finalscore);
                 String txtDiemTongKet = String.valueOf(tong);
 
-
+                //Gán giá trị cho textview hiển thị
                 txtDiemGiua.setText(txtDiemGiuaKi);
                 txtDiemCuoi.setText(txtDiemCuoiKi);
                 txtDiemTong.setText(txtDiemTongKet);

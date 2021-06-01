@@ -86,6 +86,12 @@ public class StudentFeeAdapter  extends RecyclerView.Adapter<StudentFeeAdapter.S
         }
     }
 
+    /**
+     * format hoc phi
+     * @param pattern
+     * @param value
+     * @return
+     */
     static public String customFormat(String pattern, double value ) {
         DecimalFormat myFormatter = new DecimalFormat(pattern);
         String output = myFormatter.format(value);

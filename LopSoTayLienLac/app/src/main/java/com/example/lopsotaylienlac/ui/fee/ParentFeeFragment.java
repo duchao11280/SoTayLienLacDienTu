@@ -54,15 +54,19 @@ public class ParentFeeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_parent_check_fee, container, false);
+        //Lấy thông tin đăng nhập của phụ huynh
         sharedPreferences = this.getActivity().getSharedPreferences("dataLogin", Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("userID","-1");
         recyclerView = (RecyclerView)root.findViewById(R.id.rcvParentCheckFee);
         layoutManager = new LinearLayoutManager(getContext());
+
         getStudentId(Integer.parseInt(id));
 
         return  root;
     }
-
+    /**
+     * Dialog hiển thị khi không có môn học đóng học phí
+     */
     public void openInfoDialog(){
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
         View view = getLayoutInflater().inflate(R.layout.dialog_student_check_fee,null);
@@ -82,11 +86,17 @@ public class ParentFeeFragment extends Fragment {
         });
 
     }
+
+    /**
+     * api lấy id của học sinh dựa vào id của phụ huynh
+     * @param id
+     */
     private void getStudentId(int id){
         UserApi.apiService.getStudentIdByParentId(id).enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 studentID = response.body();
+                //Lấy các môn học của học sinh
                 getSubject(studentID);
             }
 
@@ -97,22 +107,26 @@ public class ParentFeeFragment extends Fragment {
         });
     }
 
+    /**
+     * lấy môn học bằng id của học sinh
+     * @param id
+     */
     private void getSubject(int id){
 
         UserApi.apiService.getAllSubclassByStudentID(id).enqueue(new Callback<ArrayList<Subjectofstudent>>() {
             @Override
             public void onResponse(Call<ArrayList<Subjectofstudent>> call, Response<ArrayList<Subjectofstudent>> responsemain) {
-
+                //api lấy danh sách học phí
                 UserApi.apiService.getAllFee().enqueue(new Callback<ArrayList<Fee>>() {
                     @Override
                     public void onResponse(Call<ArrayList<Fee>> call, Response<ArrayList<Fee>> response) {
                         List<Fee> lst = new ArrayList<>();
-
+                        //Lấy học phí mới nhất
                         lst =  response.body();
                         int lastindex = lst.size();
                         Fee lastfee = response.body().get(lastindex-1);
                         feeofyear = lastfee.getMoney();
-
+                        //Set dữ liệu và hiển thị
                         studentFeeAdapter= new StudentFeeAdapter(responsemain.body(),feeofyear);
                         recyclerView.setAdapter(studentFeeAdapter);
                         recyclerView.setLayoutManager(layoutManager);
@@ -120,7 +134,7 @@ public class ParentFeeFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<ArrayList<Fee>> call, Throwable t) {
-
+                        System.out.println("No Fee");
                     }
                 });
 
@@ -128,7 +142,7 @@ public class ParentFeeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<Subjectofstudent>> call, Throwable t) {
-
+                //Hiển thị dialog không có môn học đóng học phí
                 openInfoDialog();
             }
         });

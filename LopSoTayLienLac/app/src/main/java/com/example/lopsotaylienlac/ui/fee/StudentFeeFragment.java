@@ -52,24 +52,28 @@ public class StudentFeeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_student_fee, container, false);
+        //Lấy thông tin đăng nhập của học sinh
         sharedPreferences = this.getActivity().getSharedPreferences("dataLogin", Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("userID","-1");
         recyclerView = (RecyclerView)root.findViewById(R.id.rcvStudentCheckFee);
         layoutManager = new LinearLayoutManager(getContext());
+        /**
+         * gọi api lấy tất cả môn học từ id của học sinh
+         */
         UserApi.apiService.getAllSubclassByStudentID(Integer.parseInt(id)).enqueue(new Callback<ArrayList<Subjectofstudent>>() {
             @Override
             public void onResponse(Call<ArrayList<Subjectofstudent>> call, Response<ArrayList<Subjectofstudent>> responsemain) {
-
+                    //Lấy tất cả học phí
                     UserApi.apiService.getAllFee().enqueue(new Callback<ArrayList<Fee>>() {
                         @Override
                         public void onResponse(Call<ArrayList<Fee>> call, Response<ArrayList<Fee>> response) {
                             List<Fee> lst = new ArrayList<>();
-
+                            //Lấy học phí mới nhất
                             lst =  response.body();
                             int lastindex = lst.size();
                             Fee lastfee = response.body().get(lastindex-1);
                             feeofyear = lastfee.getMoney();
-
+                            //Set dữ liệu và hiển thị
                             studentFeeAdapter= new StudentFeeAdapter(responsemain.body(),feeofyear);
                             recyclerView.setAdapter(studentFeeAdapter);
                             recyclerView.setLayoutManager(layoutManager);
@@ -77,7 +81,7 @@ public class StudentFeeFragment extends Fragment {
 
                         @Override
                         public void onFailure(Call<ArrayList<Fee>> call, Throwable t) {
-
+                            System.out.println("No Fee");
                         }
                     });
 
@@ -85,7 +89,7 @@ public class StudentFeeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<Subjectofstudent>> call, Throwable t) {
-
+                //Nếu không có môn học thì sẽ thông báo
                 openInfoDialog();
             }
         });
@@ -93,6 +97,9 @@ public class StudentFeeFragment extends Fragment {
         return  root;
     }
 
+    /**
+     * Dialog hiển thị khi không có môn học đóng học phí
+     */
     public void openInfoDialog(){
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
         View view = getLayoutInflater().inflate(R.layout.dialog_student_check_fee,null);
