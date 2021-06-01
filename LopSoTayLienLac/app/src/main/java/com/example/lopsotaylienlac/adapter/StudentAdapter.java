@@ -125,8 +125,18 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
          * when click on Ok to save grades
          */
         btnFillOK.setOnClickListener(v -> {
+            // validate input
+            if(edtMidGrades.length()==0) {
+                edtMidGrades.setError("Vui lòng nhập điểm");
+                return;
+            }
+            if(edtFinalGrades.length()==0) {
+                edtFinalGrades.setError("Vui lòng nhập điểm");
+                return;
+            }
             float midGrades = Float.parseFloat(edtMidGrades.getText().toString());
             float finalGrades = Float.parseFloat(edtFinalGrades.getText().toString());
+
             //Check valid
             if(checkPoint(midGrades) == false)
                 edtMidGrades.setError("Nhập số điểm hợp lệ");
@@ -194,4 +204,5 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
             return false;
         return true;
     }
+
 }
