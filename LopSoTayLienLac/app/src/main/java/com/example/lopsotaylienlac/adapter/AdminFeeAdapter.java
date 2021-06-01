@@ -57,7 +57,9 @@ public class AdminFeeAdapter extends RecyclerView.Adapter<AdminFeeAdapter.AdminF
 
     @Override
     public int getItemCount() {
-        return lstFee.size();
+        if(lstFee!=null)
+            return lstFee.size();
+        else return 0;
     }
 
     public class AdminFeeViewHolder extends RecyclerView.ViewHolder{

@@ -112,7 +112,7 @@ public class NotificationAdminAddFragment extends Fragment {
         int role;
 
         //set value up to spnItem selected
-        if (roleString.equals(R.string.hocsinh))
+        if (roleString.equals("Học sinh"))
             role = 1;
         else role = 2;
 

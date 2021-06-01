@@ -82,7 +82,7 @@ public class FeeAdminFragment extends Fragment {
             public void onResponse(Call<ArrayList<Fee>> call, Response<ArrayList<Fee>> response) {
 
                 //reverse list in response
-                Collections.reverse(response.body());
+//                Collections.reverse(response.body());
                 //set data, adapter
                 adapter = new AdminFeeAdapter(response.body());//adapter
                 layoutManager = new LinearLayoutManager(getContext());//layout manager
