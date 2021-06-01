@@ -26,14 +26,21 @@ public class SubClassStudentAdapter extends RecyclerView.Adapter<SubClassStudent
     private List<Subjectofstudent> lstSubofStudent = new ArrayList<>();
     private int id;
     private List<String> lstIsPaid = new ArrayList<String>();
-    private  Set<String> set = new HashSet<>();
     private Context context;
-
+    private SharedPreferences sharedPreferences;
+    private Set<String> set;
+    private SharedPreferences.Editor editor;
     //constructor
     public SubClassStudentAdapter(List<Subjectofstudent> lstSubofStudent, Context context, int id) {
         this.lstSubofStudent = lstSubofStudent;
         this.id = id;
         this.context = context;
+        set = new HashSet();
+        sharedPreferences = context.getSharedPreferences("listIsPaid", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        editor.putStringSet("subClassID", set);
+        editor.apply();
+        editor.commit();
         notifyDataSetChanged();
     }
 
@@ -113,6 +120,7 @@ public class SubClassStudentAdapter extends RecyclerView.Adapter<SubClassStudent
         private CheckBox chkisPaid;
         private ItemClickListener itemClickListener;
         private LinearLayout item;
+
         private SharedPreferences sharedPreferences;
 
         public SubClassStudentViewHolder(@NonNull View itemView) {

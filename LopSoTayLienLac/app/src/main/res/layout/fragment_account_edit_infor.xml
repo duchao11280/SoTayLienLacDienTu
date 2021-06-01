@@ -21,11 +21,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:text="Nguyễn Đức Hảo"
         android:textColor="@color/white"
         android:textSize="26dp"
         android:textStyle="bold"
+        android:maxLines="2"
         app:layout_constraintStart_toEndOf="@+id/imgAvt"
         app:layout_constraintTop_toTopOf="parent" />
 
