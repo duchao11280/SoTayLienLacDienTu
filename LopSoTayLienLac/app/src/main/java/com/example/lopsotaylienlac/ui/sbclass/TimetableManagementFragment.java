@@ -35,6 +35,8 @@ public class TimetableManagementFragment extends Fragment {
     private TimetableAdapter timetableAdapter;
     private LinearLayoutManager layoutManager;
     ImageView imgSave;
+    Set<String> set =new HashSet<>();
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_edit_schedule, container, false);
@@ -53,19 +55,25 @@ public class TimetableManagementFragment extends Fragment {
     }
 
     private void saveChange() {
-        Set<String> set =new HashSet<>();
         set = sharedPreferencesforupdate.getStringSet("timetableID",null);
+
+        System.out.println("Day la set: "+ set);
         String ttbID="";
+        if(set ==null)
+            set = new HashSet<>();
         for (String timetableID : set){
             ttbID += timetableID;
             ttbID +=",";
         }
+        System.out.println(ttbID);
         UserApi.apiService.updateIsOff(ttbID).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 Toast.makeText(getContext(),"Saved Success",Toast.LENGTH_SHORT).show();
                 //return to Management Class Frament
                 NavHostFragment.findNavController(TimetableManagementFragment.this).navigate(R.id.fragment_class_detail);
+
+
             }
 
             @Override

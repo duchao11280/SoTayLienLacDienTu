@@ -35,6 +35,12 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
     Context context;
     private EditText edtMidGrades,edtFinalGrades;
     private Button btnFillOK;
+
+    /**
+     * Initial
+     * @param lstStudent
+     * @param context
+     */
     public StudentAdapter(List<Student> lstStudent, Context context) {
         this.lstStudent = lstStudent;
         this.context = context;
@@ -63,21 +69,32 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
             return;
         holder.txtMSSV.setText(""+student.getStudentID());
         holder.txtHovaten.setText(student.getStudentName());
+        /**
+         * When user click on item, a dialog appear to fill grades
+         */
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
                 if(isLongClick)
                     return;
                 else {
+                    /**
+                     * get id from SharedPrefernces
+                     */
                     holder.sharedPreferences = context.getSharedPreferences("subjectClass",Context.MODE_PRIVATE);
                     String subjectID = holder.sharedPreferences.getString("subjectclassID","");
-                    System.out.println("Position: "+position + "Student: "+student.getStudentID()+"SubjectID: "+subjectID);
+                    // open Dialog with studentID and subjectID
                     openFillGradesDialog(student.getStudentID(),subjectID);
                 }
             }
         });
     }
 
+    /**
+     * Dialog fill grades
+     * @param studentID
+     * @param subjectID
+     */
     private void openFillGradesDialog(int studentID, String subjectID) {
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
         LayoutInflater li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -159,6 +176,11 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
         }
     }
 
+    /**
+     * validate point
+     * @param inp
+     * @return
+     */
     private boolean checkPoint(float inp){
         if(inp>(float)10)
             return false;

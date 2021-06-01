@@ -32,11 +32,19 @@ public class TimetableAdapter extends RecyclerView.Adapter<TimetableAdapter.Time
     List<Timetable> listTimetable = new ArrayList<>();
     private Context context;
     //Convert list to HashSet to add array to sharedpreference
-    private Set<String> set = new HashSet<>();
+    private Set<String> set;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     public TimetableAdapter(List<Timetable> listTimetable, Context context) {
         this.listTimetable = listTimetable;
         this.context = context;
+        sharedPreferences = context.getSharedPreferences("timetable",Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        set = new HashSet<>();
+        editor.putStringSet("timetableID",set);
+        editor.apply();
+        editor.commit();
         notifyDataSetChanged();
     }
 
@@ -76,8 +84,7 @@ public class TimetableAdapter extends RecyclerView.Adapter<TimetableAdapter.Time
         String date = DateFormat.format("dd/MM/yyyy",calendar).toString();
         holder.txtDateSchedule.setText(date);
         holder.chkStudy.setOnClickListener(v -> {
-            holder.sharedPreferences = context.getSharedPreferences("timetable",Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = holder.sharedPreferences.edit();
+
             String timetableId= String.valueOf(timetable.getTimetableID());
             /**
              * when user checked, it will add timetableid to Hashset
@@ -86,9 +93,15 @@ public class TimetableAdapter extends RecyclerView.Adapter<TimetableAdapter.Time
              */
             if(!set.contains(timetableId)){
                 set.add(timetableId);//add to SetString to putStringSet
+                System.out.println(set);
             }
-            else
+            else{
                 set.remove(timetableId);
+                System.out.println(set);
+            }
+            holder.txtDateSchedule.setOnClickListener(v1 -> {
+                System.out.println(set);
+            });
             editor.putStringSet("timetableID",set);
             editor.apply();
             editor.commit();
@@ -107,7 +120,7 @@ public class TimetableAdapter extends RecyclerView.Adapter<TimetableAdapter.Time
 
         private CheckBox chkStudy;
         private TextView txtDateSchedule;
-        private SharedPreferences sharedPreferences;
+
         public TimetableViewHolder(@NonNull View itemView) {
             super(itemView);
             txtDateSchedule = (TextView) itemView.findViewById(R.id.txtDateSchedule);

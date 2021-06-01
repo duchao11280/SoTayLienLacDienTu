@@ -28,7 +28,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginTop="60dp"
         android:layout_marginRight="50dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="70dp"
         android:background="@drawable/dialog_border_radius">
 
 
