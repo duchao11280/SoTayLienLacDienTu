@@ -80,6 +80,10 @@ public class ParentScheduleFragment extends Fragment {
         return root;
     }
 
+    /**
+     * Get Student ID and get current schedule
+     * @param id
+     */
     private void getStudentId(int id){
         UserApi.apiService.getStudentIdByParentId(id).enqueue(new Callback<Integer>() {
             @Override
@@ -94,6 +98,10 @@ public class ParentScheduleFragment extends Fragment {
             }
         });
     }
+
+    /**
+     * Open calendar to choose a day to view the schedule
+     */
     private void openCalender() {
         //Initialize year, month, day
         Calendar cal = Calendar.getInstance();
@@ -119,6 +127,12 @@ public class ParentScheduleFragment extends Fragment {
 
         datePickerDialog.show();
     }
+
+    /**
+     * Get schedule by userid and date
+     * @param id
+     * @param dtpk
+     */
     private void getSchedule(int id, String dtpk){
         UserApi.apiService.getScheduleByStudentIdandDate(id,dtpk).enqueue(new Callback<ArrayList<Schedule>>() {
             @Override

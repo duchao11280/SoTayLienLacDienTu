@@ -39,36 +39,47 @@ public class DetailSubjectFragment extends Fragment {
     private ImageView imgTimetable;
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_class_detail, container, false);
+        /**
+         * get subject class id from shared preference
+         */
         sharedPreferences = getContext().getSharedPreferences("subjectClass", Context.MODE_PRIVATE);
         String sbID = sharedPreferences.getString("subjectclassID","-1");
         recyclerView = root.findViewById(R.id.rcvListSt);
-        //set layout cho recyclerview
-
-        //Anh Xa
+        /**
+         * mapping
+         */
         txtTenHP=root.findViewById(R.id.txtTenHP);
         txtMaLopHP=root.findViewById(R.id.txtMaLopHP);
         txtSoTC=root.findViewById(R.id.txtSoTC);
         txtSoSV=root.findViewById(R.id.txtSoSV);
         imgTimetable = root.findViewById(R.id.imgTimetable);
-        System.out.println(sbID);
-        // Lay thong tin cua Class
+
+        /**
+         * Get detail class
+         */
         getDetailClass(sbID);
         // Lay danh sach sinh vien
         getListStudent(sbID);
-        //Khi click vao bieu tuong thoi khoa bieu
+        //when click on icon table, it will navigate to fragement edit schedule
         imgTimetable.setOnClickListener(v -> {
             NavHostFragment.findNavController(DetailSubjectFragment.this).navigate(R.id.fragment_edit_schedule);
         });
         return root;
     }
+    /**
+     * Get detail class
+     * @param id
+     */
     public void getDetailClass(String id){
         UserApi.apiService.getSubjectclassBySubjectID(id).enqueue(new Callback<ArrayList<Subjectclass>>() {
             @Override
             public void onResponse(Call<ArrayList<Subjectclass>> call, Response<ArrayList<Subjectclass>> response) {
+                if(response.body() !=null){
 
                 txtTenHP.setText(response.body().get(0).getSubjectName());
                 txtMaLopHP.setText(response.body().get(0).getSubjectID());
                 txtSoTC.setText(""+response.body().get(0).getCredit());
+                }
             }
 
             @Override
@@ -77,6 +88,11 @@ public class DetailSubjectFragment extends Fragment {
             }
         });
     }
+
+    /**
+     * Get list student of class with subject id
+     * @param id
+     */
     public void getListStudent(String id){
         UserApi.apiService.getListUserBySubjectID(id).enqueue(new Callback<ArrayList<Student>>() {
             @Override

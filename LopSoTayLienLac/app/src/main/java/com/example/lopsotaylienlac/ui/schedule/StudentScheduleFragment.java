@@ -74,7 +74,9 @@ public class StudentScheduleFragment extends Fragment {
         });
         return root;
     }
-
+    /**
+     * Open calendar to choose a day to view the schedule
+     */
     private void openCalender() {
         //Initialize year, month, day
         Calendar cal = Calendar.getInstance();
@@ -101,7 +103,11 @@ public class StudentScheduleFragment extends Fragment {
 
         datePickerDialog.show();
     }
-
+    /**
+     * Get schedule by userid and date
+     * @param id
+     * @param dtpk
+     */
     public void getSchedule(int id, String dtpk){
         UserApi.apiService.getScheduleByStudentIdandDate(id,dtpk).enqueue(new Callback<ArrayList<Schedule>>() {
             @Override

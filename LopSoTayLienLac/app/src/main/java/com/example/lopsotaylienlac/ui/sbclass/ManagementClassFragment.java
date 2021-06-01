@@ -32,7 +32,8 @@ public class ManagementClassFragment extends Fragment {
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     SubjectClassApdapter subjectClassApdapter;
-    private RecyclerView.Adapter adapter;
+
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_admin_management_allclass, container, false);
         recyclerView = (RecyclerView)root.findViewById(R.id.rcvAllSubjectClass);
@@ -43,6 +44,9 @@ public class ManagementClassFragment extends Fragment {
          * tao va set layout cho recylerview
          */
         layoutManager = new LinearLayoutManager(getContext());
+        /**
+         * show list subjectclass
+         */
         UserApi.apiService.getAllSubjectclass().enqueue(new Callback<ArrayList<Subjectclass>>() {
             @Override
             public void onResponse(Call<ArrayList<Subjectclass>> call, Response<ArrayList<Subjectclass>> response) {

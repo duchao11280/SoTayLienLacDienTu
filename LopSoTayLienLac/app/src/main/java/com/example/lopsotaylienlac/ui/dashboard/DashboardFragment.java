@@ -23,7 +23,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class DashboardFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+
     private SharedPreferences sharedPreferences;
     private TextView itdbClass;
     private TextView itdbFee,itdbSchedule,itdbSchedulepr, itdbNotification;
@@ -36,14 +36,15 @@ public class DashboardFragment extends Fragment {
         sharedPreferences = this.getActivity().getSharedPreferences("dataLogin", MODE_PRIVATE);
         // lấy role khi nguoi dùng đăng nhập ( 0: admin, 1: student, 2: parent)
         int role = sharedPreferences.getInt("role",1);
-        dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+
         View root = null;
         switch (role){
             case 0:
+                //set view dashboard admin
                 root = inflater.inflate(R.layout.fragment_admin_dashboard, container, false);
 
                 itdbNotification = root.findViewById(R.id.itdbNotification);
+                // chuyen den fragment management notification khi nhan vao icon
                 itdbNotification.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

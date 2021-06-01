@@ -49,7 +49,7 @@ public class SubjectClassApdapter extends RecyclerView.Adapter<SubjectClassApdap
 
 
     /**
-     * tao view layout
+     * create view layout
      * @param parent
      * @param viewType
      * @return
@@ -72,19 +72,22 @@ public class SubjectClassApdapter extends RecyclerView.Adapter<SubjectClassApdap
             return;
         holder.txtMaLop.setText(sbclass.getSubjectID());
         holder.txtTenLop.setText(sbclass.getSubjectName());
+        /**
+         * when click on item, it will go to fragment class detail
+         */
         holder.setItemClickListener(new ItemClickListener() {
-
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
                 if(isLongClick)
                     return;
                 else {
-
+                    // get id subject class, add to shared preference
                     holder.sharedPreferences = context.getSharedPreferences("subjectClass", MODE_PRIVATE);
                     SharedPreferences.Editor editor = holder.sharedPreferences.edit();
                     editor.putString("subjectclassID",sbclass.getSubjectID());
                     editor.apply();
                     editor.commit();
+                    // go to fragment class detail
                     navController.navigate(R.id.fragment_class_detail);
 
                 }
@@ -92,7 +95,7 @@ public class SubjectClassApdapter extends RecyclerView.Adapter<SubjectClassApdap
         });
     }
     /**
-     * Tra ve so luong item trong list
+     * return size of list
      * @return
      */
     @Override

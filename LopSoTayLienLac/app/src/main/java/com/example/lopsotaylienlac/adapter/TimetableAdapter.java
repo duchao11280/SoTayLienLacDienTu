@@ -93,15 +93,10 @@ public class TimetableAdapter extends RecyclerView.Adapter<TimetableAdapter.Time
              */
             if(!set.contains(timetableId)){
                 set.add(timetableId);//add to SetString to putStringSet
-                System.out.println(set);
             }
             else{
                 set.remove(timetableId);
-                System.out.println(set);
             }
-            holder.txtDateSchedule.setOnClickListener(v1 -> {
-                System.out.println(set);
-            });
             editor.putStringSet("timetableID",set);
             editor.apply();
             editor.commit();
@@ -109,6 +104,10 @@ public class TimetableAdapter extends RecyclerView.Adapter<TimetableAdapter.Time
 
     }
 
+    /**
+     * return size of list timetable
+     * @return
+     */
     @Override
     public int getItemCount() {
         if(listTimetable!=null)

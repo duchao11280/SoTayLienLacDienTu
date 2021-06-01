@@ -96,14 +96,19 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
      * @param subjectID
      */
     private void openFillGradesDialog(int studentID, String subjectID) {
+        //initial
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
         LayoutInflater li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = li.inflate(R.layout.dialog_fillgrades,null);
         AlertDialog alertDialog = builder.create();
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        //mapping
         edtMidGrades = view.findViewById(R.id.edtMidGrades);
         edtFinalGrades = view.findViewById(R.id.edtFinalGrades);
         btnFillOK = view.findViewById(R.id.btnFillOK);
+        /**
+         * Load current grades into edit text
+         */
         UserApi.apiService.getDetailsSubjectclass(studentID,subjectID).enqueue(new Callback<Subjectofstudent>() {
             @Override
             public void onResponse(Call<Subjectofstudent> call, Response<Subjectofstudent> response) {
@@ -116,10 +121,13 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
                 Toast.makeText(context,"Error 404",Toast.LENGTH_SHORT).show();
             }
         });
+        /**
+         * when click on Ok to save grades
+         */
         btnFillOK.setOnClickListener(v -> {
             float midGrades = Float.parseFloat(edtMidGrades.getText().toString());
             float finalGrades = Float.parseFloat(edtFinalGrades.getText().toString());
-
+            //Check valid
             if(checkPoint(midGrades) == false)
                 edtMidGrades.setError("Nhập số điểm hợp lệ");
             else

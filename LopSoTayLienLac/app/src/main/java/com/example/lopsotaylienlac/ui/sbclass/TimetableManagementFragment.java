@@ -54,10 +54,14 @@ public class TimetableManagementFragment extends Fragment {
         return root;
     }
 
+    /**
+     * Save change when checking off schedule
+     */
     private void saveChange() {
         set = sharedPreferencesforupdate.getStringSet("timetableID",null);
-
-        System.out.println("Day la set: "+ set);
+        /**
+         * Get all timetableID
+         */
         String ttbID="";
         if(set ==null)
             set = new HashSet<>();
@@ -65,15 +69,15 @@ public class TimetableManagementFragment extends Fragment {
             ttbID += timetableID;
             ttbID +=",";
         }
-        System.out.println(ttbID);
+        /**
+         * Call Api to save change
+         */
         UserApi.apiService.updateIsOff(ttbID).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 Toast.makeText(getContext(),"Saved Success",Toast.LENGTH_SHORT).show();
                 //return to Management Class Frament
                 NavHostFragment.findNavController(TimetableManagementFragment.this).navigate(R.id.fragment_class_detail);
-
-
             }
 
             @Override
@@ -83,13 +87,18 @@ public class TimetableManagementFragment extends Fragment {
         });
     }
 
+    /**
+     * Load schedule of subject class when input is subject class id
+     * @param id
+     */
     public void loadTimetable(String id){
         UserApi.apiService.getTimetableBySubjectId(id).enqueue(new Callback<ArrayList<Timetable>>() {
             @Override
             public void onResponse(Call<ArrayList<Timetable>> call, Response<ArrayList<Timetable>> response) {
                 timetableAdapter = new TimetableAdapter(response.body(),getContext());
-                System.out.println(response.body());
+                // set adapter for recyclerview
                 recyclerView.setAdapter(timetableAdapter);
+                //set layout for recycleview
                 recyclerView.setLayoutManager(layoutManager);
             }
 
