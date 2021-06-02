@@ -98,61 +98,6 @@ public class StudentScoreFragment extends Fragment {
 
     }
 
-    /**
-     * dialog hiển thị điểm chi tiết của từng môn học
-     * @param x
-     */
-    public void openScoreDialog(int x){
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
-        View view = getLayoutInflater().inflate(R.layout.dialog_student_check_score,null);
-        AlertDialog alertDialog = builder.create();
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        sharedPreferences = this.getActivity().getSharedPreferences("dataLogin", Context.MODE_PRIVATE);
-        String id = sharedPreferences.getString("userID","-1");
-        //api lấy tất cả môn học của học sinh bằng id của học sinh
-        UserApi.apiService.getAllSubclassByStudentID(Integer.parseInt(id)).enqueue(new Callback<ArrayList<Subjectofstudent>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Subjectofstudent>> call, Response<ArrayList<Subjectofstudent>> response) {
-                /**
-                 * anh xa du lieu tu view
-                 */
-                TextView txtTenMonHoc = view.findViewById(R.id.txtTitle);
-                TextView txtDiemGiua = view.findViewById(R.id.txtDiemGiuaKi);
-                TextView txtDiemCuoi = view.findViewById(R.id.txtDiemCuoiKi);
-                TextView txtDiemTong = view.findViewById(R.id.txtDiemTongKet);
-                //Lấy môn học tại item được ấn
-                String sjname = response.body().get(x).getSubjectName();
-                float mid = response.body().get(x).getScoreMidTerm();
-                float finalscore = response.body().get(x).getScoreFinalTerm();
-                float tong = (mid+finalscore)/2;
-                String txtDiemGiuaKi = String.valueOf(mid);
-                String txtDiemCuoiKi = String.valueOf(finalscore);
-                String txtDiemTongKet = String.valueOf(tong);
-
-                //Set dữ liệu và hiển thị lên
-                txtDiemGiua.setText(txtDiemGiuaKi);
-                txtDiemCuoi.setText(txtDiemCuoiKi);
-                txtDiemTong.setText(txtDiemTongKet);
-                txtTenMonHoc.setText(sjname);
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<Subjectofstudent>> call, Throwable t) {
-                System.out.println("Error");
-            }
-        });
-
-        alertDialog.setView(view);
-        alertDialog.show();
-
-        /**
-         * su kien nut OK
-         */
-        btnScoreOK = view.findViewById(R.id.btnScoreOK);
-        btnScoreOK.setOnClickListener(v -> {
-            alertDialog.cancel();
-        });
-    }
 
 }
