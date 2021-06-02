@@ -73,8 +73,26 @@ public class StudentFeeFragment extends Fragment {
                             int lastindex = lst.size();
                             Fee lastfee = response.body().get(lastindex-1);
                             feeofyear = lastfee.getMoney();
+
+                            //Lấy danh sách học phí chưa đóng
+                            List<Subjectofstudent> templst = new ArrayList<>();
+
+                            for (Subjectofstudent s: responsemain.body()) {
+                                if(s.isPaid()==false){
+                                    templst.add(s);
+                                }
+                            }
+
+                            for (Subjectofstudent cc: templst) {
+                                System.out.println(cc);
+                            }
+                            if(templst.size()==0){
+                                openInfoDialog();
+                                return;
+                            }
+
                             //Set dữ liệu và hiển thị
-                            studentFeeAdapter= new StudentFeeAdapter(responsemain.body(),feeofyear);
+                            studentFeeAdapter= new StudentFeeAdapter(templst,feeofyear);
                             recyclerView.setAdapter(studentFeeAdapter);
                             recyclerView.setLayoutManager(layoutManager);
                         }
