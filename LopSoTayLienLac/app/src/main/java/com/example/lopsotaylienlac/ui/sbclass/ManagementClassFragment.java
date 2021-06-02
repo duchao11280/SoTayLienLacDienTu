@@ -50,7 +50,6 @@ public class ManagementClassFragment extends Fragment {
         UserApi.apiService.getAllSubjectclass().enqueue(new Callback<ArrayList<Subjectclass>>() {
             @Override
             public void onResponse(Call<ArrayList<Subjectclass>> call, Response<ArrayList<Subjectclass>> response) {
-                System.out.println(response.body().toString());
                 subjectClassApdapter= new SubjectClassApdapter(response.body(),navController,context);
                 recyclerView.setAdapter(subjectClassApdapter);
                 recyclerView.setLayoutManager(layoutManager);
