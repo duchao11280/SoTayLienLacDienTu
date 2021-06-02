@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost_3306
+ Source Server         : MySQL
  Source Server Type    : MySQL
  Source Server Version : 100417
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 01/06/2021 11:30:11
+ Date: 02/06/2021 08:48:14
 */
 
 SET NAMES utf8mb4;
@@ -66,7 +66,7 @@ CREATE TABLE `fee`  (
   `feeID` int NOT NULL AUTO_INCREMENT,
   `year` int NULL DEFAULT NULL,
   `money` int NULL DEFAULT NULL,
-  `dateUpload` datetime(0) NULL DEFAULT NULL,
+  `dateUpload` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`feeID`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
@@ -97,11 +97,11 @@ CREATE TABLE `parent`  (
 -- ----------------------------
 -- Records of parent
 -- ----------------------------
-INSERT INTO `parent` VALUES (18110101, 'e1adc3949ba59abbe56e057f2f883e', 'Nguyễn Văn An', '1978-02-01', '0587123123', '05,Đường Trần Quang Diệu, Quận 3, Thành phố Hồ Chí Minh');
-INSERT INTO `parent` VALUES (18110102, 'e1adc3949ba59abbe56e057f2f883e', 'Nguyễn Thị Bình', '1980-01-01', '0912323442', '15, Đường Trần Quang Diệu, Quận 3, Thành phố Hồ Chí Minh');
-INSERT INTO `parent` VALUES (18110103, 'e1adc3949ba59abbe56e057f2f883e', 'Trịnh Kim Chi', '1985-05-02', '0923654544', 'hẻm 451 Hai Bà Trưng, Quận 3, Thành phố Hồ Chí Minh');
-INSERT INTO `parent` VALUES (18110104, 'e1adc3949ba59abbe56e057f2f883e', 'Võ Nguyễn Ánh Dương', '1978-05-09', '0587125456', '19, Đường Nguyễn Trãi, Phường Nguyễn Cư Trinh, Quận 1, Thành phố Hồ Chí Minh');
-INSERT INTO `parent` VALUES (18110105, 'e1adc3949ba59abbe56e057f2f883e', 'Trần Minh Hoàng', '1969-12-31', '0763654126', '72, Đường Cách Mạng Tháng Tám, Phường Bến Thành, Quận 1, Thành phố Hồ Chí Minh');
+INSERT INTO `parent` VALUES (18110101, 'c33367701511b4f62ec61ded352059', 'Nguyễn Văn An', '1978-02-01', '0587123123', '05,Đường Trần Quang Diệu, Quận 3, Thành phố Hồ Chí Minh');
+INSERT INTO `parent` VALUES (18110102, 'c33367701511b4f62ec61ded352059', 'Nguyễn Thị Bình', '1980-01-01', '0912323442', '15, Đường Trần Quang Diệu, Quận 3, Thành phố Hồ Chí Minh');
+INSERT INTO `parent` VALUES (18110103, 'c33367701511b4f62ec61ded352059', 'Trịnh Kim Chi', '1985-05-02', '0923654544', 'hẻm 451 Hai Bà Trưng, Quận 3, Thành phố Hồ Chí Minh');
+INSERT INTO `parent` VALUES (18110104, 'c33367701511b4f62ec61ded352059', 'Võ Nguyễn Ánh Dương', '1978-05-09', '0587125456', '19, Đường Nguyễn Trãi, Phường Nguyễn Cư Trinh, Quận 1, Thành phố Hồ Chí Minh');
+INSERT INTO `parent` VALUES (18110105, 'c33367701511b4f62ec61ded352059', 'Trần Minh Hoàng', '1969-12-31', '0763654126', '72, Đường Cách Mạng Tháng Tám, Phường Bến Thành, Quận 1, Thành phố Hồ Chí Minh');
 
 -- ----------------------------
 -- Table structure for parent_announcement
@@ -285,8 +285,8 @@ DROP TABLE IF EXISTS `timetable`;
 CREATE TABLE `timetable`  (
   `timetableID` int NOT NULL,
   `subjectID` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `timeStart` datetime(0) NULL DEFAULT NULL,
-  `timeEnd` datetime(0) NULL DEFAULT NULL,
+  `timeStart` datetime NULL DEFAULT NULL,
+  `timeEnd` datetime NULL DEFAULT NULL,
   `date` date NULL DEFAULT NULL,
   `isOff` bit(1) NULL DEFAULT NULL,
   PRIMARY KEY (`timetableID`) USING BTREE,
