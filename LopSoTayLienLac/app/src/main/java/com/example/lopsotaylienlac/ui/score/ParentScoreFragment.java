@@ -51,25 +51,6 @@ public class ParentScoreFragment extends Fragment {
         recyclerView = (RecyclerView)root.findViewById(R.id.rcvStudentCheckScore);
         layoutManager = new LinearLayoutManager(getContext());
 
-        /*UserApi.apiService.getAllSubclassByStudentID(Integer.parseInt(id)).enqueue(new Callback<ArrayList<Subjectofstudent>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Subjectofstudent>> call, Response<ArrayList<Subjectofstudent>> response) {
-
-
-                studentScoreAdapter= new StudentScoreAdapter(response.body());
-                recyclerView.setAdapter(studentScoreAdapter);
-                recyclerView.setLayoutManager(layoutManager);
-
-
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<Subjectofstudent>> call, Throwable t) {
-
-                openInfoDialog();
-            }
-        });
-*/
 
         getStudentId(Integer.parseInt(id));
         return  root;
@@ -94,58 +75,6 @@ public class ParentScoreFragment extends Fragment {
         });
 
 
-    }
-
-    public void openScoreDialog(int x){
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
-        View view = getLayoutInflater().inflate(R.layout.dialog_student_check_score,null);
-        AlertDialog alertDialog = builder.create();
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        sharedPreferences = this.getActivity().getSharedPreferences("dataLogin", Context.MODE_PRIVATE);
-        String id = sharedPreferences.getString("userID","-1");
-        UserApi.apiService.getAllSubclassByStudentID(Integer.parseInt(id)).enqueue(new Callback<ArrayList<Subjectofstudent>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Subjectofstudent>> call, Response<ArrayList<Subjectofstudent>> response) {
-                /**
-                 * anh xa du lieu tu view
-                 */
-                TextView txtTenMonHoc = view.findViewById(R.id.txtTitle);
-                TextView txtDiemGiua = view.findViewById(R.id.txtDiemGiuaKi);
-                TextView txtDiemCuoi = view.findViewById(R.id.txtDiemCuoiKi);
-                TextView txtDiemTong = view.findViewById(R.id.txtDiemTongKet);
-
-                String sjname = response.body().get(x).getSubjectName();
-                float mid = response.body().get(x).getScoreMidTerm();
-                float finalscore = response.body().get(x).getScoreFinalTerm();
-                float tong = (mid+finalscore)/2;
-                String txtDiemGiuaKi = String.valueOf(mid);
-                String txtDiemCuoiKi = String.valueOf(finalscore);
-                String txtDiemTongKet = String.valueOf(tong);
-
-
-                txtDiemGiua.setText(txtDiemGiuaKi);
-                txtDiemCuoi.setText(txtDiemCuoiKi);
-                txtDiemTong.setText(txtDiemTongKet);
-                txtTenMonHoc.setText(sjname);
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<Subjectofstudent>> call, Throwable t) {
-
-            }
-        });
-
-        alertDialog.setView(view);
-        alertDialog.show();
-
-        /**
-         * su kien nut OK
-         */
-        btnScoreOK = view.findViewById(R.id.btnScoreOK);
-        btnScoreOK.setOnClickListener(v -> {
-            alertDialog.cancel();
-        });
     }
 
     /**
@@ -182,26 +111,6 @@ public class ParentScoreFragment extends Fragment {
                 studentScoreAdapter= new StudentScoreAdapter(response.body(),getContext());
                 recyclerView.setAdapter(studentScoreAdapter);
                 recyclerView.setLayoutManager(layoutManager);
-                /*UserApi.apiService.getAllFee().enqueue(new Callback<ArrayList<Fee>>() {
-                    @Override
-                    public void onResponse(Call<ArrayList<Fee>> call, Response<ArrayList<Fee>> response) {
-                        List<Fee> lst = new ArrayList<>();
-
-                        lst =  response.body();
-                        int lastindex = lst.size();
-                        Fee lastfee = response.body().get(lastindex-1);
-                        feeofyear = lastfee.getMoney();
-
-                        studentFeeAdapter= new StudentFeeAdapter(responsemain.body(),feeofyear);
-                        recyclerView.setAdapter(studentFeeAdapter);
-                        recyclerView.setLayoutManager(layoutManager);
-                    }
-
-                    @Override
-                    public void onFailure(Call<ArrayList<Fee>> call, Throwable t) {
-
-                    }
-                });*/
 
             }
 
@@ -215,25 +124,4 @@ public class ParentScoreFragment extends Fragment {
 
     }
 
-
-    /**
-     * tao context menu cho tung item trong recyclerview
-     * @param item
-     * @return
-     */
-    @Override
-    public boolean onContextItemSelected(@NonNull MenuItem item) {
-        int x = item.getGroupId();
-        switch (item.getItemId()){
-            /**
-             * case 001 la nut xem chi tiet
-             */
-            case 001:
-                System.out.println("Day la xem chi tiet");
-                openScoreDialog(x);
-                return true;
-
-        }
-        return super.onContextItemSelected(item);
-    }
 }
