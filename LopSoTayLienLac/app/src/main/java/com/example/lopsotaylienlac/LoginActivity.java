@@ -153,7 +153,6 @@ public class LoginActivity extends AppCompatActivity {
         UserApi.apiService.getAdminByAdminID(username).enqueue(new Callback<Admin>() {
             @Override
             public void onResponse(Call<Admin> call, Response<Admin> response) {
-                System.out.println("Call Success");
                 if(response.body()!=null){//Check exist user != null
                     if(!password.equals(response.body().getPassword())){
                         openLoginFailedDialog();
@@ -199,7 +198,6 @@ public class LoginActivity extends AppCompatActivity {
         UserApi.apiService.getStudentByID(username).enqueue(new Callback<Student>() {
             @Override
             public void onResponse(Call<Student> call, Response<Student> response) {
-                System.out.println("Call Success");
                 if(response.body()!=null){//Check exist user != null
                     if(!password.equals(response.body().getPassword())){
                         openLoginFailedDialog();
@@ -231,7 +229,6 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Student> call, Throwable t) {
-                System.out.println("Call Fail");
                 openLoginFailedDialog();
             }
         });
